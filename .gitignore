@@ -1,0 +1,6 @@
+venv
+poldeepner/data/poleval2018ner-data
+poldeepner/model/poldeepner-nkjp-ftcc-bigru
+poldeepner/model/poldeepner-nkjp-ftcc-bilstm
+poldeepner/model/poldeepner-nkjp-ftkgr10plain
+*.pyc
