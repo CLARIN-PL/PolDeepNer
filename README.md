@@ -6,12 +6,17 @@ About
 
 *PolDeepNer* recognizes mentions of named entities in plain text using deep learning techniques.  
 
+
+### Credits
+
+*PolDeepNer* code was based on AnaGo (https://github.com/Hironsan/anago)
+
 Contributors
 ------------
 
 * Michał Marcińczuk <michal.marcinczuk@pwr.edu.pl>
 * Jan Kocoń <jan.kocon@pwr.edu.pl>
-* Michał Gawor 
+* Michał Gawor <michal.gawor@pwr.edu.pl>
 
 
 Installation
