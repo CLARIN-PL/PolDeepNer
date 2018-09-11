@@ -28,10 +28,10 @@ model_params = os.path.join(model, "params.pkl")
 model_preprocessor = os.path.join(model, "preprocessor.pkl")
 
 x_train, y_train = iob.load_data_and_labels(args.i)
-x_test, y_test = iob.load_data_and_labels(test = args.t)
+x_test, y_test = iob.load_data_and_labels(args.t)
 print("Train: %d" % len(x_train))
 print("Test : %d" % len(x_test))
 
 m = Sequence(args.f, use_char=False, nn_type=args.n)
-m.fit(x_train, y_train, fasttext, x_test, y_test, epochs=args.e, batch_size=32)
+m.fit(x_train, y_train, args.f, x_test, y_test, epochs=args.e, batch_size=32)
 m.save(model_weights, model_params, model_preprocessor)
