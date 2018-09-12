@@ -4,12 +4,29 @@ PolDeepNer
 About
 -----
 
-*PolDeepNer* recognizes mentions of named entities in plain text using deep learning techniques.  
+*PolDeepNer* recognizes mentions of named entities in text using deep learning methods. 
+The tool won second place in the PolEval 2018 Task 2 on named entity recognition. 
+It contains a pre-trained model trained on the NKJP corpus (nkjp.pl) which recognizes nested annotations of the following types:
+* geogName
+* orgName
+* persName
+  * persName-addName
+  * persName-forename
+  * persName-surname
+* placeName
+  * placeName-bloc
+  * placeName-country
+  * placeName-district
+  * placeName-region
+  * placeName-settlement
+* date
+* time
+  
 
 
 ### Credits
 
-*PolDeepNer* code was based on AnaGo (https://github.com/Hironsan/anago)
+BiLSTM and CRF implementation was based on AnaGo (https://github.com/Hironsan/anago)
 
 Contributors
 ------------
@@ -25,6 +42,10 @@ Installation
 ### Preparation
 
 Download and/or unpack models (word embeddings, NN pre-trained models):
+```bash
+sudo apt-get install p7zip-full
+```
+
 ```bash
 ./download_unpack.sh
 ```
@@ -59,6 +80,7 @@ pip install pyfasttext
 pip install fasttext
 pip install sklearn
 pip install python-dateutil
+pip install nltk
 ```
 
 
@@ -81,7 +103,6 @@ Run Docker
 ```
 
 Generate json file for the evaluation corpus:
-
 ```bash
 python3.6 core/process_poleval.py \
             -i data/poleval2018ner-data/index_iob.list \
@@ -89,21 +110,55 @@ python3.6 core/process_poleval.py \
             -m model
 ```
 
-Run official evaluation scripts:
-
+Run the official evaluation script:
 ```bash
 python3.6 core/poleval_ner_test.py \
              -g data/POLEVAL-NER_GOLD.json \
              -u data/poldeepner-output.json
 ```
 
-Output (to update):
+Output:
 ```bash
-OVERLAP precision: 0.915 recall: 0.806 F1: 0.857 
-EXACT precision: 0.860 recall: 0.757 F1: 0.805 
-Final score: 0.847
+OVERLAP precision: 0.920 recall: 0.804 F1: 0.858 
+EXACT precision: 0.866 recall: 0.757 F1: 0.808 
+Final score: 0.848
+```
+ 
+
+Processing
+----------
+
+### Interactive test
+
+*Disclaimer:* the current version of the script uses NLTK tokenizer which is not fully compatible with the training data used to train the model.
+The final version of the script should use *toki* tokenizer or *WCRFT* tagger. 
+
+Run inside Docker:
+
+```bash
+python3.6 core/interactive_test.py
 ```
 
+Enter text to process:
+
+```bash
+Enter text to process:
+```
+
+```bash
+Enter text to process: XXXIII konwent fanów fantastyki Polcon trwał przez 4 dni: od 12 do 15 sierpnia 2018 na terenie Miasteczka Akademickiego Uniwersytetu Mikołaja Kopernika w Toruniu.
+```
+
+Output:
+```bash
+[ 32: 38] orgName              Polcon
+[ 61: 63] date                 12
+[ 67: 83] date                 15 sierpnia 2018
+[ 95:151] geogName             Miasteczka Akademickiego Uniwersytetu Mikołaja Kopernika
+[154:161] placeName_settlement Toruniu
+```
+
+To exit press Enter without typing any text.
 
 Training
 --------
@@ -133,7 +188,7 @@ python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
               -t poldeepner/data/nkjp-nested-simplified-v2.iob \
               -f poldeepner/model/kgr10-plain-sg-300-mC50.bin \
-              -m poldeepner/model/poldeepner-nkjp-ftkgr10plain \
+              -m poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm \
               -e 15 -n LSTM
 ```
 

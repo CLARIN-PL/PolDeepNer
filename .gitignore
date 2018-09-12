@@ -1,5 +1,11 @@
 venv
 poldeepner/data/poleval2018ner-data
+poldeepner/data/POLEVAL-NER_GOLD.json
+poldeepner/data/nkjp-nested-simplified-v2.iob
+poldeepner/data/poldeepner-output.json
+poldeepner/model/cc.pl.300.bin
+poldeepner/model/kgr10-plain-sg-300-mC50.bin
+poldeepner/model/kgr10-plain-sg-300-mC50.bin.7z
 poldeepner/model/poldeepner-nkjp-ftcc-bigru
 poldeepner/model/poldeepner-nkjp-ftcc-bilstm
 poldeepner/model/poldeepner-nkjp-ftkgr10plain

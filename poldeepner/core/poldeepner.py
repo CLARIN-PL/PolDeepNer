@@ -7,13 +7,12 @@ class PolDeepNer:
 
     def __init__(self, model):
         """
-
-        :param model: Path to a folder with a model to deserialize
+        :param model: Path to a folder with a pre-trained model to load
         """
         self.models = []
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bilstm"), os.path.join(model, "cc.pl.300.bin")))
         self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bigru"), os.path.join(model, "cc.pl.300.bin")))
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10plain"), os.path.join(model, "kgr10-plain-sg-300-mC50.bin")))
+        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bilstm"), os.path.join(model, "cc.pl.300.bin")))
+        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10plain-lstm"), os.path.join(model, "kgr10-plain-sg-300-mC50.bin")))
 
     def process_sentence(self, sentence):
         """
@@ -27,17 +26,21 @@ class PolDeepNer:
         final_prediction = []
         for n in range(0, len(sentence)):
             votes = {}
+            labels = []
             for m in range(0, len(predictions)):
-                item = predictions[m][n]
-                votes[item] = (votes[item] if item in votes else 0) + 1
-            final_prediction.append(sorted(votes.items(), key=itemgetter(1), reverse=True)[0][0])
+                label = predictions[m][n]
+                votes[label] = (votes[label] if label in votes else 0) + 1
+                labels.append(label)
+            label = labels[0] if len(votes) == len(self.models) \
+                else sorted(votes.items(), key=itemgetter(1), reverse=True)[0][0]
+            final_prediction.append(label)
         return final_prediction
 
     def process_document(self, sentences):
         """
         Process a document as an array of sentences. Each sentence is an array of words.
         :param sentences: An array of sentence
-        :return: An array of token lables for each sentence
+        :return: An array of token labels for each sentence
         """
         output = []
         for sentence in sentences:

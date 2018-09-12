@@ -29,7 +29,7 @@ fi
 #
 FASTTEXT_KGR10="$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin"
 FASTTEXT_KGR10_PACK="$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin.7z"
-FASTTEXT_KGR10_URL="https://nextcloud.clarin-pl.eu/index.php/s/tJnYFiMkTenXn0o/download"
+FASTTEXT_KGR10_URL="https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
 
 if [ ! -f $FASTTEXT_KGR10_PACK ] && [ ! -f $FASTTEXT_KGR10 ]; then
   wget $FASTTEXT_KGR10_URL -O $FASTTEXT_KGR10_PACK
@@ -40,7 +40,6 @@ fi
 
 if [ ! -f $FASTTEXT_KGR10 ]; then
   OUTPUT=`dirname $FASTTEXT_KGR10`
-  echo $OUTPUT
   7z x $FASTTEXT_KGR10_PACK -o$OUTPUT
   echo "- `basename $FASTTEXT_KGR10_PACK` unpacked"
 else
@@ -65,7 +64,7 @@ function unpack_model_7z()
 
 unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftcc-bigru"
 unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftcc-bilstm"
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10plain"
+unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm"
 
 unpack_model_7z "$DIR/poldeepner/data/nkjp-nested-simplified-v2.iob"
 unpack_model_7z "$DIR/poldeepner/data/POLEVAL-NER_GOLD.json"

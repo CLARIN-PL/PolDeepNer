@@ -31,5 +31,6 @@ RUN pip install pyfasttext
 RUN pip install fasttext
 RUN pip install sklearn
 RUN pip install python-dateutil
+RUN pip install nltk
 
 WORKDIR "/poldeepner"
