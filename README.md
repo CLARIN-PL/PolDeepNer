@@ -157,6 +157,8 @@ Output:
 [ 95:151] geogName             Miasteczka Akademickiego Uniwersytetu Mikołaja Kopernika
 [154:161] placeName_settlement Toruniu
 ```
+![PolDeepNer interactive test demo](docs/media/PolDeepNer_demo.gif)
+
 
 To exit press Enter without typing any text.
 
