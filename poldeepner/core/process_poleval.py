@@ -67,7 +67,9 @@ if __name__ == "__main__":
     ner = PolDeepNer(args.m)
 
     dict_list = []
-    for rel_path in codecs.open(path, "r", "utf8"):
+    paths = codecs.open(path, "r", "utf8").readlines()
+    paths_count = len(paths)
+    for n, rel_path in enumerate(paths):
         abs_path = os.path.abspath(os.path.join(parent, rel_path.strip()))
         namext = os.path.basename(abs_path)
         name = os.path.splitext(namext)[0]
@@ -75,8 +77,8 @@ if __name__ == "__main__":
 
         text = codecs.open(os.path.join(path, name + ".txt"), "r", "utf8").read()
         doc_id = get_id(os.path.join(path, name + ".ini"))
+        print("%d from %d: %s" % (n, paths_count, doc_id))
 
-        print(doc_id)
         sentences, _ = load_data_and_labels(os.path.join(path, name + '.iob'))
         labels = ner.process_document(sentences)
 

@@ -11,8 +11,8 @@ class PolDeepNer:
         """
         self.models = []
         self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bigru"), os.path.join(model, "cc.pl.300.bin")))
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bilstm"), os.path.join(model, "cc.pl.300.bin")))
         self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10plain-lstm"), os.path.join(model, "kgr10-plain-sg-300-mC50.bin")))
+        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10orth-bigru"), os.path.join(model, "kgr10_orths.vec.bin")))
 
     def process_sentence(self, sentence):
         """

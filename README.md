@@ -119,9 +119,9 @@ python3.6 core/poleval_ner_test.py \
 
 Output:
 ```bash
-OVERLAP precision: 0.920 recall: 0.804 F1: 0.858 
-EXACT precision: 0.866 recall: 0.757 F1: 0.808 
-Final score: 0.848
+OVERLAP precision: 0.918 recall: 0.815 F1: 0.864 
+EXACT precision: 0.860 recall: 0.764 F1: 0.809 
+Final score: 0.853
 ```
  
 
@@ -182,9 +182,9 @@ python poldeepner/core/trainmodel.py \
 python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
               -t poldeepner/data/nkjp-nested-simplified-v2.iob \
-              -f poldeepner/model/cc.pl.300.bin \
-              -m poldeepner/model/poldeepner-nkjp-ftcc-bilstm \
-              -e 15 -n LSTM
+              -f poldeepner/model/kgr10_orths.vec.bin \
+              -m poldeepner/model/poldeepner-nkjp-ftkgr10orth-bigru \
+              -e 15 -n GRU -s 100
                           
 python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
@@ -192,6 +192,26 @@ python poldeepner/core/trainmodel.py \
               -f poldeepner/model/kgr10-plain-sg-300-mC50.bin \
               -m poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm \
               -e 15 -n LSTM
+```
+
+Before training the structure of the NN will be printed:
+```bash
+Layer (type)                 Output Shape              Param #   
+=================================================================
+word_input (InputLayer)      (None, None, 100)         0         
+_________________________________________________________________
+dropout_1 (Dropout)          (None, None, 100)         0         
+_________________________________________________________________
+bidirectional_1 (Bidirection (None, None, 200)         120600    
+_________________________________________________________________
+dense_1 (Dense)              (None, None, 100)         20100     
+_________________________________________________________________
+crf_1 (CRF)                  (None, None, 41)          5904      
+=================================================================
+Total params: 146,604
+Trainable params: 146,604
+Non-trainable params: 0
+_________________________________________________________________
 ```
 
 After every epoch a table with accuracy of the current model will be printed. Below is a sample table after the first epoch.

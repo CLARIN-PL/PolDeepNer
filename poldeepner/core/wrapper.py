@@ -11,6 +11,7 @@ from trainer import Trainer
 
 import os
 
+
 class Sequence(object):
 
     def __init__(self,
@@ -26,7 +27,8 @@ class Sequence(object):
                  initial_vocab=None,
                  lower=False,
                  optimizer='adam',
-                 nn_type='GRU'):
+                 nn_type='GRU',
+                 input_size=300):
 
         self.model = None
         self.p = None
@@ -45,6 +47,7 @@ class Sequence(object):
         self.optimizer = optimizer
         self.lower = lower
         self.nn_type = nn_type
+        self.input_size = input_size
 
     def fit(self, x_train, y_train, fasttext_path, x_valid=None, y_valid=None,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -77,8 +80,10 @@ class Sequence(object):
                           dropout=self.dropout,
                           use_char=self.use_char,
                           use_crf=self.use_crf,
-                          nn_type=self.nn_type)
+                          nn_type=self.nn_type,
+                          input_size=self.input_size)
         model, loss = model.build()
+
         model.compile(loss=loss, optimizer=self.optimizer)
 
         trainer = Trainer(model, preprocessor=p)

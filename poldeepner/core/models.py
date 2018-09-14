@@ -46,7 +46,8 @@ class BiLSTMCRF(object):
                  use_char=False,
                  use_crf=True,
                  use_fasttext=False,
-                 nn_type="GRU"):
+                 nn_type="GRU",
+                 input_size=300):
         """Build a Bi-LSTM CRF model.
 
         Args:
@@ -62,7 +63,8 @@ class BiLSTMCRF(object):
             embeddings (numpy array): word embedding matrix.
             use_char (boolean): add char feature.
             use_crf (boolean): use crf as last layer.
-            nn_type (String): NN type: GRU or LSTM
+            nn_type (String): NN type: GRU or LSTM.
+            input_size (int): input size of the first layer.
         """
         super(BiLSTMCRF).__init__()
         self._char_embedding_dim = char_embedding_dim
@@ -77,10 +79,11 @@ class BiLSTMCRF(object):
         self._num_labels = num_labels
         self._use_fasttext = use_fasttext
         self._nn_type = nn_type
+        self._input_size = input_size
 
     def build(self):
         # build word embedding
-        words = Input(batch_shape=(None, None, 300), dtype='float32', name='word_input')
+        words = Input(batch_shape=(None, None, self._input_size), dtype='float32', name='word_input')
         inputs = [words]
 
         # build character based word embedding
@@ -115,5 +118,7 @@ class BiLSTMCRF(object):
             pred = Dense(self._num_labels, activation='softmax')(z)
 
         model = Model(inputs=inputs, outputs=pred)
+
+        print(model.summary())
 
         return model, loss

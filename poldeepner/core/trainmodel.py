@@ -13,6 +13,7 @@ parser.add_argument('-f', required=True, metavar='PATH', help='path to a FastTex
 parser.add_argument('-m', required=True, metavar='PATH', help='path to a folder in which the model will be saved')
 parser.add_argument('-n', required=True, metavar='nn_type', help='type of NN: GRU or LSTM', default='GRU')
 parser.add_argument('-e', required=True, default=32, type=int, metavar='num', help='number of epoches')
+parser.add_argument('-s', required=False, default=300, type=int, metavar='num', help='size of the input')
 
 args = parser.parse_args()
 model = args.m
@@ -32,6 +33,6 @@ x_test, y_test = iob.load_data_and_labels(args.t)
 print("Train: %d" % len(x_train))
 print("Test : %d" % len(x_test))
 
-m = Sequence(args.f, use_char=False, nn_type=args.n)
+m = Sequence(args.f, use_char=False, nn_type=args.n, input_size=args.s)
 m.fit(x_train, y_train, args.f, x_test, y_test, epochs=args.e, batch_size=32)
 m.save(model_weights, model_params, model_preprocessor)
