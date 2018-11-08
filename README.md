@@ -7,22 +7,37 @@ About
 *PolDeepNer* recognizes mentions of named entities in text using deep learning methods. 
 The tool won second place in the PolEval 2018 Task 2 on named entity recognition. 
 It contains a pre-trained model trained on the NKJP corpus (nkjp.pl) which recognizes nested annotations of the following types:
-* geogName
-* orgName
-* persName
-  * persName-addName
-  * persName-forename
-  * persName-surname
-* placeName
-  * placeName-bloc
-  * placeName-country
-  * placeName-district
-  * placeName-region
-  * placeName-settlement
-* date
-* time
-  
 
+![NKJP NER categories](docs/media/nkjp-ner-schema.png)  
+
+### Paper
+
+Marcińczuk, Michał; Kocoń, Jan; Gawor, Michał. 
+_Recognition of Named Entities for Polish-Comparison of Deep Learning and Conditional Random Fields Approaches_
+Ogrodniczuk, Maciej; Kobyliński, Łukasz (Eds.): 
+Proceedings of the PolEval 2018 Workshop, pp. 63-73, Institute of Computer Science, 
+Polish Academy of Science, Warszawa, 2018.
+
+\[[PDF](https://www.researchgate.net/publication/328429192_Recognition_of_Named_Entities_for_Polish-Comparison_of_Deep_Learning_and_Conditional_Random_Fields_Approaches)\]
+
+<details><summary>[Bibtex]</summary>
+<p>
+
+```
+@inproceedings{poldeepner2018,
+  title     = "Recognition of Named Entities for Polish-Comparison of Deep Learning and Conditional Random Fields Approaches",
+  author    = "Marcińczuk, Michał and Kocoń, Jan and Gawor, Michał",
+  year      = "2018",
+  editor    = "Ogrodniczuk, Maciej and Kobyliński, Łukasz",
+  booktitle = "Proceedings of the PolEval 2018 Workshop",
+  location  = "Warsaw, Poland",
+  pages     = "77--92",
+  publisher = "Institute of Computer Science, Polish Academy of Science"
+}
+```
+
+</p>
+</details>
 
 ### Credits
 
