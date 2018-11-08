@@ -5,10 +5,11 @@ About
 -----
 
 *PolDeepNer* recognizes mentions of named entities in text using deep learning methods. 
-The tool won second place in the PolEval 2018 Task 2 on named entity recognition. 
-It contains a pre-trained model trained on the NKJP corpus (nkjp.pl) which recognizes nested annotations of the following types:
+The tool won second place in the [PolEval 2018 Task 2](http://poleval.pl/tasks/) on named entity recognition. 
+It contains a pre-trained model trained on the [NKJP corpus](http://clip.ipipan.waw.pl/NationalCorpusOfPolish) 
+which recognizes nested annotations of the following types:
 
-![NKJP NER categories](docs/media/nkjp-ner-schema.png)  
+![NKJP NER categories](docs/media/nkjp-ner-schema.png)
 
 ### Paper
 
