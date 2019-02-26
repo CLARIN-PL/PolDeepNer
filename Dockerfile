@@ -33,4 +33,41 @@ RUN pip install sklearn
 RUN pip install python-dateutil
 RUN pip install nltk
 
+# install corpus2
+RUN apt-get install -y libboost-all-dev 
+RUN apt-get install -y libicu-dev
+RUN apt-get install -y libxml++2.6-dev
+RUN apt-get install -y bison
+RUN apt-get install -y flex
+RUN apt-get install -y libloki-dev
+RUN apt-get install -y cmake
+RUN apt-get install -y g++
+RUN apt-get install -y swig
+
+RUN git clone http://nlp.pwr.edu.pl/corpus2.git
+RUN cd corpus2
+RUN mkdir bin
+RUN cd bin
+RUN cmake -D CORPUS2_BUILD_POLIQARP:BOOL=True ..
+RUN make -j
+
+# because of an error in c2pqtest, “make” must be done twice
+RUN make -j
+RUN sudo make install
+RUN sudo ldconfig
+RUN cd ../..
+
+# install toki
+RUN git clone http://nlp.pwr.edu.pl/toki.git
+RUN cd toki
+RUN mkdir bin
+RUN cd bin
+RUN cmake ..
+RUN make -j
+RUN sudo make install
+RUN sudo ldconfig
+RUN cd ../..
+
+
+
 WORKDIR "/poldeepner"
