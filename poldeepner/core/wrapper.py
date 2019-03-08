@@ -118,6 +118,15 @@ class Sequence(object):
         else:
             raise OSError('Could not find a model. Call load(dir_path).')
 
+    def predict(x_test):
+        if self.model:
+            x_test = self.p.transform(x_test)
+            y_pred = self.model.predict(x_test)
+            y_pred = self.p.inverse_transform(y_pred, lengths)
+            print(x_test)
+            print(y_pred)
+
+
     def predict_to_iob(self, input_path, output_path):
         input_file = open(input_path, 'r')
 
