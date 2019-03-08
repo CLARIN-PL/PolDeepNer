@@ -44,10 +44,10 @@ RUN apt-get install -y cmake
 RUN apt-get install -y g++
 RUN apt-get install -y swig
 
+RUN ls -a
 RUN git clone http://nlp.pwr.edu.pl/corpus2.git
-RUN cd corpus2
-RUN mkdir bin
-RUN cd bin
+RUN mkdir -p corpus2/bin
+WORKDIR "/corpus2/bin"
 RUN cmake -D CORPUS2_BUILD_POLIQARP:BOOL=True ..
 RUN make -j
 
@@ -55,19 +55,16 @@ RUN make -j
 RUN make -j
 RUN sudo make install
 RUN sudo ldconfig
-RUN cd ../..
+
+WORKDIR "/"
 
 # install toki
 RUN git clone http://nlp.pwr.edu.pl/toki.git
-RUN cd toki
-RUN mkdir bin
-RUN cd bin
+RUN mkdir -p toki/bin
+WORKDIR "/toki/bin"
 RUN cmake ..
 RUN make -j
 RUN sudo make install
 RUN sudo ldconfig
-RUN cd ../..
-
-
 
 WORKDIR "/poldeepner"
