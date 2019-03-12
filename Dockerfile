@@ -53,8 +53,8 @@ RUN make -j
 
 # because of an error in c2pqtest, “make” must be done twice
 RUN make -j
-RUN sudo make install
-RUN sudo ldconfig
+RUN make install
+RUN ldconfig
 
 WORKDIR "/"
 
@@ -64,7 +64,7 @@ RUN mkdir -p toki/bin
 WORKDIR "/toki/bin"
 RUN cmake ..
 RUN make -j
-RUN sudo make install
-RUN sudo ldconfig
+RUN make install
+RUN ldconfig
 
 WORKDIR "/poldeepner"
