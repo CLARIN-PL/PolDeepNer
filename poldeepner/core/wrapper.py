@@ -93,7 +93,9 @@ class Sequence(object):
                       shuffle=shuffle)
 
         self.p = p
-        self.model = model
+        self.model = trainer.best_model
+        print("Best model report\n")
+        print(trainer.best_model_report)
 
     def score(self, x_test, y_test):
         """Returns the f1-micro score on the given test model and labels.
