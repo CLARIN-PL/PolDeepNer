@@ -45,9 +45,7 @@ class BiLSTMCRF(object):
                  embeddings=None,
                  use_char=False,
                  use_crf=True,
-                 use_fasttext=False,
-                 nn_type="GRU",
-                 input_size=300):
+                 nn_type="GRU"):
         """Build a Bi-LSTM CRF model.
 
         Args:
@@ -77,13 +75,11 @@ class BiLSTMCRF(object):
         self._use_crf = use_crf
         self._embeddings = embeddings
         self._num_labels = num_labels
-        self._use_fasttext = use_fasttext
         self._nn_type = nn_type
-        self._input_size = input_size
 
     def build(self):
         # build word embedding
-        words = Input(batch_shape=(None, None, self._input_size), dtype='float32', name='word_input')
+        words = Input(batch_shape=(None, None, self._word_embedding_dim), dtype='float32', name='word_input')
         inputs = [words]
 
         # build character based word embedding

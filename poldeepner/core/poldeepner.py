@@ -2,17 +2,19 @@ from operator import itemgetter
 import os
 
 from wrapper import Sequence
+from embedding_wrapper import load_embedding
+
 
 class PolDeepNer:
-
-    def __init__(self, model):
+    def __init__(self, models_paths, embeddings_paths):
         """
-        :param model: Path to a folder with a pre-trained model to load
+        :param models_paths: An array of paths to models
+        :param embeddings_paths: An array of paths to embeddings for respective models
         """
         self.models = []
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftcc-bigru"), os.path.join(model, "cc.pl.300.bin")))
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10plain-lstm"), os.path.join(model, "kgr10-plain-sg-300-mC50.bin")))
-        self.models.append(Sequence.load(os.path.join(model, "poldeepner-nkjp-ftkgr10orth-bigru"), os.path.join(model, "kgr10_orths.vec.bin")))
+        for model_path, embedding_path in zip(models_paths, embeddings_paths):
+            embedding = load_embedding(embedding_path)
+            self.models.append(Sequence.load(os.path.join(model, embedding)))
 
     def process_sentence(self, sentence):
         """

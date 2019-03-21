@@ -5,15 +5,15 @@ from tensorflow.python.client import device_lib
 
 from load_data import load_iob, load_xml, UnsupportedFileFormat
 from wrapper import Sequence
+from embedding_wrapper import load_embedding
 
 parser = argparse.ArgumentParser(description='Process IOB file, recognize NE and save the output to another IOB file.')
 parser.add_argument('-i', required=True, metavar='PATH', help='input train file .iob .xml or index file')
 parser.add_argument('-t', required=False, metavar='PATH', help='input test IOB file')
-parser.add_argument('-f', required=True, metavar='PATH', help='path to a FastText bin file with embeddings')
+parser.add_argument('-f', required=True, metavar='PATH', help='path to .vec keyed vector (gensim) or .bin embedding (fasttext)')
 parser.add_argument('-m', required=True, metavar='PATH', help='path to a folder in which the model will be saved')
 parser.add_argument('-n', required=True, metavar='nn_type', help='type of NN: GRU or LSTM', default='GRU')
 parser.add_argument('-e', required=True, default=32, type=int, metavar='num', help='number of epoches')
-parser.add_argument('-s', required=False, default=300, type=int, metavar='num', help='size of the input')
 parser.add_argument('-g', required=True, nargs='+', help='which GPUs to use')
 
 args = parser.parse_args()
@@ -93,15 +93,14 @@ if args.t:
                 else:
                     raise UnsupportedFileFormat('Unsupported file format of file: ' + os.path.basename(index))
 
-model_weights = os.path.join(model, "weights.pkl")
-model_params = os.path.join(model, "params.pkl")
-model_preprocessor = os.path.join(model, "preprocessor.pkl")
-
 print("Train: %d" % len(x_train))
 if args.t:
     print("Test : %d" % len(x_test))
 
-# _____ BUILD AND TRAIN MODEL _____
-m = Sequence(args.f, use_char=False, nn_type=args.n, input_size=args.s)
-m.fit(x_train, y_train, args.f, x_test, y_test, epochs=args.e, batch_size=32)
-m.save(model_weights, model_params, model_preprocessor)
+# _____LOAD EMBEDDING_____
+embedding = load_embedding(args.f)
+
+# _____BUILD AND TRAIN MODEL_____
+m = Sequence(embedding, use_char=False, nn_type=args.n)
+m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
+m.save(model)

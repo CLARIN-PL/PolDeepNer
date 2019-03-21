@@ -1,33 +1,37 @@
 # -*- coding: utf-8 -*-
 """
 Preprocessors.
-
-Based on https://github.com/Hironsan/anago
 """
-from pyfasttext import FastText
+from __future__ import absolute_import
 
+import hashlib
 import numpy as np
-from keras.preprocessing.sequence import pad_sequences
-from keras.utils.np_utils import to_categorical
+import os
+import re
+import time
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.externals import joblib
+from keras.utils.np_utils import to_categorical
+from keras.preprocessing.sequence import pad_sequences
 
 from utils import Vocabulary
 
 
-#def normalize_number(text):
-#    return re.sub(r'[0-9０１２３４５６７８９]', r'0', text)
+def normalize_number(text):
+    return re.sub(r'[0-9０１２３４５６７８９]', r'0', text)
 
 
 class VectorTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, fasttext_path, use_char=True, lower=False):
-        self.fasttext = FastText(fasttext_path)
+    def __init__(self, embedding, use_char=False, lower=False):
+        self._embedding = embedding
         self._label_vocab = Vocabulary(lower=lower, unk_token=False)
         self._char_vocab = Vocabulary(lower=False)
         self._use_char = use_char
+        self._embedding_md5 = self._embedding.md5
 
     def fit(self, sentences, labels):
         self._label_vocab.add_documents(labels)
+
         if self._use_char:
             for sentence in sentences:
                 self._char_vocab.add_documents(sentence)
@@ -35,13 +39,16 @@ class VectorTransformer(BaseEstimator, TransformerMixin):
         self._char_vocab.build()
         return self
 
+    def get_word_vector(self, word):
+        return self._embedding.get_numpy_vector(word)
+
     def transform(self, sentences, labels=None):
-        vector_vocab = [[self.fasttext.get_numpy_vector(word) for word in sentence] for sentence in sentences]
+        vector_vocab = [[self.get_word_vector(word) for word in sentence] for sentence in sentences]
         vector_vocab = pad_sequences(vector_vocab, dtype='float32', padding='post')
 
         if self._use_char:
-            char_ids = [[self._char_vocab.doc2id(w) for w in doc] for doc in X]
-            char_ids = pad_nested_sequences(char_ids)
+            char_ids = [[self._char_vocab.doc2id(word) for word in sentence] for sentence in sentences]
+            char_ids = pad_nested_sequences(char_ids, dtype='float32')
             features = [vector_vocab, char_ids]
         else:
             features = vector_vocab
@@ -58,6 +65,7 @@ class VectorTransformer(BaseEstimator, TransformerMixin):
             # So, I expand dimensions when len(y.shape) == 2.
             y = y if len(y.shape) == 3 else np.expand_dims(y, axis=0)
             return features, y
+
         return features
 
     def inverse_transform(self, y, lengths=None):
@@ -77,22 +85,50 @@ class VectorTransformer(BaseEstimator, TransformerMixin):
 
         return inverse_y
 
-    def load_fasttext(self, fasttext_path):
-        self.fasttext = FastText(fasttext_path)
+    @property
+    def embedding_name(self):
+        return self._embedding.name
+
+    @property
+    def word_vector_len(self):
+        length = self.embedding_vector_len
+        return length
+
+    @property
+    def embedding_vector_len(self):
+        return len(self._embedding)
+
+    @property
+    def vector_len(self):
+        return self.word_vector_len
+
+    @property
+    def labels(self):
+        return self._label_vocab.vocab
 
     @property
     def label_size(self):
         return len(self._label_vocab)
 
+    @property
+    def char_vocab_size(self):
+        return len(self._char_vocab)
+
     def save(self, file_path):
-        self.fasttext = None
+        ''' Embedding object has to be removed from preprocessor in order to dump it into a file. Joblib can't handle
+        dumping Fasttext/Word2Vec objects '''
+        self._embedding = None
         joblib.dump(self, file_path)
 
-    @classmethod
-    def load(cls, file_path, fasttext_path):
-        p = joblib.load(file_path)
-        p.load_fasttext(fasttext_path)
-        return p
+    @staticmethod
+    def load(preprocessor_file_path, embedding):
+        p = joblib.load(preprocessor_file_path)
+        if embedding.md5 == p._embedding_md5:
+            p._embedding = embedding
+            return p
+        else:
+            raise ValueError("FastText/Word2Vec embedding provided for load is different than one used by preprocessor. "
+                             "Preprocessor embedding name: ", p._emb_name)
 
 
 def pad_nested_sequences(sequences, dtype='int32'):
