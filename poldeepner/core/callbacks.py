@@ -13,6 +13,9 @@ class F1score(Callback):
         super(F1score, self).__init__()
         self.seq = seq
         self.p = preprocessor
+        self.best_model = None
+        self._best_score = 0.0
+        self._best_report = ""
 
     def on_epoch_end(self, epoch, logs={}):
         label_true = []
@@ -27,7 +30,17 @@ class F1score(Callback):
 
             label_true.extend(y_true)
             label_pred.extend(y_pred)
-        score = f1_score(label_true, label_pred)
-        print(' - f1: {:04.2f}'.format(score * 100))
-        print(NestedReport(label_true, label_pred))
-        logs['f1'] = score
+        report = NestedReport(label_true, label_pred)
+        print(report)
+        f1_score = report.f1_score
+        logs['f1'] = f1_score
+        if self._best_score < f1_score:
+            self.best_model = self.model
+            self._best_score = f1_score
+            self._best_report = report
+
+    def get_best_model(self):
+        return self.best_model
+
+    def get_best_model_report(self):
+        return self._best_report
