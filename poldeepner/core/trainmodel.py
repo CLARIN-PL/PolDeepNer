@@ -3,12 +3,12 @@ import os
 
 from tensorflow.python.client import device_lib
 
-import iob
+from load_data import load_iob, load_xml, UnsupportedFileFormat
 from wrapper import Sequence
 
 parser = argparse.ArgumentParser(description='Process IOB file, recognize NE and save the output to another IOB file.')
-parser.add_argument('-i', required=True, metavar='PATH', help='input train IOB file')
-parser.add_argument('-t', required=True, metavar='PATH', help='input test IOB file')
+parser.add_argument('-i', required=True, metavar='PATH', help='input train file .iob .xml or index file')
+parser.add_argument('-t', required=False, metavar='PATH', help='input test IOB file')
 parser.add_argument('-f', required=True, metavar='PATH', help='path to a FastText bin file with embeddings')
 parser.add_argument('-m', required=True, metavar='PATH', help='path to a folder in which the model will be saved')
 parser.add_argument('-n', required=True, metavar='nn_type', help='type of NN: GRU or LSTM', default='GRU')
@@ -18,21 +18,87 @@ parser.add_argument('-s', required=False, default=300, type=int, metavar='num', 
 args = parser.parse_args()
 model = args.m
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 print(device_lib.list_local_devices())
 
 if not os.path.exists(model):
-    os.mkdir(model)
+    os.makedirs(model)
+
+
+# _____LOAD DATA_____
+x_test, y_test = [], []
+x_train, y_train = [], []
+
+# Get data from iob file
+if args.i.endswith('.iob'):
+    x_train, y_train = load_iob(args.i)
+
+# Get data from xml file
+elif args.i.endswith('.xml'):
+    x_train, y_train = load_xml(args.i)
+
+# Get data from index file
+else:
+    with open(args.i, 'r') as index_file:
+        for index in index_file:
+            index = index.replace('\n', '')
+            file_path = os.path.join(os.path.dirname(args.i), index)
+            # Get data from iob listed in index file
+            if index.endswith('.iob'):
+                x, y = load_iob(file_path)
+                x_train += x
+                y_train += y
+
+            # Get data from xml listed in index file
+            elif index.endswith('xml'):
+                x, y = load_xml(file_path)
+                x_train += x
+                y_train += y
+
+            else:
+                raise UnsupportedFileFormat('Unsupported file format of file: ' + os.path.basename(index))
+
+# Get test data if provided
+if args.t:
+    # Get test data from iob file
+    if args.t.endswith('.iob'):
+        x_test, y_test = load_iob(args.t)
+
+    # Get test data from xml file
+    elif args.t.endswith('.xml'):
+        x_test, y_test = load_xml(args.t)
+
+    # Get test from index file
+    else:
+        with open(args.t, 'r') as index_file:
+            for index in index_file:
+                index = index.replace('\n', '')
+                file_path = os.path.join(os.path.dirname(args.t), index)
+
+                # Get data from iob listed in index file
+                if index.endswith('.iob'):
+                    x, y = load_iob(file_path)
+                    x_test += x
+                    y_test += y
+
+                # Get data from xml listed in index file
+                elif index.endswith('.xml'):
+                    x, y = load_xml(file_path)
+                    x_test += x
+                    y_test += y
+
+                else:
+                    raise UnsupportedFileFormat('Unsupported file format of file: ' + os.path.basename(index))
 
 model_weights = os.path.join(model, "weights.pkl")
 model_params = os.path.join(model, "params.pkl")
 model_preprocessor = os.path.join(model, "preprocessor.pkl")
 
-x_train, y_train = iob.load_data_and_labels(args.i)
-x_test, y_test = iob.load_data_and_labels(args.t)
 print("Train: %d" % len(x_train))
-print("Test : %d" % len(x_test))
+if args.t:
+    print("Test : %d" % len(x_test))
 
+# _____ BUILD AND TRAIN MODEL _____
 m = Sequence(args.f, use_char=False, nn_type=args.n, input_size=args.s)
 m.fit(x_train, y_train, args.f, x_test, y_test, epochs=args.e, batch_size=32)
 m.save(model_weights, model_params, model_preprocessor)
