@@ -85,8 +85,11 @@ class Sequence(object):
                       epochs=epochs, batch_size=batch_size,
                       verbose=verbose, callbacks=callbacks,
                       shuffle=shuffle)
-
-        self.model = model
+        if x_train and y_valid:
+            self.model = trainer.best_model
+            self.best_report = trainer.best_model_report
+            print("Best model report: ")
+            print(self.best_report)
 
     def score(self, x_test, y_test):
         """Returns the f1-micro score on the given test model and labels.

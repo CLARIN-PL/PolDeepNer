@@ -25,9 +25,6 @@ for gpu_nb in args.g:
 os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 print(device_lib.list_local_devices())
 
-if not os.path.exists(model):
-    os.makedirs(model)
-
 # _____LOAD DATA_____
 x_test, y_test = [], []
 x_train, y_train = [], []
@@ -100,7 +97,15 @@ if args.t:
 # _____LOAD EMBEDDING_____
 embedding = load_embedding(args.f)
 
+
 # _____BUILD AND TRAIN MODEL_____
 m = Sequence(embedding, use_char=False, nn_type=args.n)
 m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
+
+# _____SAVE MODEL_____
+model = os.path.join(model, 'poldeepner' + embedding.name)
+
+if not os.path.exists(model):
+    os.makedirs(model)
+
 m.save(model)
