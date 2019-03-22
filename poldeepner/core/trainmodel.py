@@ -3,7 +3,7 @@ import os
 
 from tensorflow.python.client import device_lib
 
-from load_data import load_iob, load_xml, UnsupportedFileFormat
+from load_data import load_data
 from wrapper import Sequence
 from embedding_wrapper import load_embedding
 
@@ -25,74 +25,16 @@ for gpu_nb in args.g:
 os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 print(device_lib.list_local_devices())
 
-# _____LOAD DATA_____
-x_test, y_test = [], []
-x_train, y_train = [], []
 
-# Get data from iob file
-if args.i.endswith('.iob'):
-    x_train, y_train = load_iob(args.i)
-
-# Get data from xml file
-elif args.i.endswith('.xml'):
-    x_train, y_train = load_xml(args.i)
-
-# Get data from index file
-else:
-    with open(args.i, 'r') as index_file:
-        for index in index_file:
-            index = index.replace('\n', '')
-            file_path = os.path.join(os.path.dirname(args.i), index)
-            # Get data from iob listed in index file
-            if index.endswith('.iob'):
-                x, y = load_iob(file_path)
-                x_train += x
-                y_train += y
-
-            # Get data from xml listed in index file
-            elif index.endswith('xml'):
-                x, y = load_xml(file_path)
-                x_train += x
-                y_train += y
-
-            else:
-                raise UnsupportedFileFormat('Unsupported file format of file: ' + os.path.basename(index))
-
-# Get test data if provided
-if args.t:
-    # Get test data from iob file
-    if args.t.endswith('.iob'):
-        x_test, y_test = load_iob(args.t)
-
-    # Get test data from xml file
-    elif args.t.endswith('.xml'):
-        x_test, y_test = load_xml(args.t)
-
-    # Get test from index file
-    else:
-        with open(args.t, 'r') as index_file:
-            for index in index_file:
-                index = index.replace('\n', '')
-                file_path = os.path.join(os.path.dirname(args.t), index)
-
-                # Get data from iob listed in index file
-                if index.endswith('.iob'):
-                    x, y = load_iob(file_path)
-                    x_test += x
-                    y_test += y
-
-                # Get data from xml listed in index file
-                elif index.endswith('.xml'):
-                    x, y = load_xml(file_path)
-                    x_test += x
-                    y_test += y
-
-                else:
-                    raise UnsupportedFileFormat('Unsupported file format of file: ' + os.path.basename(index))
-
+# _____LOAD DATA______
+x_train, y_train = load_data(args.i)
 print("Train: %d" % len(x_train))
+
 if args.t:
+    x_test, y_test = load_data(args.t)
     print("Test : %d" % len(x_test))
+else:
+    x_test, y_test = None, None
 
 # _____LOAD EMBEDDING_____
 embedding = load_embedding(args.f)

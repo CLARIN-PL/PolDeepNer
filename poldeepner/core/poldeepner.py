@@ -14,7 +14,7 @@ class PolDeepNer:
         self.models = []
         for model_path, embedding_path in zip(models_paths, embeddings_paths):
             embedding = load_embedding(embedding_path)
-            self.models.append(Sequence.load(os.path.join(model, embedding)))
+            self.models.append(Sequence.load(model_path, embedding))
 
     def process_sentence(self, sentence):
         """
