@@ -43,11 +43,11 @@ def load_data(data_file_path):
     return x_data, y_data
 
 
-def load_iob(filename, extra_features = False):
+def load_iob(file_path, extra_features = False):
     """Loads data and label from a file.
 
     Args:
-        filename (str): path to the file.
+        file_path (str): path to the file.
         extra_features(bool): use dictionary features from iob
 
         The file format is tab-separated values.
@@ -79,7 +79,7 @@ def load_iob(filename, extra_features = False):
     """
     sents, labels = [], []
     words, tags = [], []
-    with open(filename, 'r') as f:
+    with open(file_path, 'r') as f:
         for line in f:
             if "DOCSTART" in line:
                 continue
@@ -146,6 +146,8 @@ def load_xml(file_path):
 
 
 def load_toki(file_path):
+    """Function for loading Toki's output files
+    :param file_path: path to .tok file"""
     with open(file_path) as f:
         data = []
         sentence = []

@@ -1,5 +1,8 @@
+"""
+Usage: python process_iob.py
+
+"""
 import argparse
-import configparser
 import codecs
 import os
 
@@ -17,9 +20,9 @@ def process_file(input_path, output_path, models=None):
     if models is not None:
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     else:
-        models = {'./../data/': './../data/cc.pl.300.bin',
-                  './../dat/': './../data/',
-                  '': ''}
+        models = {'./../data/poldeepner-nkjp-ftcc-bigru/': './../data/cc.pl.300.bin',
+                  './../data/poldeepner-nkjp-ftkgr10orth-bigru': './../data/kgr10_orths.vec.bin',
+                  './../data/poldeepner-nkjp-ftkgr10plain-lstm': './../data/kgr10-plain-sg-300-mC50.bin'}
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     x, _ = load_data(input_path)
     y_pred = ner.process_document(x)
@@ -32,3 +35,16 @@ def process_file(input_path, output_path, models=None):
             for token, label in zip(sentence, labels):
                 output_file.write(token + '\t' + label + '\n')
             output_file.write('\n')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description='Process IOB file, recognize NE and save the output to another IOB file.')
+    parser.add_argument('-i', required=True, metavar='PATH', help='input IOB file')
+    parser.add_argument('-m', required=False, metavar='PATH', help='path to the model')
+    parser.add_argument('-o', required=True, metavar='PATH', help='output IOB file')
+    parser.add_argument('-f', required=False, metavar='PATH', help='path to embedding')
+
+    args = parser.parse_args()
+
+    ner = PolDeepNer([args.m], [args.f])
