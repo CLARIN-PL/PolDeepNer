@@ -53,6 +53,7 @@ class Trainer(object):
                                   callbacks=callbacks,
                                   verbose=verbose,
                                   shuffle=shuffle)
+
         if x_valid and y_valid:
             self.best_model = f1.get_best_model()
             self.best_model_report = f1.get_best_model_report()

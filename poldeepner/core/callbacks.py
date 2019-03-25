@@ -30,6 +30,7 @@ class F1score(Callback):
 
             label_true.extend(y_true)
             label_pred.extend(y_pred)
+
         report = NestedReport(label_true, label_pred)
         print(report)
         f1_score = report.f1_score

@@ -17,12 +17,14 @@ parser.add_argument('-e', required=True, default=32, type=int, metavar='num', he
 parser.add_argument('-g', required=True, nargs='+', help='which GPUs to use')
 parser.add_argument('-C', action='store_true', help='use char embedding built from training data')
 
+
 args = parser.parse_args()
 model = args.m
 
 gpus = ''
 for gpu_nb in args.g:
     gpus += str(gpu_nb) + ' '
+
 os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 print(device_lib.list_local_devices())
 
@@ -39,7 +41,6 @@ else:
 
 # _____LOAD EMBEDDING_____
 embedding = load_embedding(args.f)
-
 
 # _____BUILD AND TRAIN MODEL_____
 m = Sequence(embedding, use_char=args.C, nn_type=args.n)
