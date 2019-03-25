@@ -16,12 +16,14 @@ parser.add_argument('-n', required=True, metavar='nn_type', help='type of NN: GR
 parser.add_argument('-e', required=True, default=32, type=int, metavar='num', help='number of epoches')
 parser.add_argument('-g', required=True, nargs='+', help='which GPUs to use')
 
+
 args = parser.parse_args()
 model = args.m
 
 gpus = ''
 for gpu_nb in args.g:
     gpus += str(gpu_nb) + ' '
+
 os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 print(device_lib.list_local_devices())
 
@@ -38,7 +40,6 @@ else:
 
 # _____LOAD EMBEDDING_____
 embedding = load_embedding(args.f)
-
 
 # _____BUILD AND TRAIN MODEL_____
 m = Sequence(embedding, use_char=False, nn_type=args.n)

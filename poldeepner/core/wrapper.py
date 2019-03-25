@@ -85,6 +85,7 @@ class Sequence(object):
                       epochs=epochs, batch_size=batch_size,
                       verbose=verbose, callbacks=callbacks,
                       shuffle=shuffle)
+
         if x_train and y_valid:
             self.model = trainer.best_model
             self.best_report = trainer.best_model_report
@@ -113,6 +114,15 @@ class Sequence(object):
             return score
         else:
             raise OSError('Could not find a model. Call load(dir_path).')
+
+    def predict(x_test):
+        if self.model:
+            x_test = self.p.transform(x_test)
+            y_pred = self.model.predict(x_test)
+            y_pred = self.p.inverse_transform(y_pred, lengths)
+            print(x_test)
+            print(y_pred)
+
 
     def predict_to_iob(self, input_path, output_path):
         input_file = open(input_path, 'r')

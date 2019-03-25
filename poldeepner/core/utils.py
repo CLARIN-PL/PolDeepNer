@@ -3,11 +3,44 @@ Utility functions.
 """
 import math
 from collections import Counter
+import os
+import subprocess
 
 import numpy as np
 from keras.utils import Sequence
 
 from annotation import Annotation
+
+def load_tokenised():
+    dir_path = os.getcwd()
+    with open('/../data/tmp_tokenised.txt', 'r') as f:
+        data = []
+        sentence = []
+        for line in f:
+            line_splitted = line.split('\t')
+            if line_splitted[1] == 'newline':
+                data.append(sentence)
+                sentence = []
+                continue
+            else:
+                sentence.append(line_splitted[0])
+    os.remove('./../data/tmp_tokenised.txt')
+    return data
+
+
+def tokenise_file(file_path):
+    print("########################################################")
+    print(os.path.dirname(file_path))
+    print("___________________________________________________________")
+    cwd = os.getcwd()
+    print(cwd)
+    print(os.path.split(cwd)[0])
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print(os.path.split(cwd)[0] + '/data/tmp_tokenised.txt')
+
+    p = subprocess.Popen('toki-app -f \$orth\\t\$ws\\n < /mnt/big_one/gawor/data/inwokacja.txt > ' + os.path.split(cwd)[0] + '/data/tmp_tokenised.txt')
+    p.wait()
+    return load_tokenised()
 
 
 def wrap_annotations(sentences):
@@ -91,7 +124,6 @@ class NestedReport:
         supp_counter = Counter()
         report = '{:<22}{:>8}{:>8}{:>8}{:>10}{:>10}{:>10}{:>10}\n'.format('annotation', 'TP', 'FP', 'FN', 'precision',
                                                                           'recall', 'f1-score', 'support')
-        TP_total, FP_total, FN_total, supp_total = 0, 0, 0, 0
 
         for annotation, TP, FP, FN, support in annotations_TP_FP_FN_support:
             TP_counter.update({annotation: TP})
