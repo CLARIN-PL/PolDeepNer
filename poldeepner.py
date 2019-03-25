@@ -36,6 +36,11 @@ class PolDeepNerWorker(nlp_ws.NLPWorker):
         process_file(tok_file_path, iob_file_path, task_options['models'])
         os.remove(tmp_file_path)
 
+        # Transform output from .iob to .xml (CCL format)
+        q = subprocess.Popen('liner-cli -i iob -f ' + iob_file_path + ' -o ccl -t ' + output_path)
+        q.wait()
+        os.remove(iob_file_path)
+
 
 class WrongTaskOptions(Exception):
     def __init__(self, message):
