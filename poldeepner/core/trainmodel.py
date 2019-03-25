@@ -15,6 +15,7 @@ parser.add_argument('-m', required=True, metavar='PATH', help='path to a folder 
 parser.add_argument('-n', required=True, metavar='nn_type', help='type of NN: GRU or LSTM', default='GRU')
 parser.add_argument('-e', required=True, default=32, type=int, metavar='num', help='number of epoches')
 parser.add_argument('-g', required=True, nargs='+', help='which GPUs to use')
+parser.add_argument('-C', action='store_true', help='append char embedding created from training data')
 
 args = parser.parse_args()
 model = args.m
@@ -41,7 +42,7 @@ embedding = load_embedding(args.f)
 
 
 # _____BUILD AND TRAIN MODEL_____
-m = Sequence(embedding, use_char=False, nn_type=args.n)
+m = Sequence(embedding, use_char=args.C, nn_type=args.n)
 m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
 
 # _____SAVE MODEL_____

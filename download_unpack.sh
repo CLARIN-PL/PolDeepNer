@@ -5,9 +5,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #
 # Download and unpack cc.pl.300.bin
 #
-FASTTEXT_CC="$DIR/poldeepner/model/cc.pl.300.bin"
-FASTTEXT_CC_PACK="$DIR/poldeepner/model/cc.pl.300.bin.gz"
-FASTTEXT_CC_URL="https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.pl.300.bin.gz"
+KGR10_SKIPGRAM_300="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
+KGR10_SKIPGRAM_300_PACK="$DIR/"
+KGR10_SKIPGRAM_300_URL="https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.pl.300.bin.gz"
 
 if [ ! -f $FASTTEXT_CC_PACK ] && [ ! -f $FASTTEXT_CC ]; then
   wget $FASTTEXT_CC_URL -O $FASTTEXT_CC_PACK
