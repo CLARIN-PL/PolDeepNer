@@ -36,6 +36,7 @@ class BiLSTMCRF(object):
 
     def __init__(self,
                  num_labels,
+                 char_vocab_size=None,
                  word_embedding_dim=100,
                  char_embedding_dim=25,
                  word_lstm_size=100,
@@ -65,6 +66,7 @@ class BiLSTMCRF(object):
             input_size (int): input size of the first layer.
         """
         super(BiLSTMCRF).__init__()
+        self._char_vocab_size = char_vocab_size
         self._char_embedding_dim = char_embedding_dim
         self._word_embedding_dim = word_embedding_dim
         self._char_lstm_size = char_lstm_size

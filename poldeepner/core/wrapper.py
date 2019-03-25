@@ -67,7 +67,8 @@ class Sequence(object):
 
         self.p.fit(x_train, y_train)
 
-        model = BiLSTMCRF(num_labels=self.p.label_size,
+        model = BiLSTMCRF(char_vocab_size=self.p.char_vocab_size,
+                          num_labels=self.p.label_size,
                           word_embedding_dim=self.p.vector_len,
                           word_lstm_size=self.word_lstm_size,
                           char_lstm_size=self.char_lstm_size,
