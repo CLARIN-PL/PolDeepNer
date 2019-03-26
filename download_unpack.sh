@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #
 # Download kgr10.plain.skipgram.dim300.neg10.bin from CLARIN-PL NextCloud
 #
-EMBEDDING="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
+EMBEDDING="$./poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
 EMBEDDING_URL="https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
 
 if [ ! -f $EMBEDDING ]; then
@@ -56,4 +56,4 @@ function unpack_model_7z()
   fi
 }
 
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin"
+unpack_model_7z "./poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin"
