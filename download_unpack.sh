@@ -3,54 +3,43 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
 #
-# Download and unpack cc.pl.300.bin
+# Download kgr10.plain.skipgram.dim300.neg10.bin from CLARIN-PL NextCloud
 #
 EMBEDDING="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
-EMBEDDING_PACK="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
-EMBEDDING_URL="https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.pl.300.bin.gz"
+EMBEDDING_URL="https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
 
-if [ ! -f $FASTTEXT_CC_PACK ] && [ ! -f $FASTTEXT_CC ]; then
-  wget $FASTTEXT_CC_URL -O $FASTTEXT_CC_PACK
-  echo "- `basename $FASTTEXT_CC_PACK` downloaded"
+if [ ! -f $EMBEDDING ]; then
+  wget $EMBEDDING_URL -O $EMBEDDING
+  echo "- `basename $EMBEDDING` downloaded"
 else
-  echo "- `basename $FASTTEXT_CC_PACK` found"
-fi
-
-if [ ! -f $FASTTEXT_CC ]; then
-  gunzip $FASTTEXT_CC_PACK
-  echo "- `basename $FASTTEXT_CC_PACK` unpacked"
-else
-  echo "- `basename $FASTTEXT_CC` found"
+  echo "- `basename $EMBEDDING` found"
 fi
 
 
 #
-# Download KGR10 embeddings from CLARIN-PL NextCloud
+# Download KGR10 model from CLARIN-PL NextCloud
 #
 function download_nextcloud()
 {
-    KGR10_SKIPGRAM_300=$1
-    KGR10_SKIPGRAM_300_PACK="$KGR10_SKIPGRAM_300.7z"
-    FASTTEXT_KGR10_URL=$2
+    MODEL=$1
+    MODEL_PACK="$MODEL.7z"
+    MODEL_URL=$2
 
-    if [ ! -f $FASTTEXT_KGR10_PACK ] && [ ! -f $FASTTEXT_KGR10 ]; then
-      wget $FASTTEXT_KGR10_URL -O $FASTTEXT_KGR10_PACK
-      echo "- `basename $FASTTEXT_KGR10_PACK` downloaded"
+    if [ ! -f $MODEL_PACK ] && [ ! -f $MODEL ]; then
+      wget $MODEL_URL -O $MODEL_PACK
+      echo "- `basename $MODEL_PACK` downloaded"
     else
-      echo "- `basename $FASTTEXT_KGR10_PACK` found"
+      echo "- `basename $MODEL_PACK` found"
     fi
 
-    if [ ! -f $FASTTEXT_KGR10 ]; then
-      OUTPUT=`dirname $FASTTEXT_KGR10`
-      7z x $FASTTEXT_KGR10_PACK -o$OUTPUT
-      echo "- `basename $FASTTEXT_KGR10_PACK` unpacked"
+    if [ ! -f $MODEL ]; then
+      OUTPUT=`dirname $MODEL`
+      7z x $MODEL_PACK -o $OUTPUT
+      echo "- `basename $MODEL_PACK` unpacked"
     else
-      echo "- `basename $FASTTEXT_KGR10` found"
+      echo "- `basename $MODEL` found"
     fi
 }
-
-download_nextcloud "$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin" "https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
-download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextcloud.clarin-pl.eu/index.php/s/WVbVyIwkAHUDaYs/download"
 
 #
 # Unpack pre-trained models
@@ -58,19 +47,13 @@ download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextclou
 function unpack_model_7z()
 {
   MODEL=$1
-  OUTPUT=`dirname $MODEL`
-  if [ ! -d $MODEL ] && [ ! -f $MODEL ] ; then
-    7z x "$MODEL.7z" -o$OUTPUT
+  OUTPUT=`$MODEL`
+  if [ ! -d $MODEL ] ; then
+    7z x "$MODEL.7z" -o $OUTPUT
     echo "- `basename $MODEL` unpacked"
   else
     echo "- `basename $MODEL` found"
   fi
 }
 
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftcc-bigru"
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10orth-bigru"
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm"
-
-unpack_model_7z "$DIR/poldeepner/data/nkjp-nested-simplified-v2.iob"
-unpack_model_7z "$DIR/poldeepner/data/POLEVAL-NER_GOLD.json"
-unpack_model_7z "$DIR/poldeepner/data/poleval2018ner-data"
+unpack_model_7z "$DIR/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin"
