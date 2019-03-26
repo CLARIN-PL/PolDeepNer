@@ -27,7 +27,7 @@ class PolDeepNerWorker(nlp_ws.NLPWorker):
                             }
         elif not check_models_paths(task_options['models']):
             raise WrongTaskOptions('Wrong paths to models: ' + str(task_options['models']))
-        
+
         # Create tmp file where toki output will be stored
         (tokfd, tok_file_path) = tempfile.mkstemp(suffix='.tok', dir='./tmp')
         (iobfd, iob_file_path) = tempfile.mkstemp(suffix='.iob', dir='./tmp')
