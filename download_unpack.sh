@@ -5,9 +5,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #
 # Download and unpack cc.pl.300.bin
 #
-KGR10_SKIPGRAM_300="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
-KGR10_SKIPGRAM_300_PACK="$DIR/"
-KGR10_SKIPGRAM_300_URL="https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.pl.300.bin.gz"
+EMBEDDING="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
+EMBEDDING_PACK="$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
+EMBEDDING_URL="https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.pl.300.bin.gz"
 
 if [ ! -f $FASTTEXT_CC_PACK ] && [ ! -f $FASTTEXT_CC ]; then
   wget $FASTTEXT_CC_URL -O $FASTTEXT_CC_PACK
@@ -29,8 +29,8 @@ fi
 #
 function download_nextcloud()
 {
-    FASTTEXT_KGR10=$1
-    FASTTEXT_KGR10_PACK="$FASTTEXT_KGR10.7z"
+    KGR10_SKIPGRAM_300=$1
+    KGR10_SKIPGRAM_300_PACK="$KGR10_SKIPGRAM_300.7z"
     FASTTEXT_KGR10_URL=$2
 
     if [ ! -f $FASTTEXT_KGR10_PACK ] && [ ! -f $FASTTEXT_KGR10 ]; then
