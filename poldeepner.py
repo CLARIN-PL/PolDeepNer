@@ -49,3 +49,4 @@ class WrongTaskOptions(Exception):
 
 if __name__ == '__main__':
     nlp_ws.NLPService.main(PolDeepNerWorker)
+
