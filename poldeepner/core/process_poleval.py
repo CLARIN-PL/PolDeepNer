@@ -3,7 +3,7 @@ import argparse
 import os
 import codecs
 
-from iob import load_data_and_labels
+from load_data import load_data
 from poldeepner import PolDeepNer
 from utils import wrap_annotations
 
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         doc_id = get_id(os.path.join(path, name + ".ini"))
         print("%d from %d: %s" % (n, paths_count, doc_id))
 
-        sentences, _ = load_data_and_labels(os.path.join(path, name + '.iob'))
+        sentences, _ = load_data(os.path.join(path, name + '.iob'))
         labels = ner.process_document(sentences)
 
         dict_list.append(get_poleval_dict(doc_id, text, sentences, labels))
