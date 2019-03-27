@@ -47,9 +47,8 @@ function download_nextcloud()
 function unpack_model_7z()
 {
   MODEL=$1
-  OUTPUT=`$MODEL`
   if [ ! -d $MODEL ] ; then
-    7z x "$MODEL.7z" -o$OUTPUT
+    7z x "$MODEL.7z" -o$MODEL
     echo "- `basename $MODEL` unpacked"
   else
     echo "- `basename $MODEL` found"
