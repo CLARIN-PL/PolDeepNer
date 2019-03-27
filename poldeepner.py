@@ -23,26 +23,22 @@ class PolDeepNerWorker(nlp_ws.NLPWorker):
     def process(self, input_path, task_options, output_path):
         if task_options is None:
             task_options = {'models': {'./poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
-                                           './poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}
-                            }
+                                       './poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}}
+        elif 'models' not in task_options:
+            raise WrongTaskOptions('Models not in task options: ' + str(task_options))
+
         elif not check_models_paths(task_options['models']):
             raise WrongTaskOptions('Wrong paths to models: ' + str(task_options['models']))
 
         # Create tmp file where toki output will be stored
-        (tokfd, tok_file_path) = tempfile.mkstemp(suffix='.tok', dir='./tmp')
-        (iobfd, iob_file_path) = tempfile.mkstemp(suffix='.iob', dir='./tmp')
+        (iobfd, iob_file_path) = tempfile.mkstemp(suffix='.xml', dir='./tmp')
 
-        # Run toki in order to tokenise input .txt file and save it in tmp .tok file
-        p = subprocess.Popen('toki-app -f \$orth\\t\$ws\\n < ' + input_path + ' > ' + tok_file_path)
+        # Use liner to convert input ccl format to iob
+        p = subprocess.Popen('liner-cli -i ccl -f ' + input_path + ' -o iob -t ' + iob_file_path)
         p.wait()
 
-        # Process .tok file
-        process_file(tok_file_path, iob_file_path, task_options['models'])
-        os.remove(tmp_file_path)
-
-        # Transform output from .iob to .xml (CCL format)
-        q = subprocess.Popen('liner-cli -i iob -f ' + iob_file_path + ' -o ccl -t ' + output_path)
-        q.wait()
+        # Process .iob file
+        process_file(iob_file_path, output_path, task_options['models'])
         os.remove(iob_file_path)
 
 

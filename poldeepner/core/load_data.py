@@ -11,14 +11,12 @@ def load_data(data_file_path):
 
     # Get data from iob file
     if data_file_path.endswith('.iob'):
-        x_data, y_data = load_iob(data_file_path)
+        x_data, y_data, ext_data = load_iob(data_file_path, extended_data=True)
+        return x_data, y_data, ext_data
 
     # Get data from xml file
     elif data_file_path.endswith('.xml'):
         x_data, y_data = load_xml(data_file_path)
-
-    elif data_file_path.endswith('.tok'):
-        x_data, y_data = load_toki(data_file_path)
 
     # Get data from index file
     else:
@@ -43,12 +41,12 @@ def load_data(data_file_path):
     return x_data, y_data
 
 
-def load_iob(filename, extra_features = False):
+def load_iob(filename, extended_data=False):
     """Loads data and label from a file.
 
     Args:
         filename (str): path to the file.
-        extra_features(bool): use dictionary features from iob
+        extended_data (bool): return columns other then tokens and annotations from iob
 
         The file format is tab-separated values.
         A blank line is required at the end of a sentence.
@@ -79,6 +77,7 @@ def load_iob(filename, extra_features = False):
     """
     sents, labels = [], []
     words, tags = [], []
+    ext_data_sents, ext_data = [], []
     with open(filename, 'r') as f:
         for line in f:
             if "DOCSTART" in line:
@@ -86,16 +85,16 @@ def load_iob(filename, extra_features = False):
             line = line.rstrip()
             if line:
                 cols = line.split('\t')
-                if extra_features:
-                    words.append([cols[0]] + cols[3:-1])
-                else:
-                    words.append(cols[0])
+                words.append(cols[0])
                 tags.append(cols[-1])
+                if extended_data:
+                    ext_data.append(cols[1:-1])
             else:
                 sents.append(words)
+                ext_data_sents.append(ext_data)
                 labels.append(tags)
-                words, tags = [], []
-        return sents, labels
+                words, tags, ext_data = [], [], []
+        return sents, labels, ext_data_sents
 
 
 class AnnsChannels:
