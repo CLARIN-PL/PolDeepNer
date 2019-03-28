@@ -30,16 +30,8 @@ class PolDeepNerWorker(nlp_ws.NLPWorker):
         elif not check_models_paths(task_options['models']):
             raise WrongTaskOptions('Wrong paths to models: ' + str(task_options['models']))
 
-        # Create tmp file where toki output will be stored
-        (iobfd, iob_file_path) = tempfile.mkstemp(suffix='.xml', dir='./tmp')
-
-        # Use liner to convert input ccl format to iob
-        p = subprocess.Popen('liner-cli -i ccl -f ' + input_path + ' -o iob -t ' + iob_file_path)
-        p.wait()
-
         # Process .iob file
-        process_file(iob_file_path, output_path, task_options['models'])
-        os.remove(iob_file_path)
+        process_file(input_path, output_path, task_options['models'])
 
 
 class WrongTaskOptions(Exception):
