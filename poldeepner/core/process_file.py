@@ -22,7 +22,6 @@ def process_file(input_path, output_path, models=None):
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     x, _, ext_data = load_data(input_path)
     y_pred = ner.process_document(x)
-    print(y_pred)
 
     if not os.path.exists(os.path.dirname(output_path)):
         os.makedirs(os.path.dirname(output_path))
@@ -34,14 +33,13 @@ def process_file(input_path, output_path, models=None):
                 for ext_col in ext_cols:
                     line += '\t' + ext_col
                 if label != '':
-                    line += '\t' + label + '\n'
+                    line += '\t' + label
                 else:
-                    line += '\tO\n'
-                print(line)
+                    line += '\tO'
                 output_file.write(line)
             output_file.write('\n')
 
 
 if __name__ == '__main__':
-    os.environ['CUDA_VISIBLE_DEVICES']='0'
+    os.environ['CUDA_VISIBLE_DEVICES']='1'
     process_file('/mnt/big_one/gawor/data/nkjp-ratio4v2-nested-simplified-seta.iob', '/mnt/big_one/gawor/data/result.txt')
