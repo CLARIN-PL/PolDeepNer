@@ -8,4 +8,4 @@ parser.add_argument('-i', required=True, metavar='PATH', help='input IOB file')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    process_file(args.i, '/test_result.iob')
+    process_file(args.i, '/PolDeepNer/test_result.iob')
