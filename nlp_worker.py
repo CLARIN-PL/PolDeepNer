@@ -7,7 +7,7 @@ import sys
 import tempfile
 
 import nlp_ws
-from poldeepner.core.process_file import process_file
+from process_file import process_file
 
 _log = logging.getLogger(__name__)
 
@@ -22,8 +22,8 @@ def check_models_paths(models_embeddings):
 class PolDeepNerWorker(nlp_ws.NLPWorker):
     def process(self, input_path, task_options, output_path):
         if task_options is None:
-            task_options = {'models': {'./poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
-                                       './poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}}
+            task_options = {'models': {'PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
+                                       'PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}}
         elif 'models' not in task_options:
             raise WrongTaskOptions('Models not in task options: ' + str(task_options))
 
