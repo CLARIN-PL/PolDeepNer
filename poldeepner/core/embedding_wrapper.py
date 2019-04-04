@@ -1,7 +1,8 @@
+from gensim.models import KeyedVectors
 import hashlib
 import os
 from pyfasttext import FastText
-from gensim.models import KeyedVectors
+
 
 
 def load_embedding(embedding_path):
@@ -42,9 +43,9 @@ class EmbeddingWrapper(object):
         return self._md5
 
     @staticmethod
-    def _hash_emb(word2vec_path):
+    def _hash_emb(embedding_path):
         md5 = hashlib.md5()
-        with open(word2vec_path, 'rb') as f:
+        with open(embedding_path, 'rb') as f:
             while True:
                 data = f.read(65536)
                 if not data:

@@ -55,4 +55,4 @@ function unpack_model_7z()
   fi
 }
 
-unpack_model_7z "./poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin"
+unpack_model_7z "/PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin"

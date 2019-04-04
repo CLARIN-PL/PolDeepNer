@@ -1,8 +1,8 @@
 from operator import itemgetter
 import os
 
-from wrapper import Sequence
-from embedding_wrapper import load_embedding
+from .wrapper import Sequence
+from .embedding_wrapper import load_embedding
 
 
 class PolDeepNer:

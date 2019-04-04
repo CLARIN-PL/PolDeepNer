@@ -1,10 +1,10 @@
 import argparse
 import configparser
 import codecs
-import os
 
-from load_data import load_data
-from poldeepner import PolDeepNer
+
+from .load_data import load_data
+from .poldeepner import PolDeepNer
 
 
 def process_file(input_path, output_path, models=None):
@@ -17,8 +17,8 @@ def process_file(input_path, output_path, models=None):
     if models is not None:
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     else:
-        models = {'./../model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
-                  './../model/kgr10.plain.skipgram.dim300.neg10.bin'}
+        models = {'PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
+                  'PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     x, _, ext_data = load_data(input_path)
     y_pred = ner.process_document(x)

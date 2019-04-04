@@ -7,7 +7,7 @@ from collections import Counter
 import numpy as np
 from keras.utils import Sequence
 
-from annotation import Annotation
+from .annotation import Annotation
 
 
 def wrap_annotations(sentences):

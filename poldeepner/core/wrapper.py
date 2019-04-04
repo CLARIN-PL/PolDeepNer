@@ -5,9 +5,9 @@ Based on https://github.com/Hironsan/anago
 """
 from seqeval.metrics import f1_score
 
-from models import BiLSTMCRF, save_model, load_model
-from preprocessing import VectorTransformer
-from trainer import Trainer
+from .models import BiLSTMCRF, save_model, load_model
+from .preprocessing import VectorTransformer
+from .trainer import Trainer
 
 import os
 

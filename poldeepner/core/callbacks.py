@@ -4,7 +4,7 @@ Custom callbacks.
 from keras.callbacks import Callback
 from seqeval.metrics import f1_score
 
-from utils import get_lengths, NestedReport
+from .utils import get_lengths, NestedReport
 
 
 class F1score(Callback):

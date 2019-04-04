@@ -2,8 +2,8 @@
 
 Based on https://github.com/Hironsan/anago
 """
-from callbacks import F1score
-from utils import NERSequence
+from .callbacks import F1score
+from .utils import NERSequence
 
 
 class Trainer(object):

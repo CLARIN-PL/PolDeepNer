@@ -3,9 +3,9 @@ import os
 
 from tensorflow.python.client import device_lib
 
-from load_data import load_data
-from wrapper import Sequence
-from embedding_wrapper import load_embedding
+from .load_data import load_data
+from .wrapper import Sequence
+from .embedding_wrapper import load_embedding
 
 parser = argparse.ArgumentParser(description='Process IOB file, recognize NE and save the output to another IOB file.')
 parser.add_argument('-i', required=True, metavar='PATH', help='input train file .iob .xml or index file')
