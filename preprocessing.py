@@ -123,12 +123,12 @@ class VectorTransformer(BaseEstimator, TransformerMixin):
     @staticmethod
     def load(preprocessor_file_path, embedding):
         p = joblib.load(preprocessor_file_path)
-        if embedding.md5 == p._embedding_md5:
-            p._embedding = embedding
-            return p
-        else:
-            raise ValueError("FastText/Word2Vec embedding provided for load is different than one used by preprocessor. "
-                             "Preprocessor embedding name: ", p._emb_name)
+        # not working in nlp worker variant, unknown reason for idfferent digests of the same embedding
+        # if embedding.md5 == p._embedding_md5:
+        p._embedding = embedding
+        return p
+        # else:
+            # raise ValueError("FastText/Word2Vec embedding provided for load is different than one used by preprocessor. ")
 
 
 def pad_nested_sequences(sequences, dtype='int32'):

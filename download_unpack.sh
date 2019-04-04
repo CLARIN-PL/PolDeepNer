@@ -5,7 +5,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #
 # Download kgr10.plain.skipgram.dim300.neg10.bin from CLARIN-PL NextCloud
 #
-EMBEDDING="./poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
+EMBEDDING="PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin"
 EMBEDDING_URL="https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
 
 if [ ! -f $EMBEDDING ]; then
