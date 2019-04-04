@@ -33,9 +33,9 @@ def process_file(input_path, output_path, models=None):
                 for ext_col in ext_cols:
                     line += '\t' + ext_col
                 if label != '':
-                    line += '\t' + label
+                    line += '\t' + label + '\n'
                 else:
-                    line += '\tO'
+                    line += '\tO\n'
                 output_file.write(line)
             output_file.write('\n')
 
