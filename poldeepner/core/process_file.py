@@ -17,8 +17,8 @@ def process_file(input_path, output_path, models=None):
     if models is not None:
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     else:
-        models = {'PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
-                  'PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}
+        models = {'/PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
+                  '/PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}
         ner = PolDeepNer(list(models.keys()), list(models.values()))
     x, _, ext_data = load_data(input_path)
     y_pred = ner.process_document(x)
