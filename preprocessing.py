@@ -14,7 +14,7 @@ from sklearn.externals import joblib
 from keras.utils.np_utils import to_categorical
 from keras.preprocessing.sequence import pad_sequences
 
-from .utils import Vocabulary
+from utils import Vocabulary
 
 
 def normalize_number(text):

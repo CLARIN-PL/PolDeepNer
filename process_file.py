@@ -3,8 +3,8 @@ import configparser
 import codecs
 
 
-from .load_data import load_data
-from .poldeepner import PolDeepNer
+from load_data import load_data
+from poldeepner import PolDeepNer
 
 
 def process_file(input_path, output_path, models=None):
@@ -43,5 +43,4 @@ def process_file(input_path, output_path, models=None):
 
 
 if __name__ == '__main__':
-    os.environ['CUDA_VISIBLE_DEVICES']='1'
     process_file('/mnt/big_one/gawor/data/nkjp-ratio4v2-nested-simplified-seta.iob', '/mnt/big_one/gawor/data/result.txt')
