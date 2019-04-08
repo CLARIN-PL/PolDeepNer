@@ -126,7 +126,7 @@ class Sequence(object):
                 for ctag in ctags:
                     to_write += ' ' + ctag
                 if prediction != '':
-                    to_write += ' ' + prediction
+                    to_write += ' ' + prediction + '\n'
                 else:
                     to_write += ' O\n'
                 output_file.write(to_write)
