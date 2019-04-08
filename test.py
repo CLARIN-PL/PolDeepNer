@@ -8,4 +8,6 @@ parser.add_argument('-i', required=True, metavar='PATH', help='input IOB file')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    process_file(args.i, '/PolDeepNer/test_result.iob')
+    embedding = load_embedding('/PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin')
+    model = Sequence.load('/PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin', embedding)
+    model.predict_to_iob(args.i, '/PolDeepNer/test_result.iob')

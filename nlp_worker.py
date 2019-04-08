@@ -4,34 +4,36 @@ import os
 from pathlib import Path
 import subprocess
 import sys
-import tempfile
+import tempfile,shutil
 
 import nlp_ws
 from process_file import process_file
+from poldeepner import PolDeepNer
+from embedding_wrapper import load_embedding
+from wrapper import Sequence
 
 _log = logging.getLogger(__name__)
 
 
-def check_models_paths(models_embeddings):
-    for model_path, embedding_path in models_embeddings.items():
-        if not (os.path.exists(model_path) and os.path.exists(embedding_path)):
-            return False
-    return True
-
-
 class PolDeepNerWorker(nlp_ws.NLPWorker):
-    def process(self, input_path, task_options, output_path):
-        if task_options is None:
-            task_options = {'models': {'PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin':
-                                       'PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin'}}
-        elif 'models' not in task_options:
-            raise WrongTaskOptions('Models not in task options: ' + str(task_options))
-
-        elif not check_models_paths(task_options['models']):
-            raise WrongTaskOptions('Wrong paths to models: ' + str(task_options['models']))
-
+    def __init__(self):
+        embedding = load_embedding('/PolDeepNer/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin')
+        self.model = Sequence.load('/PolDeepNer/poldeepner/model/poldeepner-kgr10.plain.skipgram.dim300.neg10.bin', embedding)
+    def process(self, input_path, task_options, output_path):                	
+        #make temp file
+        temp_folder = tempfile.mkdtemp()
+        if not os.path.exists(temp_folder):
+            os.mkdir(temp_folder)    
+            
+        new_path=os.path.join(temp_folder, 'data.iob');    
+        shutil.copy2(input_path,new_path)    
+        print(new_path)
         # Process .iob file
-        process_file(input_path, output_path, task_options['models'])
+        self.model.predict_to_iob(new_path, output_path)
+        
+        #remove temp file
+        shutil.rmtree(temp_folder)	
+
 
 
 class WrongTaskOptions(Exception):

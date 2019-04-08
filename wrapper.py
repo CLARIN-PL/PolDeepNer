@@ -5,6 +5,7 @@ Based on https://github.com/Hironsan/anago
 """
 from seqeval.metrics import f1_score
 
+from load_data import load_data
 from models import BiLSTMCRF, save_model, load_model
 from preprocessing import VectorTransformer
 from trainer import Trainer
@@ -115,34 +116,22 @@ class Sequence(object):
             raise OSError('Could not find a model. Call load(dir_path).')
 
     def predict_to_iob(self, input_path, output_path):
-        input_file = open(input_path, 'r')
-
         output_file = open(output_path, 'w')
-        sentence, iob_lines, true_labels = [], [], []
+        x, _, all_ctags = load_data(input_path)
 
-        for input_line in input_file:
-            if "DOCSTART CONFIG" in input_line or "DOCSTART FILE" in input_line:
-                continue
-            if input_line == '\n':
-                x_test = self.p.transform([sentence])
-                lengths = map(len, [true_labels])
-                y_pred = self.model.predict(x_test)
-                y_pred = self.p.inverse_transform(y_pred, lengths)
-                for prediction, iob_line in zip(y_pred[0], iob_lines):
-                    output_line = ''
-                    for pos in iob_line:
-                        output_line += pos + '\t'
-                    output_line += prediction
-                    output_file.write(output_line + '\n')
-                output_file.write('\n')
-                sentence = []
-                iob_lines = []
-            else:
-                iob_line = input_line.split(sep='\t')[0:3]
-                iob_lines.append(iob_line)
-                sentence.append(input_line.split(sep='\t')[0])
-                true_labels.append(input_line.split(sep='\t')[3])
-
+        for sentence, sent_ctags in zip(x, all_ctags):
+            predictions = self.predict_sentence(sentence)
+            for token, prediction, ctags in zip(sentence, predictions, sent_ctags):
+                to_write = token
+                for ctag in ctags:
+                    to_write += ' ' + ctag
+                if prediction != '':
+                    to_write += ' ' + prediction
+                else:
+                    to_write += ' O\n'
+                output_file.write(to_write)
+            output_file.write('\n')
+                
     def predict_sentence(self, sentence):
         x_test = self.p.transform([sentence])
         lengths = [len(sentence)]
