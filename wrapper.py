@@ -124,11 +124,11 @@ class Sequence(object):
             for token, prediction, ctags in zip(sentence, predictions, sent_ctags):
                 to_write = token
                 for ctag in ctags:
-                    to_write += ' ' + ctag
+                    to_write += '\t' + ctag
                 if prediction != '':
-                    to_write += ' ' + prediction + '\n'
+                    to_write += '\t' + prediction + '\n'
                 else:
-                    to_write += ' O\n'
+                    to_write += '\tO\n'
                 output_file.write(to_write)
             output_file.write('\n')
                 
