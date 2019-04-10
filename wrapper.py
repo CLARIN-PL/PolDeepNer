@@ -117,20 +117,35 @@ class Sequence(object):
 
     def predict_to_iob(self, input_path, output_path):
         output_file = open(output_path, 'w')
+        input_file = open(input_path, 'r')
         x, _, all_ctags = load_data(input_path)
+        predictions = []
 
-        for sentence, sent_ctags in zip(x, all_ctags):
-            predictions = self.predict_sentence(sentence)
-            for token, prediction, ctags in zip(sentence, predictions, sent_ctags):
-                to_write = token
-                for ctag in ctags:
-                    to_write += '\t' + ctag
-                if prediction != '':
-                    to_write += '\t' + prediction + '\n'
-                else:
-                    to_write += '\tO\n'
-                output_file.write(to_write)
-            output_file.write('\n')
+        for sentence in x:
+            predictions.append(self.predict_sentence(sentence))
+        
+        write_sentence_mode = False
+        for line in input_file:
+            if 'DOCSTART' in line or line == '\n':
+                output_file.write(line)
+                write_sentence_mode = True
+
+            elif write_sentence_mode:
+                write_sentence_mode = False
+                predictions_sentence = predictions.pop(0)
+                sentence = x.pop(0)
+                ctags = all_ctags.pop(0)
+                
+                for token, ctag, prediction in zip(sentence, ctags, predictions_sentence):
+                    to_write = token
+                    for tag in ctag:
+                        to_write += ' ' + tag
+                    if prediction == '':
+                        to_write += ' 0\n'
+                    else:
+                        to_write += ' ' + prediction + '\n'
+                    output_file.write(to_write)
+                
                 
     def predict_sentence(self, sentence):
         x_test = self.p.transform([sentence])

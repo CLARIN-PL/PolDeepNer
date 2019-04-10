@@ -1,0 +1,1331 @@
+-DOCSTART CONFIG FEATURES orth base ctag
+-DOCSTART FILE 1
+-DOCSTART FILE 2
+Inż inżynier brev:pun O
+. . interp O
+e e subst:sg:nom:n O
+- - interp O
+syst syst ign O
+. . interp O
+- - interp O
+techn techn ign O
+. . interp O
+
+JAVA Java subst:sg:nom:f O
+Projekt Projekt subst:sg:gen:m3 O
+
+-DOCSTART FILE 3
+Temat temat subst:sg:nom:m3 O
+: : interp O
+Bashownik Bashownik ign O
+- - interp O
+quiz quiz subst:sg:nom:m3 O
+do do prep:gen O
+samodzielnej samodzielny adj:sg:gen:f:pos O
+nauki nauka subst:sg:gen:f O
+pracy praca subst:sg:gen:f O
+z z prep:inst:nwok O
+powłoką powłoka subst:sg:inst:f O
+bash bash ign O
+Grupa Grupa subst:sg:nom:m1 O
+: : interp O
+Paweł Paweł subst:sg:nom:m1 O
+Czarnecki Czarnecki subst:sg:nom:m1 O
+, , interp O
+234974 234974 num:pl:nom:m3:rec O
+Przemysław Przemysław subst:sg:nom:m1 O
+Wujek wujek subst:sg:nom:m1 O
+, , interp O
+234983 234983 num:pl:nom:m3:rec O
+Stefan Stefan subst:sg:nom:m1 O
+Piróg Piróg subst:sg:nom:m1 O
+, , interp O
+226223 226223 num:pl:nom:m3:rec O
+Funkcje funkcja subst:pl:nom:f O
+projektu projekt subst:sg:gen:m3 O
+: : interp O
+
+-DOCSTART FILE 4
+● ● ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+● ● ign O
+Zakładanie zakładać ger:sg:nom:n:imperf:aff O
+kont konto subst:pl:gen:n O
+● ● ign O
+Utrzymanie utrzymać ger:sg:acc:n:perf:aff O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+
+-DOCSTART FILE 5
+Projekt projekt subst:sg:nom:m3 O
+zakłada zakładać fin:sg:ter:imperf O
+przechowywanie przechowywać ger:sg:acc:n:imperf:aff O
+spreparowanej spreparować ppas:sg:gen:f:perf:aff O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+zamkniętych zamknięty adj:pl:gen:n:pos O
+z z prep:gen:nwok O
+zakresu zakres subst:sg:gen:m3 O
+znajomości znajomość subst:sg:gen:f O
+linuxa linuxa ign O
+oraz oraz conj O
+jego on ppron3:sg:gen:m1:ter:akc:npraep O
+powłoki powłoka subst:sg:gen:f O
+
+-DOCSTART FILE 6
+● ● ign O
+Możliwość możliwość subst:sg:acc:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+własnych własny adj:pl:gen:f:pos O
+baz baza subst:pl:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:inst:nwok O
+możliwością możliwość subst:sg:inst:f O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+Zarejestrowani zarejestrować ppas:pl:nom:m1:perf:aff O
+użytkownicy użytkownik subst:pl:nom:m1 O
+mają mieć fin:pl:ter:imperf O
+możliwość możliwość subst:sg:acc:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+nowych nowy adj:pl:gen:n:pos O
+pytań pytanie subst:pl:gen:n O
+wraz wraz adv O
+z z prep:inst:nwok O
+odpowiedziami odpowiedź subst:pl:inst:f O
+do do prep:gen O
+nich on ppron3:pl:gen:f:ter:akc:praep O
+i i conj O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+ich on ppron3:pl:gen:f:ter:akc:npraep O
+w w prep:loc:nwok O
+ramach ramy subst:pl:loc:n O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+
+-DOCSTART FILE 7
+● ● ign O
+Nauka nauka subst:sg:nom:f O
+○ ○ ign O
+wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+czy czy conj O
+zaznaczona zaznaczyć ppas:sg:nom:f:perf:aff O
+odpowiedź odpowiedź subst:sg:nom:f O
+jest być fin:sg:ter:imperf O
+dobra dobry adj:sg:nom:f:pos O
+czy czy conj O
+zła zły adj:sg:nom:f:pos O
+○ ○ ign O
+losowanie losować ger:sg:nom:n:imperf:aff O
+pytań pytanie subst:pl:gen:n O
+○ ○ ign O
+zliczanie zliczać ger:sg:nom:n:imperf:aff O
+poprawnych poprawny adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+○ ○ ign O
+doliczanie doliczać ger:sg:nom:n:imperf:aff O
+powtórzeń powtórzenie subst:pl:gen:n O
+pytań pytanie subst:pl:gen:n O
+gdy gdy adv O
+odpowie odpowiedzieć fin:sg:ter:perf O
+się się qub O
+na na prep:acc O
+nie on ppron3:sg:acc:n:ter:akc:praep O
+źle źle adv:pos O
+○ ○ ign O
+możliwość możliwość subst:sg:acc:f O
+pytań pytanie subst:pl:gen:n O
+otwartych otwarty adj:pl:gen:n:pos O
+i i conj O
+zamkniętych zamknąć ppas:pl:gen:f:perf:aff O
+odpowiedzi odpowiedź subst:pl:gen:f O
+○ ○ ign O
+na na prep:acc O
+koniec koniec subst:sg:acc:m3 O
+wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+statystyk statystyka subst:pl:gen:f O
+dotyczących dotyczyć pact:pl:gen:f:imperf:aff O
+prawidłowych prawidłowy adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+○ ○ ign O
+symulator symulator subst:sg:acc:m3 O
+basha basha ign O
+
+-DOCSTART FILE 8
+● ● ign O
+Test test subst:sg:acc:m3 O
+○ ○ ign O
+test test subst:sg:nom:m3 O
+z z prep:inst:nwok O
+jednokrotnym jednokrotny adj:sg:inst:n:pos O
+powtórzeniem powtórzenie subst:sg:inst:n O
+określonej określony adj:sg:gen:f:pos O
+liczby liczba subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+○ ○ ign O
+wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+wyniku wynik subst:sg:gen:m3 O
+na na prep:acc O
+koniec koniec subst:sg:acc:m3 O
+i i conj O
+pokazanie pokazać ger:sg:acc:n:perf:aff O
+złych zły adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+
+-DOCSTART FILE 9
+● ● ign O
+Synchronizacja synchronizacja subst:sg:nom:f O
+aplikacji aplikacja subst:sg:gen:f O
+mobilnej mobilny adj:sg:gen:f:pos O
+i i conj O
+webowej webowy adj:sg:gen:f:pos O
+Wymagania wymaganie subst:pl:nom:n O
+niefunkcjonalne niefunkcjonalny adj:pl:nom:n:pos O
+:  interp O
+
+-DOCSTART FILE 10
+● ● ign O
+Aplikacja aplikacja subst:sg:nom:f O
+w w prep:loc:nwok O
+wersji wersja subst:sg:loc:f O
+przeglądarkowej przeglądarkowej ign O
+oraz oraz conj O
+mobilnej mobilny adj:sg:gen:f:pos O
+, , interp O
+przeznaczonej przeznaczyć ppas:sg:gen:f:perf:aff O
+na na prep:acc O
+systemy system subst:pl:acc:m3 O
+Android android subst:sg:nom:m2 O
+● ● ign O
+Responsywny responsywny adj:sg:acc:m3:pos O
+system system subst:sg:acc:m3 O
+● ● ign O
+Przejrzysty przejrzysty adj:sg:acc:m3:pos O
+interfejs interfejs subst:sg:acc:m3 O
+● ● ign O
+Łatwa łatwy adj:sg:nom:f:pos O
+i i conj O
+intuicyjna intuicyjny adj:sg:nom:f:pos O
+obsługa obsługa subst:sg:nom:f O
+● ● ign O
+Dostępność dostępność subst:sg:nom:f O
+aplikacji aplikacja subst:sg:gen:f O
+z z prep:gen:nwok O
+każdego każdy adj:sg:gen:m3:pos O
+komputera komputer subst:sg:gen:m3 O
+podłączonego podłączyć ppas:sg:gen:m3:perf:aff O
+do do prep:gen O
+internetu internet subst:sg:gen:m3 O
+
+-DOCSTART FILE 11
+-DOCSTART FILE 12
+-DOCSTART FILE 13
+-DOCSTART FILE 14
+Podstawowe podstawowy adj:pl:nom:n:pos O
+pojęcia pojęcie subst:pl:nom:n O
+Użytkownik użytkownik subst:sg:nom:m1 O
+to to pred O
+osoba osoba subst:sg:nom:f O
+zalogowana zalogować ppas:sg:nom:f:perf:aff O
+na na prep:acc O
+swoje swój adj:sg:acc:n:pos O
+osobiste osobisty adj:sg:acc:n:pos O
+konto konto subst:sg:acc:n O
+, , interp O
+któremu który adj:sg:dat:m1:pos O
+będzie być bedzie:sg:ter:imperf O
+przypisany przypisać ppas:sg:nom:m3:perf:aff O
+unikalny unikalny adj:sg:nom:m3:pos O
+numer numer subst:sg:nom:m3 O
+. . interp O
+
+Będą być bedzie:pl:ter:imperf O
+na na prep:loc O
+nim on ppron3:sg:loc:m3:ter:akc:praep O
+widniały widnieć praet:pl:m3:imperf O
+jego on ppron3:sg:gen:m1:ter:akc:npraep O
+postępy postęp subst:pl:nom:m3 O
+w w prep:loc:nwok O
+nauce nauka subst:sg:loc:f O
+tj to jest brev:pun O
+. . interp O
+ilość ilość subst:sg:nom:f O
+opanowanych opanować ppas:pl:gen:n:perf:aff O
+pytań pytanie subst:pl:gen:n O
+, , interp O
+wyniki wynik subst:pl:nom:m3 O
+rozwiązanych rozwiązać ppas:pl:gen:m3:perf:aff O
+testów test subst:pl:gen:m3 O
+. . interp O
+
+Użytkownik użytkownik subst:sg:nom:m1 O
+ma mieć fin:sg:ter:imperf O
+profil profil subst:sg:acc:m3 O
+wypełniony wypełnić ppas:sg:acc:m3:perf:aff O
+podstawowymi podstawowy adj:pl:inst:f:pos O
+danymi dana subst:pl:inst:f O
+. . interp O
+
+Ma mieć fin:sg:ter:imperf O
+możliwość możliwość subst:sg:acc:f O
+przeglądania przeglądać ger:sg:gen:n:imperf:aff O
+dostępnych dostępny adj:pl:gen:m3:pos O
+testów test subst:pl:gen:m3 O
+, , interp O
+konstruowania konstruować ger:sg:gen:n:imperf:aff O
+własnych własny adj:pl:gen:n:pos O
+pytań pytanie subst:pl:gen:n O
+oraz oraz conj O
+układania układać ger:sg:gen:n:imperf:aff O
+testów test subst:pl:gen:m3 O
+. . interp O
+
+Ponadto ponadto qub O
+aplikacja aplikacja subst:sg:nom:f O
+umożliwi umożliwić fin:sg:ter:perf O
+mu on ppron3:sg:dat:m1:ter:nakc:npraep O
+dostęp dostęp subst:sg:acc:m3 O
+do do prep:gen O
+trybu tryb subst:sg:gen:m3 O
+nauki nauka subst:sg:gen:f O
+, , interp O
+w w prep:loc:nwok O
+którym który adj:sg:loc:n:pos O
+pytania pytanie subst:pl:acc:n O
+na na prep:acc O
+które który adj:pl:acc:m3:pos O
+należy należeć fin:sg:ter:imperf O
+odpowiedzieć odpowiedzieć inf:perf O
+będą być bedzie:pl:ter:imperf O
+losowane losować ppas:pl:nom:m3:imperf:aff O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+. . interp O
+
+Pytanie pytanie subst:sg:nom:n O
+składa składać fin:sg:ter:imperf O
+się się qub O
+z z prep:gen:nwok O
+treści treść subst:sg:gen:f O
+oraz oraz conj O
+możliwych możliwy adj:pl:gen:f:pos O
+do do prep:gen O
+wyboru wybór subst:sg:gen:m3 O
+odpowiedzi odpowiedź subst:sg:gen:f O
+, , interp O
+z z prep:gen:nwok O
+czego co subst:sg:gen:n O
+jedna jeden adj:sg:nom:f:pos O
+jest być fin:sg:ter:imperf O
+odpowiedzią odpowiedź subst:sg:inst:f O
+poprawną poprawny adj:sg:inst:f:pos O
+. . interp O
+
+Pytanie pytanie subst:sg:nom:n O
+ma mieć fin:sg:ter:imperf O
+swój swój adj:sg:acc:m3:pos O
+unikalny unikalny adj:sg:acc:m3:pos O
+numer numer subst:sg:acc:m3 O
+oraz oraz conj O
+autora autor subst:sg:acc:m1 O
+Test test subst:sg:nom:m3 O
+to to pred O
+zbiór zbiór subst:sg:nom:m3 O
+pytań pytanie subst:pl:gen:n O
+służący służyć pact:sg:nom:m3:imperf:aff O
+do do prep:gen O
+testowania testować ger:sg:gen:n:imperf:aff O
+opanowania opanować ger:sg:gen:n:perf:aff O
+materiału materiał subst:sg:gen:m3 O
+przez przez prep:acc:nwok O
+użytkownika użytkownik subst:sg:acc:m1 O
+. . interp O
+
+Rozwiązanie rozwiązanie subst:sg:nom:n O
+go on ppron3:sg:acc:m1:ter:nakc:npraep O
+polega polegać fin:sg:ter:imperf O
+na na prep:loc O
+udzieleniu udzielić ger:sg:loc:n:perf:aff O
+jednokrotnej jednokrotny adj:sg:gen:f:pos O
+odpowiedzi odpowiedź subst:sg:gen:f O
+na na prep:acc O
+każde każdy adj:sg:acc:n:pos O
+pytanie pytanie subst:sg:acc:n O
+zawarte zawrzeć ppas:sg:acc:n:perf:aff O
+w w prep:loc:nwok O
+teście test subst:sg:loc:m3 O
+. . interp O
+
+Po po prep:loc O
+zatwierdzeniu zatwierdzić ger:sg:loc:n:perf:aff O
+ostatniej ostatni adj:sg:gen:f:pos O
+odpowiedzi odpowiedź subst:sg:gen:f O
+, , interp O
+wyświetlona wyświetlić ppas:sg:nom:f:perf:aff O
+zostanie zostać fin:sg:ter:perf O
+uzyskana uzyskać ppas:sg:nom:f:perf:aff O
+punktacja punktacja subst:sg:nom:f O
+oraz oraz conj O
+nr numer brev:npun O
+pytań pytanie subst:pl:gen:n O
+na na prep:acc O
+które który adj:pl:acc:n:pos O
+odpowiedziano odpowiedzieć imps:perf O
+błędnie błędnie adv:pos O
+wraz wraz adv O
+z z prep:inst:nwok O
+poprawnymi poprawny adj:pl:inst:f:pos O
+odpowiedziami odpowiedź subst:pl:inst:f O
+. . interp O
+
+Nauka nauka subst:sg:nom:f O
+to to pred O
+tryb tryb subst:sg:nom:m3 O
+pozwalający pozwalać pact:sg:nom:m3:imperf:aff O
+na na prep:acc O
+efektywne efektywny adj:sg:acc:n:pos O
+opanowanie opanować ger:sg:acc:n:perf:aff O
+materiału materiał subst:sg:gen:m3 O
+zawartego zawrzeć ppas:sg:gen:m3:perf:aff O
+w w prep:loc:nwok O
+bazie baza subst:sg:loc:f O
+pytań pytanie subst:pl:gen:n O
+. . interp O
+
+Polega polegać fin:sg:ter:imperf O
+on on ppron3:sg:nom:m3:ter:akc:npraep O
+na na prep:loc O
+wykonywaniu wykonywać ger:sg:loc:n:imperf:aff O
+wszystkich wszystek adj:pl:gen:n:pos O
+zadań zadanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+. . interp O
+
+Użytkownik użytkownik subst:sg:nom:m1 O
+określa określać fin:sg:ter:imperf O
+ile ile num:pl:acc:n:rec O
+poprawnie poprawnie adv:pos O
+udzielonych udzielić ppas:pl:gen:f:perf:aff O
+odpowiedzi odpowiedź subst:pl:gen:f O
+na na prep:acc O
+wylosowane wylosować ppas:sg:acc:n:perf:aff O
+pytanie pytanie subst:sg:acc:n O
+będzie być bedzie:sg:ter:imperf O
+kwalifikowało kwalifikować praet:sg:n:imperf O
+pytanie pytanie subst:sg:nom:n O
+jako jako conj O
+opanowane opanowany adj:sg:nom:n:pos O
+. . interp O
+
+Na na prep:acc O
+bieżąco bieżąco adv:pos O
+będzie być bedzie:sg:ter:imperf O
+się się qub O
+wyświetlał wyświetlać praet:sg:m1:imperf O
+stopień stopień subst:sg:acc:m3 O
+opanowania opanować ger:sg:gen:n:perf:aff O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+. . interp O
+
+Opanowanie opanowanie subst:sg:nom:n O
+100 100 num:pl:acc:m3:rec O
+% % subst:sg:nom:m3 O
+oznacza oznaczać fin:sg:ter:imperf O
+poprawne poprawny adj:sg:acc:n:pos O
+odpowiedzenie odpowiedzieć ger:sg:acc:n:perf:aff O
+na na prep:acc O
+każde każdy adj:sg:acc:n:pos O
+pytanie pytanie subst:sg:acc:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+zadaną zadany adj:sg:acc:f:pos O
+ilość ilość subst:sg:acc:f O
+razy raz subst:pl:gen:m3 O
+. . interp O
+
+Opinia opinia subst:sg:nom:f O
+jest być fin:sg:ter:imperf O
+feedbackiem feedback subst:sg:inst:m3 O
+dotyczącym dotyczyć pact:sg:inst:m3:imperf:aff O
+testu test subst:sg:gen:m3 O
+, , interp O
+możliwym możliwy adj:sg:inst:m3:pos O
+do do prep:gen O
+pozostawienia pozostawić ger:sg:gen:n:perf:aff O
+przez przez prep:acc:nwok O
+użytkownika użytkownik subst:sg:acc:m1 O
+, , interp O
+który który adj:sg:nom:m3:pos O
+rozwiązał rozwiązać praet:sg:m3:perf O
+test test subst:sg:acc:m3 O
+. . interp O
+
+-DOCSTART FILE 15
+-DOCSTART FILE 16
+-DOCSTART FILE 17
+-DOCSTART FILE 18
+Moduły moduł subst:pl:acc:m3 O
+i i conj O
+technologie technologia subst:pl:acc:f O
+Wyróżniono wyróżnić imps:perf O
+poniższe poniższy adj:pl:acc:m3:pos O
+moduły moduł subst:pl:acc:m3 O
+do do prep:gen O
+wykonania wykonać ger:sg:gen:n:perf:aff O
+:  interp O
+
+-DOCSTART FILE 19
+● ● ign O
+baza baza subst:sg:nom:f O
+pytań pytanie subst:pl:gen:n O
+● ● ign O
+baza baza subst:sg:nom:f O
+użytkowników użytkownik subst:pl:gen:m1 O
+● ● ign O
+GUI Guja subst:sg:gen:m1 O
+● ● ign O
+aplikacja aplikacja subst:sg:nom:f O
+webowa webowy adj:sg:nom:f:pos O
+● ● ign O
+aplikacja aplikacja subst:sg:nom:f O
+mobilna mobilny adj:sg:nom:f:pos O
+● ● ign O
+serwer serwer subst:sg:nom:m3 O
+
+-DOCSTART FILE 20
+Planowane planować ppas:pl:nom:f:imperf:aff O
+technologie technologia subst:pl:nom:f O
+: : interp O
+
+-DOCSTART FILE 21
+● ● ign O
+MySQL MySQL subst:sg:nom:n O
+● ● ign O
+Java Java subst:sg:gen:f O
+● ● ign O
+XML XML subst:sg:nom:m2 O
+● ● ign O
+HTML HTML subst:sg:nom:m2 O
+/ / interp O
+CSS CSS ign O
+● ● ign O
+JavaScript JavaScript subst:sg:nom:m3 O
+● ● ign O
+JavaEE JavaEE ign O
+
+-DOCSTART FILE 22
+-DOCSTART FILE 23
+1 1 adj:sg:nom:n:pos O
+. . interp O
+
+Schemat schemat subst:sg:nom:m3 O
+podsystemów podsystem subst:pl:gen:m3 O
+
+-DOCSTART FILE 24
+-DOCSTART FILE 25
+Powyższy powyższy adj:sg:nom:m3:pos O
+schemat schemat subst:sg:nom:m3 O
+podsystemów podsystem subst:pl:gen:m3 O
+uwzględnia uwzględniać fin:sg:ter:imperf O
+bazę baza subst:sg:acc:f O
+danych dana subst:pl:gen:f O
+, , interp O
+serwer serwer subst:sg:acc:m3 O
+i i conj O
+dwie dwa num:pl:acc:f:congr O
+wersje wersja subst:pl:acc:f O
+aplikacji aplikacja subst:sg:gen:f O
+- - interp O
+webową webowy adj:sg:acc:f:pos O
+i i conj O
+mobilną mobilny adj:sg:acc:f:pos O
+, , interp O
+z z prep:gen:nwok O
+poziomu poziom subst:sg:gen:m3 O
+których który adj:pl:gen:f:pos O
+będzie być bedzie:sg:ter:imperf O
+możliwe możliwy adj:sg:nom:n:pos O
+zarządzanie zarządzać ger:sg:nom:n:imperf:aff O
+quizami quiz subst:pl:inst:m3 O
+i i conj O
+ich on ppron3:pl:gen:f:ter:akc:npraep O
+rozwiązywanie rozwiązywać ger:sg:nom:n:imperf:aff O
+. . interp O
+
+-DOCSTART FILE 26
+-DOCSTART FILE 27
+-DOCSTART FILE 28
+2 2 adj:sg:nom:n:pos O
+. . interp O
+
+Diagram diagram subst:sg:nom:m3 O
+ERD ERD ign O
+
+-DOCSTART FILE 29
+-DOCSTART FILE 30
+Zgodnie zgodnie adv:pos O
+z z prep:inst:nwok O
+założeniami założenie subst:pl:inst:n O
+powyższy powyższy adj:sg:nom:m3:pos O
+schemat schemat subst:sg:nom:m3 O
+umożliwia umożliwiać fin:sg:ter:imperf O
+utrzymanie utrzymanie subst:sg:acc:n O
+dla dla prep:gen O
+każdego każdy adj:sg:gen:m1:pos O
+użytkownika użytkownik subst:sg:gen:m1 O
+informacji informacja subst:pl:gen:f O
+o o prep:loc O
+stopniu stopień subst:sg:loc:m3 O
+opanowania opanować ger:sg:gen:n:perf:aff O
+materiału materiał subst:sg:gen:m3 O
+( ( interp O
+testu test subst:sg:gen:m3 O
+) ) interp O
+. . interp O
+
+-DOCSTART FILE 31
+-DOCSTART FILE 32
+-DOCSTART FILE 33
+-DOCSTART FILE 34
+3 3 adj:sg:nom:n:pos O
+. . interp O
+
+Diagram diagram subst:sg:nom:m3 O
+przypadków przypadek subst:pl:gen:m3 O
+użycia użycie subst:sg:gen:n O
+
+-DOCSTART FILE 35
+-DOCSTART FILE 36
+-DOCSTART FILE 37
+-DOCSTART FILE 38
+1 1 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Rozwiązywanie rozwiązywać ger:sg:nom:n:imperf:aff O
+testu test subst:sg:gen:m3 O
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Test test subst:sg:nom:m3 O
+z z prep:inst:nwok O
+jednokrotnym jednokrotny adj:sg:inst:n:pos O
+powtórzeniem powtórzyć ger:sg:inst:n:perf:aff O
+określonej określony adj:sg:gen:f:pos O
+liczby liczba subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+WS WS ign O
+: : interp O
+System system subst:sg:nom:m3 O
+zawiera zawierać fin:sg:ter:imperf O
+bazę baza subst:sg:acc:f O
+testów test subst:pl:gen:m3 O
+, , interp O
+z z prep:gen:nwok O
+których który adj:pl:gen:f:pos O
+można można pred O
+wybrać wybrać inf:perf O
+jeden jeden adj:sg:acc:m3:pos O
+do do prep:gen O
+rozwiązania rozwiązać ger:sg:gen:n:perf:aff O
+; ; interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+( ( interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+) ) interp O
+; ; interp O
+PU PU ign O
+Wybór wybór subst:sg:nom:m3 O
+testu test subst:sg:gen:m3 O
+WK WK ign O
+: : interp O
+Po po prep:loc O
+rozwiązaniu rozwiązać ger:sg:loc:n:perf:aff O
+testu test subst:sg:gen:m3 O
+powinna powinien winien:sg:f:imperf O
+pojawić pojawić inf:perf O
+się się qub O
+informacja informacja subst:sg:nom:f O
+o o prep:loc O
+rezultacie rezultat subst:sg:loc:m3 O
+- - interp O
+Wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+wyniku wynik subst:sg:gen:m3 O
+na na prep:acc O
+koniec koniec subst:sg:acc:m3 O
+i i conj O
+pokazanie pokazać ger:sg:acc:n:perf:aff O
+złych zły adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+( ( interp O
+PU PU ign O
+Wystawienie wystawić ger:sg:acc:n:perf:aff O
+oceny ocena subst:sg:gen:f O
+) ) interp O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 39
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Użytkownik użytkownik subst:sg:nom:m1 O
+rozpoczyna rozpoczynać fin:sg:ter:imperf O
+procedurę procedura subst:sg:acc:f O
+od od prep:gen:nwok O
+wybrania wybrać ger:sg:gen:n:perf:aff O
+opcji opcja subst:sg:gen:f O
+w w prep:loc:nwok O
+przeglądarce przeglądarka subst:sg:loc:f O
+lub lub conj O
+aplikacji aplikacja subst:sg:loc:f O
+mobilnej mobilny adj:sg:loc:f:pos O
+. . interp O
+2 2 num:pl:nom:f:rec O
+) ) interp O
+Wyświetlany wyświetlać ppas:sg:nom:m3:imperf:aff O
+jest być fin:sg:ter:imperf O
+test test subst:sg:nom:m3 O
+z z prep:inst:nwok O
+odpowiednimi odpowiedni adj:pl:inst:n:pos O
+miejscami miejsce subst:pl:inst:n O
+do do prep:gen O
+zaznaczania zaznaczać ger:sg:gen:n:imperf:aff O
+odpowiedzi odpowiedź subst:sg:gen:f O
+. . interp O
+3 3 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+zatwierdzeniu zatwierdzić ger:sg:loc:n:perf:aff O
+odpowiedzi odpowiedź subst:pl:gen:f O
+, , interp O
+wystawiana wystawiać ppas:sg:nom:f:imperf:aff O
+jest być fin:sg:ter:imperf O
+ocena ocena subst:sg:nom:f O
+. . interp O
+
+-DOCSTART FILE 40
+2 2 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Wystawianie wystawiać ger:sg:nom:n:imperf:aff O
+oceny ocena subst:sg:gen:f O
+
+-DOCSTART FILE 41
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+wyniku wynik subst:sg:gen:m3 O
+na na prep:acc O
+koniec koniec subst:sg:acc:m3 O
+i i conj O
+pokazanie pokazać ger:sg:acc:n:perf:aff O
+złych zły adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+WS WS ign O
+: : interp O
+Test test subst:sg:nom:m3 O
+z z prep:inst:nwok O
+jednokrotnym jednokrotny adj:sg:inst:n:pos O
+powtórzeniem powtórzyć ger:sg:inst:n:perf:aff O
+określonej określony adj:sg:gen:f:pos O
+liczby liczba subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+( ( interp O
+PU PU ign O
+Rozwiązanie rozwiązać ger:sg:nom:n:perf:aff O
+testu test subst:sg:gen:m3 O
+) ) interp O
+; ; interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+( ( interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+) ) interp O
+WK WK ign O
+: : interp O
+brak brak subst:sg:nom:m3 O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 42
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+rozwiązaniu rozwiązać ger:sg:loc:n:perf:aff O
+testu test subst:sg:gen:m3 O
+aplikacja aplikacja subst:sg:nom:f O
+wyświetla wyświetlać fin:sg:ter:imperf O
+uzyskane uzyskać ppas:pl:acc:m3:perf:aff O
+rezultaty rezultat subst:pl:acc:m3 O
+. . interp O
+
+-DOCSTART FILE 43
+3 3 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Nauka Nauka subst:sg:nom:f O
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+złożone złożony adj:sg:nom:n:pos O
+wymaganie wymaganie subst:sg:nom:n O
+funkcjonalne funkcjonalny adj:sg:nom:n:pos O
+- - interp O
+Nauka nauka subst:sg:nom:f O
+WS WS ign O
+: : interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+( ( interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+) ) interp O
+; ; interp O
+Utrzymanie utrzymać ger:sg:nom:n:perf:aff O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+; ; interp O
+Możliwość możliwość subst:sg:nom:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+własnych własny adj:pl:gen:f:pos O
+baz baza subst:pl:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:inst:nwok O
+możliwością możliwość subst:sg:inst:f O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+; ; interp O
+WK WK ign O
+: : interp O
+Wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+statystyk statystyka subst:pl:gen:f O
+dotyczących dotyczyć pact:pl:gen:f:imperf:aff O
+prawidłowych prawidłowy adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 44
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Użytkownik użytkownik subst:sg:nom:m1 O
+rozpoczyna rozpoczynać fin:sg:ter:imperf O
+procedurę procedura subst:sg:acc:f O
+od od prep:gen:nwok O
+wybrania wybrać ger:sg:gen:n:perf:aff O
+opcji opcja subst:sg:gen:f O
+. . interp O
+2 2 adj:sg:nom:m3:pos O
+) ) interp O
+Przeglądarka przeglądarka subst:sg:nom:f O
+lub lub conj O
+aplikacja aplikacja subst:sg:nom:f O
+wyświetla wyświetlać fin:sg:ter:imperf O
+losowe losowy adj:pl:acc:n:pos O
+pytania pytanie subst:pl:acc:n O
+. . interp O
+3 3 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+zaznaczeniu zaznaczyć ger:sg:loc:n:perf:aff O
+odpowiedzi odpowiedź subst:sg:gen:f O
+aplikacja aplikacja subst:sg:nom:f O
+decyduje decydować fin:sg:ter:imperf O
+czy czy qub O
+pytania pytanie subst:sg:gen:n O
+zostały zostać praet:pl:f:perf O
+opanowane opanować ppas:pl:nom:f:perf:aff O
+. . interp O
+4 4 num:pl:nom:f:rec O
+) ) interp O
+Na na prep:acc O
+koniec koniec subst:sg:acc:m3 O
+wyświetla wyświetlać fin:sg:ter:imperf O
+statystyki statystyka subst:sg:gen:f O
+. . interp O
+
+-DOCSTART FILE 45
+4 4 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Wybór wybór subst:sg:nom:m3 O
+testu test subst:sg:gen:m3 O
+
+-DOCSTART FILE 46
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+wymaganie wymaganie subst:sg:nom:n O
+- - interp O
+Test test subst:sg:nom:m3 O
+WS WS ign O
+: : interp O
+Możliwość możliwość subst:sg:nom:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+własnych własny adj:pl:gen:f:pos O
+baz baza subst:pl:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:inst:nwok O
+możliwością możliwość subst:sg:inst:f O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+( ( interp O
+PU PU ign O
+Stworzenie stworzyć ger:sg:acc:n:perf:aff O
+nowego nowy adj:sg:gen:m3:pos O
+testu test subst:sg:gen:m3 O
+) ) interp O
+; ; interp O
+Utrzymanie utrzymanie subst:sg:nom:n O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+WK WK ign O
+: : interp O
+Test test subst:sg:nom:m3 O
+z z prep:inst:nwok O
+jednokrotnym jednokrotny adj:sg:inst:n:pos O
+powtórzeniem powtórzenie subst:sg:inst:n O
+określonej określony adj:sg:gen:f:pos O
+liczby liczba subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+( ( interp O
+PU PU ign O
+Rozwiązanie rozwiązać ger:sg:acc:n:perf:aff O
+testu test subst:sg:gen:m3 O
+) ) interp O
+
+-DOCSTART FILE 47
+-DOCSTART FILE 48
+-DOCSTART FILE 49
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+zakończeniu zakończyć ger:sg:loc:n:perf:aff O
+logowania logować ger:sg:gen:n:imperf:aff O
+umożliwia umożliwiać fin:sg:ter:imperf O
+wybranie wybrać ger:sg:acc:n:perf:aff O
+żądanego żądać ppas:sg:gen:m3:imperf:aff O
+testu test subst:sg:gen:m3 O
+. . interp O
+2 2 adj:sg:nom:m3:pos O
+) ) interp O
+Pozwala pozwalać fin:sg:ter:imperf O
+na na prep:acc O
+rozpoczęcie rozpocząć ger:sg:acc:n:perf:aff O
+procedury procedura subst:sg:gen:f O
+rozwiązywania rozwiązywać ger:sg:gen:n:imperf:aff O
+testu test subst:sg:gen:m3 O
+, , interp O
+aczkolwiek aczkolwiek comp O
+nie nie qub O
+jest być fin:sg:ter:imperf O
+to to subst:sg:nom:n O
+konieczne konieczny adj:sg:nom:n:pos O
+. . interp O
+5 5 num:pl:nom:f:rec O
+. . interp O
+: : interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+
+-DOCSTART FILE 50
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+WS WS ign O
+: : interp O
+Zakładanie zakładać ger:sg:nom:n:imperf:aff O
+kont konto subst:pl:gen:n O
+( ( interp O
+PU PU ign O
+Rejestracja rejestracja subst:sg:nom:f O
+) ) interp O
+; ; interp O
+WK WK ign O
+: : interp O
+brak brak subst:sg:nom:m3 O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 51
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Użytkownik użytkownik subst:sg:nom:m1 O
+rozpoczyna rozpoczynać fin:sg:ter:imperf O
+procedurę procedura subst:sg:acc:f O
+od od prep:gen:nwok O
+wybrania wybrać ger:sg:gen:n:perf:aff O
+opcji opcja subst:sg:gen:f O
+w w prep:loc:nwok O
+przeglądarce przeglądarka subst:sg:loc:f O
+lub lub conj O
+aplikacji aplikacja subst:sg:loc:f O
+mobilnej mobilny adj:sg:loc:f:pos O
+. . interp O
+2 2 num:pl:nom:f:rec O
+) ) interp O
+Loguje logować fin:sg:ter:imperf O
+się się qub O
+podając podawać pcon:imperf O
+nazwę nazwa subst:sg:acc:f O
+użytkownika użytkownik subst:sg:gen:m1 O
+. . interp O
+
+-DOCSTART FILE 52
+6 6 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Rejestracja rejestracja subst:sg:nom:f O
+
+-DOCSTART FILE 53
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Zakładanie zakładać ger:sg:nom:n:imperf:aff O
+kont konto subst:pl:gen:n O
+WS WS ign O
+: : interp O
+Utrzymanie utrzymać ger:sg:nom:n:perf:aff O
+bazy baza subst:sg:gen:f O
+użytkowników użytkownik subst:pl:gen:m1 O
+WK WK ign O
+: : interp O
+brak brak subst:sg:nom:m3 O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 54
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Użytkownik użytkownik subst:sg:nom:m1 O
+rozpoczyna rozpoczynać fin:sg:ter:imperf O
+procedurę procedura subst:sg:acc:f O
+od od prep:gen:nwok O
+wybrania wybrać ger:sg:gen:n:perf:aff O
+opcji opcja subst:sg:gen:f O
+w w prep:loc:nwok O
+przeglądarce przeglądarka subst:sg:loc:f O
+lub lub conj O
+aplikacji aplikacja subst:sg:loc:f O
+mobilnej mobilny adj:sg:loc:f:pos O
+. . interp O
+2 2 num:pl:nom:f:rec O
+) ) interp O
+Należy należeć fin:sg:ter:imperf O
+wpisać wpisać inf:perf O
+nazwę nazwa subst:sg:acc:f O
+użytkownika użytkownik subst:sg:gen:m1 O
+i i conj O
+zatwierdzić zatwierdzić inf:perf O
+dodanie dodanie subst:sg:acc:n O
+konta konto subst:sg:gen:n O
+. . interp O
+
+-DOCSTART FILE 55
+7 7 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Dodanie dodać ger:sg:nom:n:perf:aff O
+pytania pytanie subst:sg:gen:n O
+
+-DOCSTART FILE 56
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Zarejestrowani zarejestrować ppas:pl:nom:m1:perf:aff O
+użytkownicy użytkownik subst:pl:nom:m1 O
+mają mieć fin:pl:ter:imperf O
+możliwość możliwość subst:sg:acc:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+nowych nowy adj:pl:gen:n:pos O
+pytań pytanie subst:pl:gen:n O
+wraz wraz adv O
+z z prep:inst:nwok O
+odpowiedziami odpowiedź subst:pl:inst:f O
+do do prep:gen O
+nich on ppron3:pl:gen:f:ter:akc:praep O
+i i conj O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+ich on ppron3:pl:gen:m3:ter:akc:npraep O
+w w prep:loc:nwok O
+ramach ramy subst:pl:loc:n O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+WS WS ign O
+: : interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+( ( interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+) ) interp O
+; ; interp O
+Utrzymanie utrzymać ger:sg:nom:n:perf:aff O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+WK WK ign O
+: : interp O
+brak brak subst:sg:nom:m3 O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 57
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Użytkownik użytkownik subst:sg:nom:m1 O
+rozpoczyna rozpoczynać fin:sg:ter:imperf O
+procedurę procedura subst:sg:acc:f O
+od od prep:gen:nwok O
+wybrania wybrać ger:sg:gen:n:perf:aff O
+opcji opcja subst:sg:gen:f O
+w w prep:loc:nwok O
+przeglądarce przeglądarka subst:sg:loc:f O
+lub lub conj O
+aplikacji aplikacja subst:sg:loc:f O
+mobilnej mobilny adj:sg:loc:f:pos O
+. . interp O
+2 2 num:pl:nom:f:rec O
+) ) interp O
+Należy należeć fin:sg:ter:imperf O
+wpisać wpisać inf:perf O
+odpowiednie odpowiedni adj:sg:acc:n:pos O
+pytanie pytanie subst:sg:acc:n O
+wraz wraz adv O
+z z prep:inst:nwok O
+poprawnymi poprawny adj:pl:inst:f:pos O
+odpowiedziami odpowiedź subst:pl:inst:f O
+i i conj O
+je on ppron3:pl:acc:m3:ter:akc:npraep O
+zatwierdzić zatwierdzić inf:perf O
+. . interp O
+
+-DOCSTART FILE 58
+8 8 adj:sg:nom:m3:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Kontrola kontrola subst:sg:nom:f O
+postępów postęp subst:pl:gen:m3 O
+
+-DOCSTART FILE 59
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+złożone złożyć ppas:pl:nom:n:perf:aff O
+wymagania wymaganie subst:pl:nom:n O
+funkcjonalne funkcjonalny adj:pl:nom:n:pos O
+- - interp O
+Nauka nauka subst:sg:nom:f O
+
+-DOCSTART FILE 60
+-DOCSTART FILE 61
+-DOCSTART FILE 62
+WS WS ign O
+: : interp O
+Doliczanie doliczać ger:sg:nom:n:imperf:aff O
+powtórzeń powtórzenie subst:pl:gen:n O
+pytań pytanie subst:pl:gen:n O
+gdy gdy adv O
+odpowie odpowiedzieć fin:sg:ter:perf O
+się się qub O
+na na prep:acc O
+nie on ppron3:sg:acc:n:ter:akc:praep O
+źle źle adv:pos O
+; ; interp O
+Zliczanie zliczać ger:sg:nom:n:imperf:aff O
+poprawnych poprawny adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+WK WK ign O
+: : interp O
+Wyświetlanie wyświetlać ger:sg:nom:n:imperf:aff O
+statystyk statystyka subst:pl:gen:f O
+dotyczących dotyczyć pact:pl:gen:f:imperf:aff O
+prawidłowych prawidłowy adj:pl:gen:f:pos O
+odpowiedzi odpowiedź subst:pl:gen:f O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 63
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+rozpoczęciu rozpocząć ger:sg:loc:n:perf:aff O
+procedury procedura subst:sg:gen:f O
+rozwiązywania rozwiązywać ger:sg:gen:n:imperf:aff O
+testu test subst:sg:gen:m3 O
+lub lub conj O
+nauki nauka subst:sg:gen:f O
+, , interp O
+program program subst:sg:nom:m3 O
+kontroluje kontrolować fin:sg:ter:imperf O
+poprawność poprawność subst:sg:acc:f O
+udzielanych udzielać ppas:pl:gen:f:imperf:aff O
+odpowiedzi odpowiedź subst:pl:gen:f O
+. . interp O
+2 2 adj:pl:nom:f:pos O
+) ) interp O
+W w prep:loc:nwok O
+zależności zależność subst:sg:loc:f O
+od od prep:gen:nwok O
+kryteriów kryterium subst:pl:gen:n O
+ustala ustalać fin:sg:ter:imperf O
+liczbę liczba subst:sg:acc:f O
+powtórzeń powtórzenie subst:pl:gen:n O
+pytania pytanie subst:sg:gen:n O
+i i conj O
+liczy liczyć fin:sg:ter:imperf O
+wynik wynik subst:sg:acc:m3 O
+końcowy końcowy adj:sg:acc:m3:pos O
+. . interp O
+
+-DOCSTART FILE 64
+9 9 adj:sg:nom:n:pos O
+. . interp O
+: : interp O
+PU PU ign O
+Stworzenie stworzyć ger:sg:nom:n:perf:aff O
+nowego nowy adj:sg:gen:m3:pos O
+testu test subst:sg:gen:m3 O
+
+-DOCSTART FILE 65
+OPIS opis subst:sg:nom:m3 O
+CEL cel subst:sg:nom:m3 O
+: : interp O
+Możliwość możliwość subst:sg:nom:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+własnych własny adj:pl:gen:f:pos O
+baz baza subst:pl:gen:f O
+pytań pytanie subst:pl:gen:n O
+z z prep:inst:nwok O
+możliwością możliwość subst:sg:inst:f O
+udostępniania udostępniać ger:sg:gen:n:imperf:aff O
+WS WS ign O
+: : interp O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+się się qub O
+do do prep:gen O
+serwera serwer subst:sg:gen:m3 O
+( ( interp O
+PU PU ign O
+Logowanie logować ger:sg:nom:n:imperf:aff O
+) ) interp O
+; ; interp O
+Utrzymanie utrzymać ger:sg:nom:n:perf:aff O
+globalnej globalny adj:sg:gen:f:pos O
+bazy baza subst:sg:gen:f O
+pytań pytanie subst:pl:gen:n O
+WK WK ign O
+: : interp O
+brak brak subst:sg:nom:m3 O
+PRZEBIEG przebieg subst:sg:nom:m3 O
+: : interp O
+
+-DOCSTART FILE 66
+1 1 adj:sg:nom:n:pos O
+) ) interp O
+Po po prep:loc O
+rozpoczęciu rozpocząć ger:sg:loc:n:perf:aff O
+procedury procedura subst:sg:gen:f O
+tworzenia tworzyć ger:sg:gen:n:imperf:aff O
+nowego nowy adj:sg:gen:m3:pos O
+testu test subst:sg:gen:m3 O
+program program subst:sg:nom:m3 O
+pozwala pozwalać fin:sg:ter:imperf O
+na na prep:acc O
+wybranie wybrać ger:sg:acc:n:perf:aff O
+pytań pytanie subst:pl:gen:n O
+z z prep:gen:nwok O
+bazy baza subst:sg:gen:f O
+danych dana subst:pl:gen:f O
+. . interp O
+2 2 num:pl:nom:f:rec O
+) ) interp O
+Należy należeć fin:sg:ter:imperf O
+uzupełnić uzupełnić inf:perf O
+opis opis subst:sg:acc:m3 O
+testu test subst:sg:gen:m3 O
+( ( interp O
+tematyczny tematyczny adj:sg:nom:m3:pos O
+) ) interp O
+oraz oraz conj O
+zatwierdzić zatwierdzić inf:perf O
+pytania pytanie subst:pl:acc:n O
+. . interp O
+3 3 adj:sg:nom:n:pos O
+) ) interp O
+Przypadek przypadek subst:sg:nom:m3 O
+nie nie qub O
+pozwala pozwalać fin:sg:ter:imperf O
+na na prep:acc O
+tworzenie tworzyć ger:sg:acc:n:imperf:aff O
+nowych nowy adj:pl:gen:n:pos O
+pytań pytanie subst:pl:gen:n O
+. . interp O
+
+Legenda legenda subst:sg:nom:f O
+: : interp O
+kursywą kursywa subst:sg:inst:f O
+zaznaczono zaznaczyć imps:perf O
+wymagania wymaganie subst:pl:acc:n O
+funkcjonalne funkcjonalny adj:pl:acc:n:pos O
+w w prep:loc:nwok O
+większości większość subst:sg:loc:f O
+sprecyzowane sprecyzować ppas:pl:acc:n:perf:aff O
+na na prep:loc O
+pierwszej pierwszy adj:sg:loc:f:pos O
+stronie strona subst:sg:loc:f O
+dokumentu dokument subst:sg:gen:m3 O
+WS WS ign O
+- - interp O
+wymagania wymaganie subst:pl:acc:n O
+wstępne wstępny adj:pl:acc:n:pos O
+WK WK ign O
+- - interp O
+wymagania wymaganie subst:pl:acc:n O
+końcowe końcowy adj:pl:acc:n:pos O
+PU PU ign O
+- - interp O
+przypadek przypadek subst:sg:acc:m3 O
+użycia użycie subst:sg:gen:n O
+
+-DOCSTART FILE 67
+-DOCSTART FILE 68
