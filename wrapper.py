@@ -119,33 +119,28 @@ class Sequence(object):
         output_file = open(output_path, 'w')
         input_file = open(input_path, 'r')
         x, _, all_ctags = load_data(input_path)
-        predictions = []
+        labels = []
 
-        for sentence in x:
-            predictions.append(self.predict_sentence(sentence))
-        
-        write_sentence_mode = False
         for line in input_file:
-            if 'DOCSTART' in line or line == '\n':
+            if '-DOCSTART CONFIG' in line: 
                 output_file.write(line)
-                write_sentence_mode = True
-
-            elif write_sentence_mode:
-                write_sentence_mode = False
-                predictions_sentence = predictions.pop(0)
-                sentence = x.pop(0)
-                ctags = all_ctags.pop(0)
-                
-                for token, ctag, prediction in zip(sentence, ctags, predictions_sentence):
-                    to_write = token
-                    for tag in ctag:
-                        to_write += ' ' + tag
-                    if prediction == '':
-                        to_write += ' 0\n'
-                    else:
-                        to_write += ' ' + prediction + '\n'
-                    output_file.write(to_write)
-                
+            if '-DOCSTART FILE' in line:
+                output_file.write(line)
+                break
+        
+        for sentence, ctags in zip(x, all_ctags):
+            predictions = self.predict_sentence(sentence)
+            for token, tags, prediction in zip(sentence, ctags, predictions):
+                line_to_write = token
+                for tag in tags:
+                    line_to_write += ' ' + tag
+                if prediction == '':
+                    line_to_write += ' O\n'
+                else:
+                    line_to_write += ' ' + prediction + '\n'
+                output_file.write(line_to_write)
+            output_file.write('\n')
+        
                 
     def predict_sentence(self, sentence):
         x_test = self.p.transform([sentence])
