@@ -130,15 +130,18 @@ class Sequence(object):
         
         for sentence, ctags in zip(x, all_ctags):
             predictions = self.predict_sentence(sentence)
+            print(predictions)
             for token, tags, prediction in zip(sentence, ctags, predictions):
                 line_to_write = token
                 for tag in tags:
-                    line_to_write += ' ' + tag
+                    line_to_write += '\t' + tag
                 if prediction == '':
-                    line_to_write += ' O\n'
+                    line_to_write += '\tO\n'
                 else:
-                    line_to_write += ' ' + prediction + '\n'
+                    line_to_write += '\t' + prediction + '\n'
                 output_file.write(line_to_write)
+                print(line_to_write)
+            input('click any button for next sentence')
             output_file.write('\n')
         
                 
@@ -147,9 +150,24 @@ class Sequence(object):
         lengths = [len(sentence)]
         y_pred = self.model.predict(x_test)
         y_pred = self.p.inverse_transform(y_pred, lengths)
-        #print(y_pred)
-        return y_pred[0]
-
+        y_pred = y_pred[0]
+        print(y_pred)
+        for i, pred in enumerate(y_pred):
+            if pred == '':
+                y_pred[i] = 'O'
+        
+        for i, pred in enumerate(y_pred):
+            if pred != 'O':
+                if 'I-' in pred and 'B-' not in y_pred[i-1]:
+                    ann = pred.split('-')[1]
+                    for j in range(i, len(y_pred)):
+                        if ann in y_pred[j]:
+                            y_pred[j] = 'O'
+                        else:
+                            break
+        print(y_pred)
+        return y_pred
+                
     def save(self, model_path):
         weights_file = os.path.join(model_path, "weights.pkl")
         params_file = os.path.join(model_path, "params.pkl")

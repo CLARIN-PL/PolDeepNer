@@ -84,7 +84,7 @@ def load_iob(filename, extended_data=False):
                 continue
             line = line.rstrip()
             if line:
-                cols = line.split(' ')
+                cols = line.split('\t')
                 words.append(cols[0])
                 tags.append(cols[-1])
                 if extended_data:
