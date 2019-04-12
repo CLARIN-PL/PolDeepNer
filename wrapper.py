@@ -130,7 +130,6 @@ class Sequence(object):
         
         for sentence, ctags in zip(x, all_ctags):
             predictions = self.predict_sentence(sentence)
-            print(predictions)
             for token, tags, prediction in zip(sentence, ctags, predictions):
                 line_to_write = token
                 for tag in tags:
@@ -140,8 +139,6 @@ class Sequence(object):
                 else:
                     line_to_write += '\t' + prediction + '\n'
                 output_file.write(line_to_write)
-                print(line_to_write)
-            input('click any button for next sentence')
             output_file.write('\n')
         
                 
@@ -151,7 +148,6 @@ class Sequence(object):
         y_pred = self.model.predict(x_test)
         y_pred = self.p.inverse_transform(y_pred, lengths)
         y_pred = y_pred[0]
-        print(y_pred)
         for i, pred in enumerate(y_pred):
             if pred == '':
                 y_pred[i] = 'O'
