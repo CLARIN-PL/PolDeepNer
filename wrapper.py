@@ -161,7 +161,6 @@ class Sequence(object):
                             y_pred[j] = 'O'
                         else:
                             break
-        print(y_pred)
         return y_pred
                 
     def save(self, model_path):
