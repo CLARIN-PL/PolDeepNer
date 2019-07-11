@@ -17,6 +17,8 @@ class Trainer(object):
     def __init__(self, model, preprocessor=None):
         self._model = model
         self._preprocessor = preprocessor
+        self.best_model = None
+        self.best_model_report = ''
 
     def train(self, x_train, y_train, x_valid=None, y_valid=None,
               epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -52,5 +54,6 @@ class Trainer(object):
                                   verbose=verbose,
                                   shuffle=shuffle)
 
-        self.best_model = f1.get_best_model()
-        self.best_model_report = f1.get_best_model_report()
+        if x_valid and y_valid:
+            self.best_model = f1.get_best_model()
+            self.best_model_report = f1.get_best_model_report()

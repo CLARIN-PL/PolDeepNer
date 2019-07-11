@@ -92,6 +92,8 @@ class NERSequence(Sequence):
 
 class NestedReport:
     def __init__(self, *args):
+        self.f1_score = 0.0
+
         if len(args) == 2:
             self.report = self.nested_classification_report(*args)
 
@@ -102,6 +104,7 @@ class NestedReport:
         return self.report
 
     def support_counter(self, annotations):
+        '''Counts support of each annotation in test set'''
         ann_count = Counter()
         anns = [str(ann) for ann in annotations]
         ann_count.update(anns)
@@ -149,6 +152,7 @@ class NestedReport:
         report += '\n'
         report += '{0[0]:<22}{0[1]:>8}{0[2]:>8}{0[3]:>8}{0[4]:>10.2f}{0[5]:>10.2f}{0[6]:>10.2f}{0[7]:>10}\n'.format(
             total)
+        self.f1_score = total[-2]
         return report
 
     def nested_classification_report(self, true_labels, predicted_labels):
@@ -176,6 +180,7 @@ class NestedReport:
         total = ["TOTAL"] + [TP] + [FP] + [FN] + [precision*100] + [recall*100] + [f1_score*100] + [sum(support.values())]
         report += '\n'
         report += '{0[0]:<22}{0[1]:>8}{0[2]:>8}{0[3]:>8}{0[4]:>10.2f}{0[5]:>10.2f}{0[6]:>10.2f}{0[7]:>10}\n'.format(total)
+        self.f1_score = total[-2]
         return report
 
     def label_classification_report(self, annotation, true_annotations, predicted_annotations, support):

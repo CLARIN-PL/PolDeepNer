@@ -97,6 +97,7 @@ pip install fasttext
 pip install sklearn
 pip install python-dateutil
 pip install nltk
+pip install gensim
 ```
 
 

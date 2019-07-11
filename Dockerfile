@@ -32,6 +32,7 @@ RUN pip install fasttext
 RUN pip install sklearn
 RUN pip install python-dateutil
 RUN pip install nltk
+RUN pip install gensim
 
 # install corpus2
 RUN apt-get install -y libboost-all-dev 
