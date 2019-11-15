@@ -14,7 +14,7 @@ args = parser.parse_args()
 
 root = os.path.dirname(os.path.abspath(__file__))
 path_data = os.path.join(root, "..", "data")
-path_eval = os.path.join(path_data, "kpwr-n82-test-sample.iob")
+path_eval = os.path.join(path_data, "kpwr-ner-n82-test.iob")
 
 try:
     model = load_pretrained_model(args.m)
