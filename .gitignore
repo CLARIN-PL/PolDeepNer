@@ -12,4 +12,5 @@ poldeepner/model/poldeepner-nkjp-ftcc-bigru
 poldeepner/model/poldeepner-nkjp-ftcc-bilstm
 poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm
 poldeepner/model/poldeepner-nkjp-ftkgr10orth-bigru
+poldeepner/model/*.bin
 *.pyc

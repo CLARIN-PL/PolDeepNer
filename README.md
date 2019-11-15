@@ -83,7 +83,7 @@ Run Docker image in the interactive mode:
 ```bash
 sudo apt-get install python3-pip python3-dev python-virtualenv
 sudo pip install -U pip
-virtualenv --system-site-packages -p python3.5 venv
+virtualenv --system-site-packages -p python3.6 venv
 source venv/bin/activate
 pip install -U pip
 
@@ -98,6 +98,7 @@ pip install sklearn
 pip install python-dateutil
 pip install nltk
 pip install gensim
+pip install allennlp==0.9.0
 ```
 
 
