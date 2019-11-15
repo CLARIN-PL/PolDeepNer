@@ -26,6 +26,10 @@ pretrained_models['n82'] = [
     PretrainedModelLoader(os.path.join(path_model_pprai, "poldeepner-kpwr-n82-ftcc-e046"),
                           "ft:" + os.path.join(path_model, "cc.pl.300.bin"))
 ]
+pretrained_models['n82-ft-kgr10'] = [
+    PretrainedModelLoader(os.path.join(path_model_pprai, "poldeepner-kpwr-n82-ft-kgr10-e027"),
+                          "ft:" + os.path.join(path_model, "kgr10.plain.skipgram.dim300.neg10.bin")),
+]
 
 
 def load_pretrained_model(name='n82'):
@@ -33,4 +37,8 @@ def load_pretrained_model(name='n82'):
         loaders = pretrained_models[name]
         return [loader.load() for loader in loaders]
     else:
-        raise Exception("Unknown model name: %s. Known models: " % (name, ", ".join(pretrained_models.keys())))
+        raise Exception("Unknown model: %s. Known models: %s" % (name, get_ptetrained_model_names()))
+
+
+def get_ptetrained_model_names():
+    return pretrained_models.keys()

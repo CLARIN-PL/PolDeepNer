@@ -4,11 +4,14 @@ from pretrained import load_pretrained_model
 
 
 class PolDeepNer:
-    def __init__(self):
+    def __init__(self, model=None):
         """
         :param model: Path to a folder with a pre-trained model to load
         """
-        self.models = load_pretrained_model()
+        if model is None:
+            self.models = load_pretrained_model()
+        else:
+            self.models = model
 
     def process_sentence(self, sentence):
         """
