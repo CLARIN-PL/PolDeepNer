@@ -1,15 +1,24 @@
+import argparse
+
 import nltk, re, pprint
 from nltk import word_tokenize
 
 from poldeepner import PolDeepNer
+from pretrained import load_pretrained_model
 from process_poleval import align_tokens_to_text
 from utils import wrap_annotations
+
+parser = argparse.ArgumentParser(description='Interactive mode')
+parser.add_argument('-m', required=True, metavar='name', help='model name', default='n82')
+args = parser.parse_args()
+
 
 print("Loading the tokenization model ...")
 nltk.download('punkt')
 
 print("Loading the NER model ...")
-ner = PolDeepNer("model")
+model = load_pretrained_model(args.m)
+ner = PolDeepNer(model)
 
 print("ready.")
 
