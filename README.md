@@ -80,6 +80,8 @@ Run Docker image in the interactive mode:
 
 ### Using virtual environment
 
+Requires CUDA 10.0+
+
 ```bash
 sudo apt-get install python3-pip python3-dev python-virtualenv
 sudo pip install -U pip
@@ -89,10 +91,10 @@ pip install -U pip
 
 pip install seqeval
 pip install keras
-pip install tensorflow-gpu
+pip install tensorflow-gpu==1.14.0
 pip install git+https://www.github.com/keras-team/keras-contrib.git
 pip install cython
-pip install pyfasttext
+pip install pyfasttext==0.4.5
 pip install fasttext
 pip install sklearn
 pip install python-dateutil

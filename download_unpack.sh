@@ -51,7 +51,9 @@ function download_nextcloud()
 
 #download_nextcloud "$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin" "https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
 #download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextcloud.clarin-pl.eu/index.php/s/WVbVyIwkAHUDaYs/download"
-download_nextcloud "$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download"
+
+# https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin
+# download_nextcloud "$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download"
 download_nextcloud "$DIR/poldeepner/model/pl.deduped.maca.skipgram.300.mc10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/FQlYoGvXOXjnQZx/download"
 
 #
