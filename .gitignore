@@ -8,9 +8,6 @@ poldeepner/model/kgr10_orths.vec.bin
 poldeepner/model/kgr10_orths.vec.bin.7z
 poldeepner/model/kgr10-plain-sg-300-mC50.bin
 poldeepner/model/kgr10-plain-sg-300-mC50.bin.7z
-poldeepner/model/poleval18/poldeepner-nkjp-ftcc-bigru
 poldeepner/model/poldeepner-nkjp-ftcc-bilstm
-poldeepner/model/poleval18/poldeepner-nkjp-ftkgr10plain-lstm
-poldeepner/model/poleval18/poldeepner-nkjp-ftkgr10orth-bigru
 poldeepner/model/*.bin
 *.pyc
