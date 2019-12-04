@@ -49,8 +49,26 @@ function download_nextcloud()
     fi
 }
 
+#
+# Download KGR10 embeddings from CLARIN-PL NextCloud
+#
+function download_nextcloud_raw()
+{
+    FILE_LOCAL=$1
+    FILE_URL=$2
+
+    if [ ! -f FILE_LOCAL ]; then
+      wget $FILE_URL -O $FILE_LOCAL
+      echo "- `basename FILE_LOCAL` downloaded"
+    else
+      echo "- `basename FILE_LOCAL` found"
+    fi
+}
+
 download_nextcloud "$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin" "https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
 download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextcloud.clarin-pl.eu/index.php/s/WVbVyIwkAHUDaYs/download"
+download_nextcloud "$DIR/poldeepner/model/pl.deduped.maca.skipgram.300.mc10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/FQlYoGvXOXjnQZx/download"
+download_nextcloud_raw "$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
 
 #
 # Unpack pre-trained models

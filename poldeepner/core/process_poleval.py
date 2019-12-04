@@ -5,8 +5,8 @@ import codecs
 
 from load_data import load_data
 from poldeepner import PolDeepNer
+from pretrained import load_pretrained_model
 from utils import wrap_annotations
-
 
 def get_id(ini_file):
     for line in codecs.open(ini_file, "r", "utf8"):
@@ -57,31 +57,36 @@ if __name__ == "__main__":
         description='Convert set of IOB, TXT and INI files into a single json file in PolEval 2018 NER format')
     parser.add_argument('-i', required=True, metavar='PATH', help='path to a file with a list of files')
     parser.add_argument('-o', required=True, metavar='PATH', help='path to a json output file')
-    parser.add_argument('-m', required=True, metavar='PATH', help='path to the model')
-
+    parser.add_argument('-m', required=True, metavar='PATH', help='model name')
     args = parser.parse_args()
-    path = args.i
 
-    parent = os.path.dirname(path)
+    parent = os.path.dirname(args.i)
 
-    ner = PolDeepNer(args.m)
+    try:
+        print("Loading the NER model ...")
+        model = load_pretrained_model(args.m)
+        ner = PolDeepNer(model)
 
-    dict_list = []
-    paths = codecs.open(path, "r", "utf8").readlines()
-    paths_count = len(paths)
-    for n, rel_path in enumerate(paths):
-        abs_path = os.path.abspath(os.path.join(parent, rel_path.strip()))
-        namext = os.path.basename(abs_path)
-        name = os.path.splitext(namext)[0]
-        path = os.path.dirname(abs_path)
+        dict_list = []
+        paths = codecs.open(args.i, "r", "utf8").readlines()
+        paths_count = len(paths)
+        for n, rel_path in enumerate(paths):
+            abs_path = os.path.abspath(os.path.join(parent, rel_path.strip()))
+            namext = os.path.basename(abs_path)
+            name = os.path.splitext(namext)[0]
+            path = os.path.dirname(abs_path)
 
-        text = codecs.open(os.path.join(path, name + ".txt"), "r", "utf8").read()
-        doc_id = get_id(os.path.join(path, name + ".ini"))
-        print("%d from %d: %s" % (n, paths_count, doc_id))
+            text = codecs.open(os.path.join(path, name + ".txt"), "r", "utf8").read()
+            doc_id = get_id(os.path.join(path, name + ".ini"))
+            print("%d from %d: %s" % (n, paths_count, doc_id))
 
-        sentences, _ = load_data(os.path.join(path, name + '.iob'))
-        labels = ner.process_document(sentences)
+            sentences, _ = load_data(os.path.join(path, name + '.iob'))
+            labels = ner.process_document(sentences)
 
-        dict_list.append(get_poleval_dict(doc_id, text, sentences, labels))
+            dict_list.append(get_poleval_dict(doc_id, text, sentences, labels))
 
-    codecs.open(args.o, "w", "utf8").write(json.dumps(dict_list))
+        codecs.open(args.o, "w", "utf8").write(json.dumps(dict_list))
+
+    except Exception as e:
+        print("[ERROR] %s" % str(e))
+

@@ -52,6 +52,12 @@ Contributors
 * Michał Gawor <michal.gawor@pwr.edu.pl>
 
 
+Requirements
+------------
+* Python 3.6
+* CUDA 10.0+
+
+
 Installation
 ------------
 
@@ -83,21 +89,24 @@ Run Docker image in the interactive mode:
 ```bash
 sudo apt-get install python3-pip python3-dev python-virtualenv
 sudo pip install -U pip
-virtualenv --system-site-packages -p python3.5 venv
+virtualenv --system-site-packages -p python3.6 venv
 source venv/bin/activate
 pip install -U pip
+pip install -r requirements.txt
+```
 
+```bash
 pip install seqeval
 pip install keras
-pip install tensorflow-gpu
+pip install tensorflow-gpu==1.14.0
 pip install git+https://www.github.com/keras-team/keras-contrib.git
 pip install cython
-pip install pyfasttext
-pip install fasttext
+pip install pyfasttext==0.4.5
 pip install sklearn
 pip install python-dateutil
 pip install nltk
 pip install gensim
+pip install allennlp==0.9.0
 ```
 
 
@@ -121,17 +130,17 @@ Run Docker
 
 Generate json file for the evaluation corpus:
 ```bash
-python3.6 core/process_poleval.py \
-            -i data/poleval2018ner-data/index_iob.list \
-            -o data/poldeepner-output.json \
-            -m model
+python poldeepner/core/process_poleval.py \
+            -i poldeepner/data/poleval2018ner-data/index_iob.list \
+            -o poldeepner/data/poldeepner-output.json \
+            -m nkjp-poleval18
 ```
 
 Run the official evaluation script:
 ```bash
-python3.6 core/poleval_ner_test.py \
-             -g data/POLEVAL-NER_GOLD.json \
-             -u data/poldeepner-output.json
+python poldeepner/core/poleval_ner_test.py \
+             -g poldeepner/data/POLEVAL-NER_GOLD.json \
+             -u poldeepner/data/poldeepner-output.json
 ```
 
 Output:
@@ -150,10 +159,10 @@ Processing
 *Disclaimer:* the current version of the script uses NLTK tokenizer which is not fully compatible with the training data used to train the model.
 The final version of the script should use *toki* tokenizer or *WCRFT* tagger. 
 
-Run inside Docker:
+Run:
 
 ```bash
-python3.6 core/interactive_test.py
+python poldeepner/core/interactive_test.py
 ```
 
 Enter text to process:
@@ -178,6 +187,55 @@ Output:
 
 
 To exit press Enter without typing any text.
+
+### Process a single plain text file
+
+Sample file: [KPWr: Toronto Dominion Center](poldeepner/data/kpwr-toronto.txt)
+
+Run:
+
+```bash
+python poldeepner/core/process_file.py -m nkjp-poleval18 -i poldeepner/data/kpwr-toronto.txt
+```
+
+Expected output:
+
+```bash
+[  0: 16] orgName              Toronto Dominion
+[  0:  7] placeName_settlement Toronto
+[ 85: 96] placeName_country    kanadyjskim
+[105:112] placeName_settlement Toronto
+[116:134] orgName              Financial District
+[204:229] persName             Ludwiga Mies van der Rohe
+[204:211] persName_forename    Ludwiga
+[212:216] persName_surname     Mies
+[225:229] persName_surname     Rohe
+[236:243] orgName              Budynki
+[293:303] geogName             Joe Fafard
+[503:550] geogName             Inuitów – Toronto Dominion Gallery of Inuit Art
+[513:520] placeName_settlement Toronto
+```
+
+Run:
+
+```bash
+python poldeepner/core/process_file.py -m n82-ft-kgr10 -i poldeepner/data/kpwr-toronto.txt
+```
+
+Expected output:
+
+```bash
+[  0: 23] nam_fac_goe          Toronto Dominion Centre
+[ 28: 51] nam_fac_goe          Toronto Dominion Centre
+[ 85: 96] nam_adj_country      kanadyjskim
+[105:112] nam_loc_gpe_city     Toronto
+[116:134] nam_loc_gpe_district Financial District
+[204:229] nam_liv_person       Ludwiga Mies van der Rohe
+[293:303] nam_liv_person       Joe Fafard
+[503:510] nam_org_nation       Inuitów
+[513:550] nam_fac_goe          Toronto Dominion Gallery of Inuit Art
+```
+
 
 Training
 --------

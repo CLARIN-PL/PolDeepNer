@@ -13,36 +13,42 @@ import os
 
 
 class Sequence(object):
+
     def __init__(self,
-                 embedding,
+                 language_model,
+                 word_embedding_dim=100,
                  char_embedding_dim=25,
                  word_lstm_size=100,
                  char_lstm_size=25,
                  fc_dim=100,
                  dropout=0.5,
+                 embeddings=None,
                  use_char=True,
                  use_crf=True,
                  initial_vocab=None,
                  lower=False,
                  optimizer='adam',
-                 nn_type='GRU'):
+                 nn_type='GRU',
+                 input_size=300):
 
         self.model = None
+        self.p = VectorTransformer(language_model, use_char=use_char)
         self.tagger = None
 
-        self.p = VectorTransformer(embedding, use_char=use_char)
-
+        self.word_embedding_dim = word_embedding_dim
         self.char_embedding_dim = char_embedding_dim
         self.word_lstm_size = word_lstm_size
         self.char_lstm_size = char_lstm_size
         self.fc_dim = fc_dim
         self.dropout = dropout
+        self.embeddings = embeddings
         self.use_char = use_char
         self.use_crf = use_crf
         self.initial_vocab = initial_vocab
         self.optimizer = optimizer
         self.lower = lower
         self.nn_type = nn_type
+        self.input_size = input_size
 
     def fit(self, x_train, y_train, x_valid=None, y_valid=None,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -67,16 +73,15 @@ class Sequence(object):
 
         self.p.fit(x_train, y_train)
 
-        model = BiLSTMCRF(char_vocab_size=self.p.char_vocab_size,
-                          num_labels=self.p.label_size,
-                          word_embedding_dim=self.p.vector_len,
+        model = BiLSTMCRF(num_labels=self.p.label_size,
                           word_lstm_size=self.word_lstm_size,
                           char_lstm_size=self.char_lstm_size,
                           fc_dim=self.fc_dim,
                           dropout=self.dropout,
                           use_char=self.use_char,
                           use_crf=self.use_crf,
-                          nn_type=self.nn_type)
+                          nn_type=self.nn_type,
+                          input_size=self.input_size)
         model, loss = model.build()
 
         model.compile(loss=loss, optimizer=self.optimizer)
@@ -87,11 +92,10 @@ class Sequence(object):
                       verbose=verbose, callbacks=callbacks,
                       shuffle=shuffle)
 
-        if x_train and y_valid:
-            self.model = trainer.best_model
-            self.best_report = trainer.best_model_report
-            print("Best model report: ")
-            print(self.best_report)
+        self.model = model
+        #self.model = trainer.best_model
+        #print("Best model report\n")
+        #print(trainer.best_model_report)
 
     def score(self, x_test, y_test):
         """Returns the f1-micro score on the given test model and labels.
@@ -115,14 +119,6 @@ class Sequence(object):
             return score
         else:
             raise OSError('Could not find a model. Call load(dir_path).')
-
-    def predict(x_test):
-        if self.model:
-            x_test = self.p.transform(x_test)
-            y_pred = self.model.predict(x_test)
-            y_pred = self.p.inverse_transform(y_pred, lengths)
-            print(x_test)
-            print(y_pred)
 
 
     def predict_to_iob(self, input_path, output_path):
@@ -159,23 +155,19 @@ class Sequence(object):
         lengths = [len(sentence)]
         y_pred = self.model.predict(x_test)
         y_pred = self.p.inverse_transform(y_pred, lengths)
-        #print(y_pred)
         return y_pred[0]
 
-    def save(self, model_path):
-        weights_file = os.path.join(model_path, "weights.pkl")
-        params_file = os.path.join(model_path, "params.pkl")
-        preprocessor_file = os.path.join(model_path, "preprocessor.pkl")
+    def save(self, weights_file, params_file, preprocessor_file):
         self.p.save(preprocessor_file)
         save_model(self.model, weights_file, params_file)
 
     @classmethod
-    def load(cls, model_path, embedding_object):
+    def load(cls, model_path, fasttext):
+        self = cls(fasttext)
         weights_file = os.path.join(model_path, "weights.pkl")
         params_file = os.path.join(model_path, "params.pkl")
         preprocessor_file = os.path.join(model_path, "preprocessor.pkl")
-        self = cls(embedding_object)
+        self.p = VectorTransformer.load(preprocessor_file, fasttext)
         self.model = load_model(weights_file, params_file)
-        self.p = VectorTransformer.load(preprocessor_file, embedding_object)
-        return self
 
+        return self

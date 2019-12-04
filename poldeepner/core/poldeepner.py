@@ -1,20 +1,17 @@
 from operator import itemgetter
-import os
 
-from wrapper import Sequence
-from embedding_wrapper import load_embedding
+from pretrained import load_pretrained_model
 
 
 class PolDeepNer:
-    def __init__(self, models_paths, embeddings_paths):
+    def __init__(self, model=None):
         """
-        :param models_paths: An array of paths to models
-        :param embeddings_paths: An array of paths to embeddings for respective models
+        :param model: Path to a folder with a pre-trained model to load
         """
-        self.models = []
-        for model_path, embedding_path in zip(models_paths, embeddings_paths):
-            embedding = load_embedding(embedding_path)
-            self.models.append(Sequence.load(model_path, embedding))
+        if model is None:
+            self.models = load_pretrained_model()
+        else:
+            self.models = model
 
     def process_sentence(self, sentence):
         """
