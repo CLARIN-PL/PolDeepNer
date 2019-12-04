@@ -85,10 +85,6 @@ function unpack_model_7z()
   fi
 }
 
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftcc-bigru"
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10orth-bigru"
-unpack_model_7z "$DIR/poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm"
-
 unpack_model_7z "$DIR/poldeepner/data/nkjp-nested-simplified-v2.iob"
 unpack_model_7z "$DIR/poldeepner/data/POLEVAL-NER_GOLD.json"
 unpack_model_7z "$DIR/poldeepner/data/poleval2018ner-data"
