@@ -1,11 +1,11 @@
-pip install seqeval
-pip install keras
-pip install tensorflow-gpu==1.14.0
-pip install git+https://www.github.com/keras-team/keras-contrib.git
-pip install cython
-pip install pyfasttext==0.4.5
-pip install sklearn
-pip install python-dateutil
-pip install nltk
-pip install gensim
-pip install allennlp==0.9.0
+seqeval
+keras
+tensorflow-gpu==1.14.0
+git+https://www.github.com/keras-team/keras-contrib.git
+cython
+pyfasttext==0.4.5
+sklearn
+python-dateutil
+nltk
+gensim
+allennlp==0.9.0
