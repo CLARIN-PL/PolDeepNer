@@ -9,39 +9,47 @@ from process_poleval import align_tokens_to_text
 from utils import wrap_annotations
 
 parser = argparse.ArgumentParser(description='Interactive mode')
-parser.add_argument('-m', required=True, metavar='name', help='model name', default='n82')
+parser.add_argument('-m', required=False, metavar='name', help='model name', default='nkjp')
 args = parser.parse_args()
 
 
-print("Loading the tokenization model ...")
-nltk.download('punkt')
+def run_cli_loop(ner):
+    while True:
+        text = input("Enter text to process: ").strip().replace("\"", "'")
 
-print("Loading the NER model ...")
-model = load_pretrained_model(args.m)
-ner = PolDeepNer(model)
+        if len(text) == 0:
+            print("closing...")
+            break
 
-print("ready.")
+        try:
+            # ToDo: replace with toki or maca.
+            tokens = word_tokenize(text)
+            labels = ner.process_sentence(tokens)
+            offsets = align_tokens_to_text([tokens], text)
 
-while True:
-    text = input("Enter text to process: ").strip().replace("\"", "'")
+            for an in wrap_annotations([labels]):
+                begin = offsets[an.token_ids[0]][0]
+                end = offsets[an.token_ids[-1]][1]
+                orth = text[begin:end]
 
-    if len(text) == 0:
-        print("closing...")
-        break
+                print("[%3s:%3s] %-20s %s" % (begin, end, an.annotation, orth))
 
-    try:
-        # ToDo: replace with toki or maca.
-        tokens = word_tokenize(text)
-        labels = ner.process_sentence(tokens)
-        offsets = align_tokens_to_text([tokens], text)
+        except Exception as e:
+            print("Failed to process the text due the following error: %s" % e)
 
-        for an in wrap_annotations([labels]):
-            begin = offsets[an.token_ids[0]][0]
-            end = offsets[an.token_ids[-1]][1]
-            orth = text[begin:end]
 
-            print("[%3s:%3s] %-20s %s" % (begin, end, an.annotation, orth))
+try:
+    print("Loading the tokenization model ...")
+    nltk.download('punkt')
 
-    except Exception as e:
-        print("Failed to process the text due the following error: %s" % e)
+    print("Loading the NER model ...")
+    model = load_pretrained_model(args.m)
+    ner = PolDeepNer(model)
+
+    print("ready.")
+    run_cli_loop(ner)
+
+except Exception as e:
+    print("[ERROR] %s" % str(e))
+
 
