@@ -83,11 +83,15 @@ class ElmoConcatEmbeddings:
 
 
 class VectorTransformer(BaseEstimator, TransformerMixin):
+
     def __init__(self, embeddings, use_char=True, lower=False):
         self._embeddings = self.create_language_model(embeddings)
         self._label_vocab = Vocabulary(lower=lower, unk_token=False)
         self._char_vocab = Vocabulary(lower=False)
         self._use_char = use_char
+
+    def size(self):
+        return len(self._embeddings.generate(["."])[0])
 
     def create_language_model(self, description):
         parts = description.split(":")

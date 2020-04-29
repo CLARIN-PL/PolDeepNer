@@ -1,19 +1,21 @@
-import argparse
-
-import nltk, re, pprint
+import warnings
+import nltk
 from nltk import word_tokenize
 
-from poldeepner import PolDeepNer
-from pretrained import load_pretrained_model
-from process_poleval import align_tokens_to_text
-from utils import wrap_annotations
+warnings.filterwarnings('ignore', category=FutureWarning)
 
-parser = argparse.ArgumentParser(description='Interactive mode')
-parser.add_argument('-m', required=False, metavar='name', help='model name', default='nkjp')
-args = parser.parse_args()
+
+def parse_args():
+    import argparse
+    parser = argparse.ArgumentParser(description='Interactive mode')
+    parser.add_argument('--model', metavar='name/path', help='model name or path to model', default='n82-ft-kgr10')
+    return parser.parse_args()
 
 
 def run_cli_loop(ner):
+    from process_poleval import align_tokens_to_text
+    from utils import wrap_annotations
+
     while True:
         text = input("Enter text to process: ").strip().replace("\"", "'")
 
@@ -38,18 +40,27 @@ def run_cli_loop(ner):
             print("Failed to process the text due the following error: %s" % e)
 
 
-try:
-    print("Loading the tokenization model ...")
-    nltk.download('punkt')
+def main(args):
+    from poldeepner import PolDeepNer
+    from pretrained import load_pretrained_model
 
-    print("Loading the NER model ...")
-    model = load_pretrained_model(args.m)
-    ner = PolDeepNer(model)
+    try:
+        print("Loading the tokenization model ...")
+        nltk.download('punkt')
 
-    print("ready.")
-    run_cli_loop(ner)
+        print("Loading the NER model ...")
+        model = load_pretrained_model(args.model)
+        ner = PolDeepNer(model)
 
-except Exception as e:
-    print("[ERROR] %s" % str(e))
+        print("ready.")
+        run_cli_loop(ner)
 
+    except Exception as e:
+        print("[ERROR] %s" % str(e))
+
+
+if __name__ == "__main__":
+    cli_args = parse_args()
+    print("Command Line Args:", cli_args)
+    main(cli_args)
 

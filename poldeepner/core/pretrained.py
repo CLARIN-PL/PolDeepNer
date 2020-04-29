@@ -31,6 +31,14 @@ pretrained_models['n82-ft-kgr10'] = [
     PretrainedModelLoader(os.path.join(path_model_pprai, "poldeepner-kpwr-n82-ft-kgr10-e027"),
                           "ft:" + os.path.join(path_model, "kgr10.plain.skipgram.dim300.neg10.bin")),
 ]
+pretrained_models['n82-ft-ccmaca'] = [
+    PretrainedModelLoader(os.path.join(path_model_pprai, "poldeepner-kpwr-n82-ccmaca-e040"),
+                          "ft:" + os.path.join(path_model, "pl.deduped.maca.skipgram.300.mc10.bin")),
+]
+pretrained_models['n82-ft-cc'] = [
+    PretrainedModelLoader(os.path.join(path_model_pprai, "poldeepner-kpwr-n82-ftcc-e046"),
+                          "ft:" + os.path.join(path_model, "cc.pl.300.bin")),
+]
 
 # https://www.researchgate.net/publication/328429192_Recognition_of_Named_Entities_for_Polish-Comparison_of_Deep_Learning_and_Conditional_Random_Fields_Approaches
 path_model_poleval18 = os.path.join(path_model, "poleval18")

@@ -11,6 +11,7 @@ from keras.utils import Sequence
 
 from annotation import Annotation
 
+
 def load_tokenised():
     dir_path = os.getcwd()
     with open('/../data/tmp_tokenised.txt', 'r') as f:

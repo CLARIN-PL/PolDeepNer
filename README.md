@@ -45,7 +45,7 @@ Polish Academy of Science, Warszawa, 2018.
 BiLSTM and CRF implementation was based on AnaGo (https://github.com/Hironsan/anago)
 
 Contributors
-------------
+-----------------------------------------------------------
 
 * Michał Marcińczuk <michal.marcinczuk@pwr.edu.pl>
 * Jan Kocoń <jan.kocon@pwr.edu.pl>
@@ -53,13 +53,13 @@ Contributors
 
 
 Requirements
-------------
+-----------------------------------------------------------
 * Python 3.6
 * CUDA 10.0+
 
 
 Installation
-------------
+-----------------------------------------------------------
 
 ### Preparation
 
@@ -89,19 +89,21 @@ Run Docker image in the interactive mode:
 ```bash
 sudo apt-get install python3-pip python3-dev python-virtualenv
 sudo pip install -U pip
-virtualenv --system-site-packages -p python3.6 venv
+virtualenv -p python3.6 venv
 source venv/bin/activate
 pip install -U pip
 pip install -r requirements.txt
 ```
 
 
-Evaluation (using Docker)
-----------
+PolEval 2018 (NKJP NER model)
+-----------------------------------------------------------
 
-### Process set of document and generate a json file
+### Evaluation (using Docker)
 
-The evalation corpus in json format was split into a set of separate files. 
+#### Process set of document and generate a json file
+
+The evaluation corpus in json format was split into a set of separate files. 
 Then each of the documents was tagged using WCRFT tagger and four files were generated:
 * NAME.txt — file content,
 * NAME.ini — ini file with document original name,
@@ -137,10 +139,9 @@ Final score: 0.853
 ```
  
 
-Processing
-----------
+### Processing
 
-### Interactive test
+#### Interactive test
 
 *Disclaimer:* the current version of the script uses NLTK tokenizer which is not fully compatible with the training data used to train the model.
 The final version of the script should use *toki* tokenizer or *WCRFT* tagger. 
@@ -174,7 +175,7 @@ Output:
 
 To exit press Enter without typing any text.
 
-### Process a single plain text file
+#### Process a single plain text file
 
 Sample file: [KPWr: Toronto Dominion Center](poldeepner/data/kpwr-toronto.txt)
 
@@ -223,34 +224,28 @@ Expected output:
 ```
 
 
-Training
---------
-Run virtual environment.
-
-```bash
-source venv/bin/activate
-```
+### Training
 
 Train each model separately. The training will replace the pre-trained models. 
 ```bash
 python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
               -t poldeepner/data/nkjp-nested-simplified-v2.iob \
-              -f poldeepner/model/cc.pl.300.bin \
+              -f ft:poldeepner/model/cc.pl.300.bin \
               -m poldeepner/model/poldeepner-nkjp-ftcc-bigru \
               -e 15 -n GRU
                           
 python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
               -t poldeepner/data/nkjp-nested-simplified-v2.iob \
-              -f poldeepner/model/kgr10_orths.vec.bin \
+              -f ft:poldeepner/model/kgr10_orths.vec.bin \
               -m poldeepner/model/poldeepner-nkjp-ftkgr10orth-bigru \
-              -e 15 -n GRU -s 100
+              -e 15 -n GRU
                           
 python poldeepner/core/trainmodel.py \
               -i poldeepner/data/nkjp-nested-simplified-v2.iob \
               -t poldeepner/data/nkjp-nested-simplified-v2.iob \
-              -f poldeepner/model/kgr10-plain-sg-300-mC50.bin \
+              -f ft:poldeepner/model/kgr10-plain-sg-300-mC50.bin \
               -m poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm \
               -e 15 -n LSTM
 ```
@@ -300,9 +295,78 @@ TOTAL                    62083   13136   21520     82.54     74.26     78.18    
 ```
 
 
+KPWr (n82 NER model)
+-----------------------------------------------------------
+
+![KPWr n82 evaluation](docs/media/kpwr-n82-pprai.png)
+
+### Evaluate
+
+```bash
+python poldeepner/core/eval.py \
+  --model MODEL \
+  --input poldeepner/data/kpwr-ner-n82-test.iob
+```
+
+Replace MODEL with value from the Model column from the table below.
+
+| Model                    | Precision | Recall | F1    |    Time | Memory usage (peak) [1] | Embeddings size |
+|--------------------------|----------:|-------:|------:|--------:|------------------------:|----------------:|  
+| n82-pprai                |     74.70 |  71.92 | 73.28 |  < 12 m |          41.5 (54.0) GB |         38.1 GB |
+| n82-ft-kgr10             |     71.36 |  71.49 | 71.43 |  <  2 m |          13.5 (22.5) GB |         10.8 GB |
+| n82-ft-ccmaca            |     72.74 |  68.89 | 70.76 |  <  7 m |          24.1 (42.0) GB |         20.1 GB |
+| n82-ft-cc                |     71.40 |  66.43 | 68.83 |  <  3 m |           9.2 (14.8) GB |          7.2 GB |
+| n82-ft-kgr10-compact [2] |     69.51 |  67.04 | 68.25 |  <  2 m |           7.0  (8.8) GB |          3.7 GB |
+| Liner2 [3]               |     67.65 |  58.85 | 62.93 |  <  8 m |           3.0 GB        |          0.5 GB |
+
+[1] Memory usage was measured using [psrecord](https://pypi.org/project/psrecord/):
+
+```bash
+psrecord PID --interval 1 --plot plot.png --log activity.txt
+```
+
+[2] The results are approximate and they will be updated when the model is published.
+
+[3] [Liner2](https://github.com/CLARIN-PL/Liner2) is using Conditional Random Fields.
+
+
+
+
+Train and test a custom model (example for n82)
+-----------------------------------------------------------
+
+### Train
+
+```bash
+python poldeepner/core/trainmodel.py \
+              -i poldeepner/data/kpwr-ner-n82-train-tune.iob \
+              -t poldeepner/data/kpwr-ner-n82-test.iob \
+              -f ft:poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin \
+              -m poldeepner/tmp/poldeepner-n82-ftkgr10-bigru \
+              -e 30 -n GRU
+```
+
+### Evaluate
+
+```bash
+python poldeepner/core/eval.py \
+  --model poldeepner/tmp/poldeepner-n82-ftkgr10-bigru \
+  --embeddings ft:poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin \
+  --input poldeepner/data/kpwr-ner-n82-test.iob
+```
+
+```bash
+annotation                  TP      FP      FN precision    recall  f1-score   support
+(...)
+TOTAL                     3104    1160    1326     72.80     70.07     71.41      4430
+```
+Processing time: 2m; 
+Memory usage: 14GB; 
+Tokens: ~80k
+
 License
------
-Copyright (C) Wrocław University of Science and Technology (PWr), 2010-2018. All rights reserved.
+-----------------------------------------------------------
+Copyright (C) Wrocław University of Science and Technology (PWr), 2010-2020. All rights reserved.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

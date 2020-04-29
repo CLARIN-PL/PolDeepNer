@@ -10,6 +10,7 @@ from preprocessing import VectorTransformer
 from trainer import Trainer
 
 import os
+import json
 
 
 class Sequence(object):
@@ -28,10 +29,10 @@ class Sequence(object):
                  initial_vocab=None,
                  lower=False,
                  optimizer='adam',
-                 nn_type='GRU',
-                 input_size=300):
+                 nn_type='GRU'):
 
         self.model = None
+        self.language_model = language_model
         self.p = VectorTransformer(language_model, use_char=use_char)
         self.tagger = None
 
@@ -48,7 +49,7 @@ class Sequence(object):
         self.optimizer = optimizer
         self.lower = lower
         self.nn_type = nn_type
-        self.input_size = input_size
+        self.input_size = self.p.size()
 
     def fit(self, x_train, y_train, x_valid=None, y_valid=None,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -157,17 +158,27 @@ class Sequence(object):
         y_pred = self.p.inverse_transform(y_pred, lengths)
         return y_pred[0]
 
-    def save(self, weights_file, params_file, preprocessor_file):
-        self.p.save(preprocessor_file)
-        save_model(self.model, weights_file, params_file)
-
-    @classmethod
-    def load(cls, model_path, fasttext):
-        self = cls(fasttext)
+    def save(self, model_path):
         weights_file = os.path.join(model_path, "weights.pkl")
         params_file = os.path.join(model_path, "params.pkl")
         preprocessor_file = os.path.join(model_path, "preprocessor.pkl")
-        self.p = VectorTransformer.load(preprocessor_file, fasttext)
+        metadata_file = os.path.join(model_path, "metadata.json")
+        self.p.save(preprocessor_file)
+        save_model(self.model, weights_file, params_file)
+        self.save_metadata(metadata_file)
+
+    def save_metadata(self, path):
+        metadata = {"language_mode": self.language_model}
+        with open(path, "w") as fjson:
+            fjson.write(json.dumps(metadata, indent=4))
+
+    @classmethod
+    def load(cls, model_path, language_model):
+        self = cls(language_model)
+        weights_file = os.path.join(model_path, "weights.pkl")
+        params_file = os.path.join(model_path, "params.pkl")
+        preprocessor_file = os.path.join(model_path, "preprocessor.pkl")
+        self.p = VectorTransformer.load(preprocessor_file, language_model)
         self.model = load_model(weights_file, params_file)
 
         return self

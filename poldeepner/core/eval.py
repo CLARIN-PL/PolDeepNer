@@ -1,37 +1,50 @@
 import os
-import argparse
-
+import warnings
 import iob
-from poldeepner import PolDeepNer
-from pretrained import load_pretrained_model
-from utils import NestedReport
-from seqeval.metrics import f1_score
 
-parser = argparse.ArgumentParser(description='Evaluate given model against annotated document in IOB format.')
-parser.add_argument('-m', required=True, metavar='name', help='model name', default='n82')
-args = parser.parse_args()
+warnings.filterwarnings('ignore', category=FutureWarning)
 
 
-root = os.path.dirname(os.path.abspath(__file__))
-path_data = os.path.join(root, "..", "data")
-path_eval = os.path.join(path_data, "kpwr-ner-n82-test.iob")
+def parse_args():
+    import argparse
 
-try:
-    model = load_pretrained_model(args.m)
-    ner = PolDeepNer(model)
+    root = os.path.dirname(os.path.abspath(__file__))
+    path_data = os.path.join(root, "..", "data")
+    path_eval = os.path.join(path_data, "kpwr-ner-n82-test.iob")
 
-    label_true, label_pred = [], []
-    x_test, y_test = iob.load_data_and_labels(path_eval)
-    for x, y in zip(x_test, y_test):
-        pred = ner.process_sentence(x)
-        label_true.append(y)
-        label_pred.append(pred)
+    parser = argparse.ArgumentParser(description='Evaluate given model against annotated document in IOB format.')
+    parser.add_argument('--model', metavar='name/path', help='model name or path to model', default='n82-ft-kgr10')
+    parser.add_argument('--embeddings', metavar='PATH',
+                        help='embedding in form of type:path, where type=ft|elmo|elmo-avg|elmo-concat')
+    parser.add_argument('--input', metavar='path', help='path to IOB data to evaluate', default=path_eval)
+    return parser.parse_args()
 
-    report = NestedReport(label_true, label_pred)
-    print(str(report))
 
-    #score = f1_score(label_true, label_pred)
-    #print(score)
+def main(args):
+    from poldeepner import PolDeepNer
+    from pretrained import load_pretrained_model
+    from utils import NestedReport
+    from wrapper import Sequence
 
-except Exception as e:
-    print("[ERROR] %s" % str(e))
+    try:
+        model = [Sequence.load(args.model, args.embeddings)] if args.embeddings else load_pretrained_model(args.model)
+        ner = PolDeepNer(model)
+
+        label_true, label_pred = [], []
+        x_test, y_test = iob.load_data_and_labels(args.input)
+        for x, y in zip(x_test, y_test):
+            pred = ner.process_sentence(x)
+            label_true.append(y)
+            label_pred.append(pred)
+
+        report = NestedReport(label_true, label_pred)
+        print(str(report))
+
+    except Exception as e:
+        print("[ERROR] %s" % str(e))
+
+
+if __name__ == "__main__":
+    cli_args = parse_args()
+    print("Command Line Args:", cli_args)
+    main(cli_args)
