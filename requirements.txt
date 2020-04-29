@@ -1,6 +1,6 @@
 seqeval
 keras
-tensorflow-gpu==1.14.0
+tensorflow-gpu==1.15.2
 git+https://www.github.com/keras-team/keras-contrib.git
 cython
 pyfasttext==0.4.5
