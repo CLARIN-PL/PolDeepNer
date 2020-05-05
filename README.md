@@ -312,6 +312,7 @@ Replace MODEL with value from the Model column from the table below.
 
 | Model                    | Precision | Recall | F1    |    Time | Memory usage (peak) [1] | Embeddings size |
 |--------------------------|----------:|-------:|------:|--------:|------------------------:|----------------:|  
+| n82-elmo-kgr10 [2]       |     73.97 |  75.49 | 74.72 |  <  5 m |                  4.5 GB |          0.4 GB |
 | n82-pprai                |     74.70 |  71.92 | 73.28 |  < 12 m |          41.5 (54.0) GB |         38.1 GB |
 | n82-ft-kgr10             |     71.36 |  71.49 | 71.43 |  <  2 m |          13.5 (22.5) GB |         10.8 GB |
 | n82-ft-ccmaca            |     72.74 |  68.89 | 70.76 |  <  7 m |          24.1 (42.0) GB |         20.1 GB |
