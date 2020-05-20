@@ -32,10 +32,15 @@ def main(args):
 
         label_true, label_pred = [], []
         x_test, y_test = iob.load_data_and_labels(args.input)
+        n = 0
         for x, y in zip(x_test, y_test):
             pred = ner.process_sentence(x)
             label_true.append(y)
             label_pred.append(pred)
+            if n % 1000 == 0:
+                print("Sentences processed: %d / %d" % (n, len(y_test)))
+            n += 1
+        print("Sentences processed: %d / %d" % (n, len(y_test)))
 
         report = NestedReport(label_true, label_pred)
         print(str(report))

@@ -51,6 +51,12 @@ pretrained_models['nkjp-poleval18'] = [
                           "ft:" + os.path.join(path_model, "kgr10_orths.vec.bin"))
 ]
 
+path_model_n82 = os.path.join(path_model, "n82")
+pretrained_models['n82-elmo-kgr10'] = [
+    PretrainedModelLoader(os.path.join(path_model_n82, "poldeepner-n82-kgr10-elmo-avg-gru019"),
+                          "elmo-avg:" + os.path.join(path_model, "elmo-kgr10-e2000000"))
+]
+
 
 def load_pretrained_model(name='nkjp-poleval18'):
     if name in pretrained_models:

@@ -65,10 +65,10 @@ function download_nextcloud_raw()
     fi
 }
 
-download_nextcloud "$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin" "https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
-download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextcloud.clarin-pl.eu/index.php/s/WVbVyIwkAHUDaYs/download"
-download_nextcloud "$DIR/poldeepner/model/pl.deduped.maca.skipgram.300.mc10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/FQlYoGvXOXjnQZx/download"
-download_nextcloud_raw "$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
+#download_nextcloud "$DIR/poldeepner/model/kgr10-plain-sg-300-mC50.bin" "https://nextcloud.clarin-pl.eu/index.php/s/HIFaRv7ekgw24F1/download"
+#download_nextcloud "$DIR/poldeepner/model/kgr10_orths.vec.bin" "https://nextcloud.clarin-pl.eu/index.php/s/WVbVyIwkAHUDaYs/download"
+#download_nextcloud "$DIR/poldeepner/model/pl.deduped.maca.skipgram.300.mc10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/FQlYoGvXOXjnQZx/download"
+#download_nextcloud_raw "$DIR/poldeepner/model/kgr10.plain.skipgram.dim300.neg10.bin" "https://nextcloud.clarin-pl.eu/index.php/s/luubhnS0AvjmtQc/download?path=%2F&files=kgr10.plain.skipgram.dim300.neg10.bin"
 
 #
 # Unpack pre-trained models
@@ -88,3 +88,25 @@ function unpack_model_7z()
 unpack_model_7z "$DIR/poldeepner/data/nkjp-nested-simplified-v2.iob"
 unpack_model_7z "$DIR/poldeepner/data/POLEVAL-NER_GOLD.json"
 unpack_model_7z "$DIR/poldeepner/data/poleval2018ner-data"
+
+
+#
+# Download ELMo model
+#
+KGR10_ELMO="$DIR/poldeepner/model/elmo-kgr10-e2000000"
+if [ ! -d $KGR10_ELMO ]; then
+    mkdir $KGR10_ELMO
+fi
+
+if [ ! -f $KGR10_ELMO"/weights.hdf5" ]; then
+    KGR10_ELMO_URL="https://clarin-pl.eu/dspace/bitstream/handle/11321/690/elmo-kgr10-e2000000.7z?sequence=1&isAllowed=y"
+    KGR10_ELMO_PACK=$KGR10_ELMO"/elmo-kgr10-e2000000.7z"
+    if [ ! -f $KGR10_ELMO_PACK ]; then
+        wget $KGR10_ELMO_URL -O $KGR10_ELMO_PACK
+    fi
+    7z x $KGR10_ELMO_PACK -o$KGR10_ELMO
+    echo "- ELMo KGR10 downloaded"
+else
+    echo "- ELMo KGR10 found"
+fi
+

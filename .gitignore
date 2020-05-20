@@ -11,3 +11,4 @@ poldeepner/model/kgr10-plain-sg-300-mC50.bin.7z
 poldeepner/model/poldeepner-nkjp-ftcc-bilstm
 poldeepner/model/*.bin
 *.pyc
+/poldeepner/model/elmo-kgr10-e2000000/
