@@ -29,7 +29,8 @@ class Sequence(object):
                  initial_vocab=None,
                  lower=False,
                  optimizer='adam',
-                 nn_type='GRU'):
+                 nn_type='GRU',
+                 transfer_model=None):
 
         self.model = None
         self.language_model = language_model
@@ -50,6 +51,7 @@ class Sequence(object):
         self.lower = lower
         self.nn_type = nn_type
         self.input_size = self.p.size()
+        self.transfer_model = transfer_model
 
     def fit(self, x_train, y_train, x_valid=None, y_valid=None,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -84,7 +86,10 @@ class Sequence(object):
                           nn_type=self.nn_type,
                           input_size=self.input_size)
         model, loss = model.build()
-
+        if self.transfer_model:
+            # todo get bin into puth
+            transfer_model = self.load(self.transfer_model, 'ft:poldeepner/model/kgr10-plain-sg-300-mC50.bin').model
+            model = BiLSTMCRF.transfer_weights_by_name(model, transfer_model)
         model.compile(loss=loss, optimizer=self.optimizer)
 
         trainer = Trainer(model, preprocessor=self.p)
@@ -171,7 +176,7 @@ class Sequence(object):
         metadata = {"language_mode": self.language_model}
         with open(path, "w") as fjson:
             fjson.write(json.dumps(metadata, indent=4))
-
+    
     @classmethod
     def load(cls, model_path, language_model):
         self = cls(language_model)

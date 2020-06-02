@@ -51,10 +51,15 @@ pretrained_models['nkjp-poleval18'] = [
                           "ft:" + os.path.join(path_model, "kgr10_orths.vec.bin"))
 ]
 
-path_model_n82 = os.path.join(path_model, "n82")
+path_model_n82 = os.path.join(path_model, "n82p")
 pretrained_models['n82-elmo-kgr10'] = [
     PretrainedModelLoader(os.path.join(path_model_n82, "poldeepner-n82-kgr10-elmo-avg-gru019"),
                           "elmo-avg:" + os.path.join(path_model, "elmo-kgr10-e2000000"))
+]
+path_model_transfer= os.path.join(path_model, "poldeepner-nkjp-ftcc-bigru-testTransfer")
+pretrained_models['transferTest'] = [
+    PretrainedModelLoader(path_model_transfer,
+                          "ft:" + os.path.join(path_model, "kgr10.plain.skipgram.dim300.neg10.bin"))
 ]
 
 

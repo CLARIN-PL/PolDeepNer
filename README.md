@@ -248,6 +248,19 @@ python poldeepner/core/trainmodel.py \
               -f ft:poldeepner/model/kgr10-plain-sg-300-mC50.bin \
               -m poldeepner/model/poldeepner-nkjp-ftkgr10plain-lstm \
               -e 15 -n LSTM
+
+Transfer
+-p Pretrained model for weight transfer 
+
+python3 poldeepner/core/trainmodel.py \
+              -i poldeepner/data/kpwr-ner-n82-train-tune.iob \
+              -t poldeepner/data/kpwr-ner-n82-test.iob \
+              -f ft:poldeepner/model/cc.pl.300.bin \
+              -m poldeepner/model/poldeepner-nkjp-ftcc-bigru-testTransfer \
+              -e 15 \
+              -n GRU \
+              -p poldeepner/model/poldeepner-nkjp-ftcc-bigru-test2
+
 ```
 
 Before training the structure of the NN will be printed:

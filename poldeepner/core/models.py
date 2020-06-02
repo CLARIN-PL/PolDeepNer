@@ -4,6 +4,7 @@ Model definition.
 import json
 
 from keras.layers import Dense, LSTM, Bidirectional, Embedding, Input, Dropout, TimeDistributed, GRU
+from keras import Sequential
 from keras.layers.merge import Concatenate
 from keras.models import Model, model_from_json
 from keras_contrib.layers import CRF
@@ -22,7 +23,6 @@ def load_model(weights_file, params_file):
         model.load_weights(weights_file)
 
     return model
-
 
 class BiLSTMCRF(object):
     """A Keras implementation of BiLSTM-CRF for sequence labeling.
@@ -122,3 +122,27 @@ class BiLSTMCRF(object):
         print(model.summary())
 
         return model, loss
+
+    def transfer(trainable_model, pretrained_model):
+        print("Transfering Layers")
+        merged = Sequential()
+        for layer in pretrained_model.layers[:-1]:
+            layer.trainable = False
+            merged.add(layer)
+        for layer in trainable_model.layers:
+            layer.name = layer.name + 'Sec'
+            merged.add(layer)
+        print(merged.summary())
+        return merged
+
+    def transfer_weights_by_name(trainable_model, pretrained_model):
+        print("Transfering Weights")
+        trainable_model.get_layer('bidirectional_1').set_weights(pretrained_model.get_layer('bidirectional_1').get_weights())
+        trainable_model.get_layer('dense_1').set_weights(pretrained_model.get_layer('dense_1').get_weights())
+        return trainable_model
+
+    def transfer_weights_by_index(trainable_model, pretrained_model):
+        print("Transfering Weights")
+        trainable_model.layers[2].set_weights(pretrained_model.layers[2].get_weights())
+        trainable_model.layers[3].set_weights(pretrained_model.layers[3].get_weights())
+        return trainable_model
