@@ -87,8 +87,7 @@ class Sequence(object):
                           input_size=self.input_size)
         model, loss = model.build()
         if self.transfer_model:
-            # todo get bin into puth
-            transfer_model = self.load(self.transfer_model, 'ft:poldeepner/model/kgr10-plain-sg-300-mC50.bin').model
+            transfer_model = self.load(self.transfer_model, self.language_model).model
             model = BiLSTMCRF.transfer_weights_by_name(model, transfer_model)
         model.compile(loss=loss, optimizer=self.optimizer)
 
