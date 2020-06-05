@@ -90,7 +90,10 @@ class Sequence(object):
         model, loss = model.build()
         if self.transfer_model:
             transfer_model = self.load(self.transfer_model, self.language_model).model
-            model = BiLSTMCRF.transfer(model, transfer_model, self.transfer_type)
+            if self.transfer_type == 'WEIGHTS':
+                BiLSTMCRF.transfer_weights_by_name(model, transfer_model)
+            elif self.transfer_type == 'LAYERS':
+                BiLSTMCRF.transfer_layers(model, transfer_model)
         model.compile(loss=loss, optimizer=self.optimizer)
 
         trainer = Trainer(model, preprocessor=self.p)
