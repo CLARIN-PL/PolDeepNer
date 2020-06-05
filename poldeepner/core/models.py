@@ -123,7 +123,13 @@ class BiLSTMCRF(object):
 
         return model, loss
 
-    def transfer(trainable_model, pretrained_model):
+    def transfer(trainable_model, pretrained_model, transfer_type):
+        if transfer_type == 'WEIGHTS':
+            transfer_weights_by_name(trainable_model, pretrained_model)
+        elif transfer_type == 'LAYERS':
+            transfer_layers(trainable_model, pretrained_model)
+
+    def transfer_layers(trainable_model, pretrained_model):
         print("Transfering Layers")
         merged = Sequential()
         for layer in pretrained_model.layers[:-1]:

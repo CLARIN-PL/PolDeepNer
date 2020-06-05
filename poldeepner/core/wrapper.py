@@ -30,7 +30,8 @@ class Sequence(object):
                  lower=False,
                  optimizer='adam',
                  nn_type='GRU',
-                 transfer_model=None):
+                 transfer_model=None,
+                 transfer_type='WEIGHTS'):
 
         self.model = None
         self.language_model = language_model
@@ -52,6 +53,7 @@ class Sequence(object):
         self.nn_type = nn_type
         self.input_size = self.p.size()
         self.transfer_model = transfer_model
+        self.transfer_type = transfer_type
 
     def fit(self, x_train, y_train, x_valid=None, y_valid=None,
             epochs=1, batch_size=32, verbose=1, callbacks=None, shuffle=True):
@@ -88,7 +90,7 @@ class Sequence(object):
         model, loss = model.build()
         if self.transfer_model:
             transfer_model = self.load(self.transfer_model, self.language_model).model
-            model = BiLSTMCRF.transfer_weights_by_name(model, transfer_model)
+            model = BiLSTMCRF.transfer(model, transfer_model, self.transfer_type)
         model.compile(loss=loss, optimizer=self.optimizer)
 
         trainer = Trainer(model, preprocessor=self.p)

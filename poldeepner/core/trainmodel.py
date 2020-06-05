@@ -17,6 +17,7 @@ parser.add_argument('-e', required=True, default=32, type=int, metavar='num', he
 parser.add_argument('-g', nargs='+', help='which GPUs to use')
 parser.add_argument('-C', action='store_true', help='use char embedding built from training data')
 parser.add_argument('-p', required=False, metavar='PATH', help='input pretrained model for transfer learning')
+parser.add_argument('-pt', required=False, help='type of transfer learning: WEIGHTS or LAYERS',  default='WEIGHTS')
 
 args = parser.parse_args()
 model = args.m
@@ -38,7 +39,7 @@ if args.t:
 
 # _____BUILD AND TRAIN MODEL_____
 
-m = Sequence(args.f, use_char=args.C, nn_type=args.n, transfer_model=args.p)
+m = Sequence(args.f, use_char=args.C, nn_type=args.n, transfer_model=args.p, transfer_type=args.pt)
 m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
 
 # _____SAVE MODEL_____
