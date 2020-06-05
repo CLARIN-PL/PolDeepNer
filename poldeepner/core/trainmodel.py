@@ -3,6 +3,7 @@ import os
 
 from tensorflow.python.client import device_lib
 
+from callbacks import ModelEpochSaver
 from load_data import load_data
 from wrapper import Sequence
 
@@ -37,7 +38,8 @@ if args.t:
 
 # _____BUILD AND TRAIN MODEL_____
 m = Sequence(args.f, use_char=args.C, nn_type=args.n)
-m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
+callbacks = [ModelEpochSaver(model, m.p)]
+m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32, callbacks=callbacks)
 
 # _____SAVE MODEL_____
 if not os.path.exists(model):

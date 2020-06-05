@@ -1,8 +1,10 @@
 """
 Custom callbacks.
 """
+import os
+
 from keras.callbacks import Callback
-from seqeval.metrics import f1_score
+from models import save_model
 
 from utils import get_lengths, NestedReport
 
@@ -45,3 +47,27 @@ class F1score(Callback):
 
     def get_best_model_report(self):
         return self._best_report
+
+
+class ModelEpochSaver(Callback):
+
+    def __init__(self, path, preprocessor):
+        self.path = path
+        self.preprocessor = preprocessor
+        self.epoch = 1
+
+    def on_epoch_end(self, epoch, logs=None):
+        epoch_str = "%03d" % self.epoch
+        folder = self.path + epoch_str
+
+        if not os.path.exists(folder):
+            os.mkdir(folder)
+
+        model_weights = os.path.join(folder, "weights.pkl")
+        model_params = os.path.join(folder, "params.pkl")
+        model_preprocessor = os.path.join(folder, "preprocessor.pkl")
+
+        self.preprocessor.save(model_preprocessor)
+        save_model(self.model, model_weights, model_params)
+
+        self.epoch += 1

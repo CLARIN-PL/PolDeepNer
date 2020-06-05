@@ -10,7 +10,7 @@ def load_data(data_file_path):
     x_data, y_data = [], []
 
     # Get data from iob file
-    if data_file_path.endswith('.iob'):
+    if data_file_path.endswith('.iob') or data_file_path.endswith('.tsv'):
         x_data, y_data = load_iob(data_file_path)
 
     # Get data from xml file
