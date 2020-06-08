@@ -123,6 +123,31 @@ class BiLSTMCRF(object):
 
         return model, loss
 
+    def build_top_layers(self):
+        words = Input(batch_shape=self._input_size, dtype='float32', name='word_input')
+        if self._nn_type == "GRU":
+            z = Bidirectional(GRU(units=self._word_lstm_size, return_sequences=True))(words)
+        elif self._nn_type == "LSTM":
+            z = Bidirectional(LSTM(units=self._word_lstm_size, return_sequences=True))(words)
+        else:
+            raise Exception("Unknown NN type: %s (expected GRU or LSTM)" % self._nn_type)
+
+        z = Dense(self._fc_dim, activation='tanh')(z)
+
+        if self._use_crf:
+            crf = CRF(self._num_labels, sparse_target=False)
+            loss = crf.loss_function
+            pred = crf(z)
+        else:
+            loss = 'categorical_crossentropy'
+            pred = Dense(self._num_labels, activation='softmax')(z)
+
+        model = Model(inputs=words, outputs=pred)
+
+        print(model.summary())
+
+        return model, loss
+
     def transfer_layers(trainable_model, pretrained_model):
         print("Transfering Layers")
         merged = Sequential()
