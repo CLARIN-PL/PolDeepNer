@@ -200,5 +200,4 @@ class Sequence(object):
         preprocessor_file = os.path.join(model_path, "preprocessor.pkl")
         self.p = VectorTransformer.load(preprocessor_file, language_model)
         self.model = load_model(weights_file, params_file)
-
         return self

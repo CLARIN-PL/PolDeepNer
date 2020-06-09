@@ -18,6 +18,8 @@ parser.add_argument('-g', nargs='+', help='which GPUs to use')
 parser.add_argument('-C', action='store_true', help='use char embedding built from training data')
 parser.add_argument('-p', required=False, metavar='PATH', help='input pretrained model for transfer learning')
 parser.add_argument('-pt', required=False, help='type of transfer learning: WEIGHTS or LAYERS',  default='WEIGHTS')
+parser.add_argument('-wls', required=False, default=100, type=int, metavar='num', help='output dimension of LSTM')
+parser.add_argument('-fcd', required=False, default=100, type=int, metavar='num', help='output dimension of fully-connected layer')
 
 args = parser.parse_args()
 model = args.m
@@ -39,7 +41,7 @@ if args.t:
 
 # _____BUILD AND TRAIN MODEL_____
 
-m = Sequence(args.f, use_char=args.C, nn_type=args.n, transfer_model=args.p, transfer_type=args.pt)
+m = Sequence(args.f, use_char=args.C, nn_type=args.n, transfer_model=args.p, transfer_type=args.pt, word_lstm_size=args.wls, fc_dim=args.fcd)
 m.fit(x_train, y_train, x_test, y_test, epochs=args.e, batch_size=32)
 
 # _____SAVE MODEL_____
