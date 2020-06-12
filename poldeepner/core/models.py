@@ -8,7 +8,7 @@ from keras import Sequential
 from keras.layers.merge import Concatenate
 from keras.models import Model, model_from_json
 from keras_contrib.layers import CRF
-
+from keras.utils import plot_model
 
 def save_model(model, weights_file, params_file):
     with open(params_file, 'w') as f:
@@ -47,7 +47,8 @@ class BiLSTMCRF(object):
                  use_char=False,
                  use_crf=True,
                  nn_type="GRU",
-                 input_size=300):
+                 input_size=300,
+                 transfer_model=None):
         """Build a Bi-LSTM CRF model.
 
         Args:
@@ -80,6 +81,7 @@ class BiLSTMCRF(object):
         self._num_labels = num_labels
         self._nn_type = nn_type
         self._input_size = input_size
+        self._transfer_model = transfer_model
 
     def build(self):
         # build word embedding
@@ -99,7 +101,14 @@ class BiLSTMCRF(object):
         else:
             word_embeddings = words
         word_embeddings = Dropout(self._dropout)(word_embeddings)
-
+        if self._transfer_model is not None and len(self._transfer_model.layers) > 1:
+            for layer in self._transfer_model.layers[1:-1]:
+                layer.trainable = False
+                layer.name = layer.name + 'Pretrained'
+            self._transfer_model.layers[1] = self._transfer_model.layers[1](words)
+            for i in range(2, len(self._transfer_model.layers) - 1):
+                self._transfer_model.layers[i] = self._transfer_model.layers[i](self._transfer_model.layers[i-1])
+            word_embeddings = Concatenate()([self._transfer_model.layers[-2], word_embeddings])
         if self._nn_type == "GRU":
             z = Bidirectional(GRU(units=self._word_lstm_size, return_sequences=True))(word_embeddings)
         elif self._nn_type == "LSTM":
@@ -118,7 +127,7 @@ class BiLSTMCRF(object):
             pred = Dense(self._num_labels, activation='softmax')(z)
 
         model = Model(inputs=inputs, outputs=pred)
-
+        plot_model(model, to_file='Transfer1.png', show_shapes=True, show_layer_names=True)
         print(model.summary())
 
         return model, loss

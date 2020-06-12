@@ -77,7 +77,7 @@ class Sequence(object):
         """
 
         self.p.fit(x_train, y_train)
-        if not self.transfer_model or self.transfer_type != 'LAYERS':
+        if not self.transfer_model or self.transfer_type == 'WEIGHTS':
             model = BiLSTMCRF(num_labels=self.p.label_size,
                             word_lstm_size=self.word_lstm_size,
                             char_lstm_size=self.char_lstm_size,
@@ -104,7 +104,18 @@ class Sequence(object):
                             input_size=transfer_model.get_layer('dense_1').output_shape)
                 model, loss = model.build_top_layers()
                 model = BiLSTMCRF.transfer_layers(model, transfer_model)
-        
+            elif self.transfer_type == 'CONCAT':
+                model = BiLSTMCRF(num_labels=self.p.label_size,
+                            word_lstm_size=self.word_lstm_size,
+                            char_lstm_size=self.char_lstm_size,
+                            fc_dim=self.fc_dim,
+                            dropout=self.dropout,
+                            use_char=self.use_char,
+                            use_crf=self.use_crf,
+                            nn_type=self.nn_type,
+                            input_size=self.input_size,
+                            transfer_model=transfer_model)
+                model, loss = model.build()
         model.compile(loss=loss, optimizer=self.optimizer)
 
         trainer = Trainer(model, preprocessor=self.p)
