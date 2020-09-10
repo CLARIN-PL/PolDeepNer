@@ -74,12 +74,12 @@ def makeAnnsFormat(inputDoc, cols, htype):
                 cat, ofrom, oto = catAndOffsets1.split(' ')
                 z_anns.append( [ofrom+"_"+oto,  cat] )
                 ofrom, oto = offsets2.split(' ')
-                z_anns.append( [ofrom+"_"+oto,  cat] )            
+                z_anns.append( [ofrom+"_"+oto,  cat] )
     return z_anns
 
 # compute micro F1 scores for exact and overlap matches
 # htype parameter reflects two possible strategies for handling fragmented entities ("split" or "merge")
-def computeScores(goldfile, userfile, htype="split"):
+def computeScores(goldfile, userfile, htype="split", types = None):
 
     global_tp_ov = 0 ; global_fp_ov = 0 ; global_fn_ov = 0
     global_tp_ex = 0 ; global_fp_ex = 0 ; global_fn_ex = 0
@@ -94,7 +94,7 @@ def computeScores(goldfile, userfile, htype="split"):
             else:
                 idsToAnnsUser[userjson[nr]['id']] = ''
 
-    found = 0;
+    found = 0
     nonfound = 0
 
     idsToAnnsGold = {}
@@ -103,7 +103,7 @@ def computeScores(goldfile, userfile, htype="split"):
 
     for nr in range(len(goldjson['questions'])):
         idGold = '/'.join(goldjson['questions'][nr]['input']['fname'].split('/')[4:])
-        # print(idGold)
+        print(idGold)
         if idGold in idsToAnnsUser:
             found += 1
             # find the most recent answer:
@@ -119,16 +119,21 @@ def computeScores(goldfile, userfile, htype="split"):
             else:
                 idsToAnnsGold[idGold] = goldjson['questions'][nr]['answers'][0]['data']['brat']
 
+                gold = makeAnnsFormat(idsToAnnsGold[idGold], 3, htype)
+                user = makeAnnsFormat(idsToAnnsUser[idGold], 2, htype)
+
+                if types is not None:
+                    gold = [(span, type) for span, type in gold if type in types]
+                    user = [(span, type) for span, type in user if type in types]
+
                 # overlap scores:
-                ovtp = compareTextsOverlap(makeAnnsFormat(idsToAnnsGold[idGold], 3, htype),
-                                           makeAnnsFormat(idsToAnnsUser[idGold], 2, htype))
+                ovtp = compareTextsOverlap(gold, user)
                 global_tp_ov += ovtp[0]
                 global_fp_ov += ovtp[1]
                 global_fn_ov += ovtp[2]
 
                 # exact match scores:
-                extp = compareTextsExact(makeAnnsFormat(idsToAnnsGold[idGold], 3, htype),
-                                         makeAnnsFormat(idsToAnnsUser[idGold], 2, htype))
+                extp = compareTextsExact(gold, user)
                 global_tp_ex += extp[0]
                 global_fp_ex += extp[1]
                 global_fn_ex += extp[2]
@@ -139,16 +144,18 @@ def computeScores(goldfile, userfile, htype="split"):
 
     print(userfile)
     print("Nr of documents identified by ID in both data sets: "+str(found)+", not identified (left out): "+str(nonfound))
+    if types is not None:
+        print("NE types to evaluate: " + ", ".join(types))
 
     prec = float(global_tp_ov) / float(global_fp_ov + global_tp_ov)
     recall = float(global_tp_ov) / float(global_fn_ov + global_tp_ov)
     f1o = float(2 * prec * recall) / float(prec + recall)
-    print("OVERLAP precision: %0.3f recall: %0.3f F1: %0.3f " %( prec, recall, f1o))
+    print("OVERLAP precision: %0.3f recall: %0.3f F1: %0.3f " % (prec, recall, f1o))
 
     prec = float(global_tp_ex) / float(global_fp_ex + global_tp_ex)
     recall = float(global_tp_ex) / float(global_fn_ex + global_tp_ex)
     f1e = float(2 * prec * recall) / float(prec + recall)
-    print("EXACT precision: %0.3f recall: %0.3f F1: %0.3f " %( prec, recall, f1e))
+    print("EXACT precision: %0.3f recall: %0.3f F1: %0.3f " % (prec, recall, f1e))
 
     print("Final score: %0.3f" % (f1o*0.8 + f1e*0.2))
 
@@ -174,9 +181,13 @@ def main(argv):
         goldfile = arg
 
     print('gold file is: ' + goldfile)
-    print('user file is: '+ userfile)
+    print('user file is: ' + userfile)
 
-    computeScores(goldfile, userfile, htype="split")
+    types = None
+    types = set(["date"])
+
+    computeScores(goldfile, userfile, htype="split", types=types)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

@@ -8,7 +8,7 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 def parse_args():
     import argparse
     parser = argparse.ArgumentParser(description='Interactive mode')
-    parser.add_argument('--model', metavar='name/path', help='model name or path to model', default='n82-ft-kgr10')
+    parser.add_argument('--model', metavar='name/path', help='model name or path to model', default='nkjp-poleval18-cc')
     return parser.parse_args()
 
 
@@ -24,7 +24,6 @@ def run_cli_loop(ner):
             break
 
         try:
-            # ToDo: replace with toki or maca.
             tokens = word_tokenize(text)
             labels = ner.process_sentence(tokens)
             offsets = align_tokens_to_text([tokens], text)

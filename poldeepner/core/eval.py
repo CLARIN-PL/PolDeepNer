@@ -31,7 +31,7 @@ def main(args):
         ner = PolDeepNer(model)
 
         label_true, label_pred = [], []
-        x_test, y_test = iob.load_data_and_labels(args.input)
+        x_test, y_test, _ = iob.load_data_and_labels(args.input)
         n = 0
         for x, y in zip(x_test, y_test):
             pred = ner.process_sentence(x)

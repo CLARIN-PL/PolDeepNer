@@ -40,6 +40,13 @@ pretrained_models['n82-ft-cc'] = [
                           "ft:" + os.path.join(path_model, "cc.pl.300.bin")),
 ]
 
+# n82 model using ELMo
+path_model_n82 = os.path.join(path_model, "n82")
+pretrained_models['n82-elmo-kgr10'] = [
+    PretrainedModelLoader(os.path.join(path_model_n82, "poldeepner-n82-kgr10-elmo-avg-gru019"),
+                          "elmo-avg:" + os.path.join(path_model, "elmo-kgr10-e2000000"))
+]
+
 # https://www.researchgate.net/publication/328429192_Recognition_of_Named_Entities_for_Polish-Comparison_of_Deep_Learning_and_Conditional_Random_Fields_Approaches
 path_model_poleval18 = os.path.join(path_model, "poleval18")
 pretrained_models['nkjp-poleval18'] = [
@@ -51,11 +58,12 @@ pretrained_models['nkjp-poleval18'] = [
                           "ft:" + os.path.join(path_model, "kgr10_orths.vec.bin"))
 ]
 
-path_model_n82 = os.path.join(path_model, "n82")
-pretrained_models['n82-elmo-kgr10'] = [
-    PretrainedModelLoader(os.path.join(path_model_n82, "poldeepner-n82-kgr10-elmo-avg-gru019"),
-                          "elmo-avg:" + os.path.join(path_model, "elmo-kgr10-e2000000"))
+pretrained_models['nkjp-poleval18-cc'] = [
+    PretrainedModelLoader(os.path.join(path_model_poleval18, "poldeepner-nkjp-ftcc-bigru"),
+                          "ft:" + os.path.join(path_model, "cc.pl.300.bin"))
 ]
+
+
 
 
 def load_pretrained_model(name='nkjp-poleval18'):

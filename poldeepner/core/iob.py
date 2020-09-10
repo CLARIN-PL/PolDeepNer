@@ -1,11 +1,12 @@
 def load_data_and_labels(filename, extra_features=False):
-    sents, labels = [], []
-    words, tags = [], []
+    sents, labels, dockstarts = [], [], []
+    words, tags, dockstart = [], [], []
     with open(filename, 'r') as f:
         for line in f:
-            if "DOCSTART" in line:
-                continue
             line = line.rstrip()
+            if "DOCSTART" in line:
+                dockstart.append(line)
+                continue
             if line:
                 cols = line.split('\t')
                 if extra_features:
@@ -13,8 +14,9 @@ def load_data_and_labels(filename, extra_features=False):
                 else:
                     words.append(cols[0])
                 tags.append(cols[-1])
-            else:
+            elif len(words) > 0:
                 sents.append(words)
                 labels.append(tags)
-                words, tags = [], []
-        return sents, labels
+                dockstarts.append(dockstart)
+                words, tags, dockstart = [], [], []
+        return sents, labels, dockstarts
