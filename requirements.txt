@@ -2,7 +2,7 @@ cython
 pyfasttext==0.4.5
 seqeval==0.0.12
 Keras==2.3.1
-tensorflow-gpu==1.15.2
+tensorflow-gpu==2.9.3
 git+https://www.github.com/keras-team/keras-contrib.git
 scikit-learn==0.22.2.post1
 sklearn
